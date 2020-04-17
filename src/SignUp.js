@@ -11,34 +11,48 @@ class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fullName: "not defined",
-            email: "not defined",
-            password: "not defined",
-            confirmPassword: "not defined"
+            fullName: null,
+            email: null,
+            password: null,
+            confirmPassword: null
         }
     }
 
     validateEmail = (text) => {
-        console.log(text);
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (reg.test(text) === false){
+            //console.log("email")
             alert("Please enter a valid email address!")
             //this.setState({email: text})
             return false;
+        } else {
+            return true;
         }
     }
 
     validatePasswords = (pass1,pass2) => {
         if(pass1!==pass2){
+            //console.log("password")
             alert("Both passwords that you have entered don't match!")
             return false;
+        } else {
+            return true;
         }
     }
 
     validations = () => {
-        this.validateEmail(this.state.email)
-        this.validatePasswords(this.state.password,this.state.confirmPassword)
-
+        //console.log(this.validateEmail(this.state.email))
+        //console.log(this.validatePasswords(this.state.password,this.state.confirmPassword))
+        if (this.state.fullName!==null && this.state.email!==null && this.state.password!==null && this.state.confirmPassword!==null){
+            if (this.validateEmail(this.state.email) && this.validatePasswords(this.state.password,this.state.confirmPassword)){
+                console.log("All done")
+                this.props.navigation.navigate("InitialDetails")
+            } else {
+                console.log("Not done")
+            }
+        } else {
+            alert("Please fill all the fields!")
+        }
     }
 
     render () {

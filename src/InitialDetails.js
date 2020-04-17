@@ -26,23 +26,30 @@ const stack = createStackNavigator();
 
 class initialDetails extends Component {
 
-    state = {
-        maritalStatus: null,
-        date: null
-    }
-
     constructor(props) {
         super(props);
         this.state = {
-            //images: infoIcon, infoIcon2,
-            date: {date: "01-01-2001"}
+            fullName: null,
+            email: null,
+            password: null,
+            confirmPassword: null,
+            dateOfBirth: null,
+            height: null,
+            weight: null,
+            ageOfFirstPeriod: null,
+            maritalStatus: null,
+            breastFeeding: null,
+            alcohol: null,
+            smoking: null,
+            menstrualCycle: null,
+            breastCancerHistory: null
         }
     }
 
     render() {
 
         return (
-            <NavigationContainer>
+            /*<NavigationContainer>*/
                 <stack.Navigator>
                     <stack.Screen
                         name="InitialPage"
@@ -140,7 +147,7 @@ class initialDetails extends Component {
                         }}
                     />
                 </stack.Navigator>
-            </NavigationContainer>
+            /*</NavigationContainer>*/
         );
     }
 }
@@ -148,9 +155,9 @@ class initialDetails extends Component {
 function GatherInfo({navigation}) {
     return (
         <View style={styles.mainView}>
-            <Text style={styles.title}>User Information</Text>
+            <Text style={styles.title}>SignUp Successful!</Text>
             <Image source={infoIcon2} style={styles.infoIcon}/>
-            <Text style={styles.subTitle}>Help me to understand you!</Text>
+            <Text style={styles.subTitle}>Let's begin with some information gathering!</Text>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Question 1')}>
                 <Text style={styles.buttonText} >Get Started</Text>
             </TouchableOpacity>
