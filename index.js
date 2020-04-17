@@ -11,4 +11,4 @@ import SignUp from './src/SignUp';
 import FrontPage from './src/FrontPage';
 import initialDetails from './src/InitialDetails';
 
-AppRegistry.registerComponent(appName, () => initialDetails);
+AppRegistry.registerComponent(appName, () => App);

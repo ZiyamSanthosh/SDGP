@@ -8,6 +8,14 @@ import logo from './Images/icure.jpg'
 
 class LogIn extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: "not defined",
+            password: "not defined"
+        }
+    }
+
     render () {
         return(
             <View style={styles.mainView}>
@@ -15,10 +23,21 @@ class LogIn extends Component {
                 <TextInput
                     style={styles.textBox}
                     placeholder = "Email"
+                    onChangeText={(value) => {
+                        this.setState({
+                            email: value
+                        })
+                    }}
                 />
                 <TextInput
                     style={styles.textBox}
                     placeholder = "Password"
+                    secureTextEntry = {true}
+                    onChangeText={(value) => {
+                        this.setState({
+                            password: value
+                        })
+                    }}
                 />
                 <TouchableOpacity style={styles.button} >
                     <Text style={styles.buttonText}>LogIn</Text>

@@ -147,7 +147,7 @@ function app() {
                     options={{headerShown: false}}
                 />
                 <stack.Screen
-                    name="Login"
+                    name="LogIn"
                     component={LogIn}
                     options={{headerShown: false}}
                 />

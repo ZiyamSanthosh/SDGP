@@ -8,40 +8,37 @@ import logo from './Images/icure.jpg'
 
 class FrontPage extends Component {
 
-    state = {
-        option: null,
-    }
-
-    constructor(props) {
+    /*constructor(props) {
         super(props);
         this.state = {
-            images: logo
+            option: "Not selected"
         }
-    }
+    }*/
 
-    selectOption = (option, navigation) => {
+    selectOption(option){
         if (option==="SignUp"){
             this.setState({
                 option: this.state.option = "SignUp",
             })
+            this.props.navigation.navigate('SignUp')
         } else {
             this.setState({
                 option: this.state.option = "LogIn",
             })
+            this.props.navigation.navigate('LogIn')
         }
     }
 
     render () {
         return (
             <View style={styles.logoView}>
-                <Image source={this.state.images} style={styles.logo} />
+                <Image source={logo} style={styles.logo} />
                 <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('SignUp')}>
                     <Text style={styles.buttonText}>New User</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Login')}>
+                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('LogIn')}>
                     <Text style={styles.buttonText}>Existing User</Text>
                 </TouchableOpacity>
-                {/*<Text>{this.state.option}</Text>*/}
             </View>
         );
     }
