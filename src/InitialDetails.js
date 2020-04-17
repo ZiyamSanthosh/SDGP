@@ -28,11 +28,12 @@ class initialDetails extends Component {
 
     constructor(props) {
         super(props);
+        const {fullName, email, password, confirmPassword} = this.props.route.params
         this.state = {
-            fullName: null,
-            email: null,
-            password: null,
-            confirmPassword: null,
+            fullName: fullName,
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
             dateOfBirth: null,
             height: null,
             weight: null,
@@ -42,12 +43,15 @@ class initialDetails extends Component {
             alcohol: null,
             smoking: null,
             menstrualCycle: null,
-            breastCancerHistory: null
-        }
+            breastCancerHistory: null,
+        };
     }
 
     render() {
-
+        console.log(this.state.fullName)
+        console.log(this.state.email)
+        console.log(this.state.password)
+        console.log(this.state.confirmPassword)
         return (
             /*<NavigationContainer>*/
                 <stack.Navigator>
@@ -55,6 +59,7 @@ class initialDetails extends Component {
                         name="InitialPage"
                         component={GatherInfo}
                         options={{headerShown: false,}}
+                        initialParams={{fullName: this.state.fullName}}
                     />
                     <stack.Screen
                         name="Question 1"
@@ -152,10 +157,10 @@ class initialDetails extends Component {
     }
 }
 
-function GatherInfo({navigation}) {
+function GatherInfo({navigation, route}) {
     return (
         <View style={styles.mainView}>
-            <Text style={styles.title}>SignUp Successful!</Text>
+            <Text style={styles.title}>Hello {route.params.fullName}</Text>
             <Image source={infoIcon2} style={styles.infoIcon}/>
             <Text style={styles.subTitle}>Let's begin with some information gathering!</Text>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Question 1')}>

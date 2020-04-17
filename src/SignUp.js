@@ -46,7 +46,12 @@ class SignUp extends Component {
         if (this.state.fullName!==null && this.state.email!==null && this.state.password!==null && this.state.confirmPassword!==null){
             if (this.validateEmail(this.state.email) && this.validatePasswords(this.state.password,this.state.confirmPassword)){
                 console.log("All done")
-                this.props.navigation.navigate("InitialDetails")
+                this.props.navigation.navigate("InitialDetails", {
+                    fullName: this.state.fullName,
+                    email: this.state.email,
+                    password: this.state.password,
+                    confirmPassword: this.state.confirmPassword
+                })
             } else {
                 console.log("Not done")
             }
