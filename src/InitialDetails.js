@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Component} from 'react';
 import {useState} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput, Platform, Alert} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput, Platform, Alert,} from 'react-native';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -17,43 +17,40 @@ import smokeIcon from './Images/cigarette.png';
 import menstruationIcon from './Images/menstruation.png';
 import medicalHistoryIcon from './Images/medicalHistory.png';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import {RadioGroup, RadioButton} from 'react-native-custom-radio-button';
 import { TagSelect } from 'react-native-tag-select';
-import {color} from 'react-native-reanimated';
+import {color, set} from 'react-native-reanimated';
 import DatePicker from 'react-native-datepicker';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 
 const stack = createStackNavigator();
 
-class initialDetails extends Component {
+class InitialDetails extends Component {
 
     constructor(props) {
         super(props);
-        const {fullName, email, password, confirmPassword} = this.props.route.params
+        const {fullName, email, password, confirmPassword, dateOfBirth, height, weight, ageOfFirstPeriod, maritalStatus,
+            breastFeeding, alcohol, smoking, menstrualCycle, breastCancerHistory} = this.props.route.params
         this.state = {
             fullName: fullName,
             email: email,
             password: password,
             confirmPassword: confirmPassword,
-            dateOfBirth: new Date(),
-            height: null,
-            weight: null,
-            ageOfFirstPeriod: null,
-            maritalStatus: null,
-            breastFeeding: null,
-            alcohol: null,
-            smoking: null,
-            menstrualCycle: null,
-            breastCancerHistory: null,
+            dateOfBirth: dateOfBirth,
+            height: height,
+            weight: weight,
+            ageOfFirstPeriod: ageOfFirstPeriod,
+            maritalStatus: maritalStatus,
+            breastFeeding: breastFeeding,
+            alcohol: alcohol,
+            smoking: smoking,
+            menstrualCycle: menstrualCycle,
+            breastCancerHistory: breastCancerHistory,
         };
     }
 
     render() {
-        console.log(this.state.fullName)
-        console.log(this.state.email)
-        console.log(this.state.password)
-        console.log(this.state.confirmPassword)
-        //console.log(this.state.dateOfBirth)
         return (
             /*<NavigationContainer>*/
                 <stack.Navigator>
@@ -61,7 +58,12 @@ class initialDetails extends Component {
                         name="InitialPage"
                         component={GatherInfo}
                         options={{headerShown: false,}}
-                        initialParams={{fullName: this.state.fullName}}
+                        initialParams={{
+                            fullName: this.state.fullName,
+                            email: this.state.email,
+                            password: this.state.password,
+                            confirmPassword: this.state.confirmPassword
+                        }}
                     />
                     <stack.Screen
                         name="Question 1"
@@ -71,7 +73,12 @@ class initialDetails extends Component {
                             headerStyle: {backgroundColor: '#ED3030'},
                             headerTintColor: 'white',
                         }}
-                        initialParams={{dateOfBirth: this.state.dateOfBirth}}
+                        initialParams={{
+                            fullName: this.state.fullName,
+                            email: this.state.email,
+                            password: this.state.password,
+                            confirmPassword: this.state.confirmPassword
+                        }}
                     />
                     <stack.Screen
                         name="Question 2"
@@ -80,6 +87,13 @@ class initialDetails extends Component {
                             title: "2 of 10",
                             headerStyle: {backgroundColor: '#ED3030'},
                             headerTintColor: 'white',
+                        }}
+                        initialParams={{
+                            fullName: this.state.fullName,
+                            email: this.state.email,
+                            password: this.state.password,
+                            confirmPassword: this.state.confirmPassword,
+                            dateOfBirth: this.state.dateOfBirth
                         }}
                     />
                     <stack.Screen
@@ -90,6 +104,14 @@ class initialDetails extends Component {
                             headerStyle: {backgroundColor: '#ED3030'},
                             headerTintColor: 'white',
                         }}
+                        initialParams={{
+                            fullName: this.state.fullName,
+                            email: this.state.email,
+                            password: this.state.password,
+                            confirmPassword: this.state.confirmPassword,
+                            dateOfBirth: this.state.dateOfBirth,
+                            height: this.state.height
+                        }}
                     />
                     <stack.Screen
                         name="Question 4"
@@ -98,6 +120,15 @@ class initialDetails extends Component {
                             title: "4 of 10",
                             headerStyle: {backgroundColor: '#ED3030'},
                             headerTintColor: 'white',
+                        }}
+                        initialParams={{
+                            fullName: this.state.fullName,
+                            email: this.state.email,
+                            password: this.state.password,
+                            confirmPassword: this.state.confirmPassword,
+                            dateOfBirth: this.state.dateOfBirth,
+                            height: this.state.height,
+                            weight: this.state.weight
                         }}
                     />
                     <stack.Screen
@@ -108,6 +139,16 @@ class initialDetails extends Component {
                             headerStyle: {backgroundColor: '#ED3030'},
                             headerTintColor: 'white',
                         }}
+                        initialParams={{
+                            fullName: this.state.fullName,
+                            email: this.state.email,
+                            password: this.state.password,
+                            confirmPassword: this.state.confirmPassword,
+                            dateOfBirth: this.state.dateOfBirth,
+                            height: this.state.height,
+                            weight: this.state.weight,
+                            ageOfFirstPeriod: this.state.ageOfFirstPeriod
+                        }}
                     />
                     <stack.Screen
                         name="Question 6"
@@ -116,6 +157,17 @@ class initialDetails extends Component {
                             title: "6 of 10",
                             headerStyle: {backgroundColor: '#ED3030'},
                             headerTintColor: 'white',
+                        }}
+                        initialParams={{
+                            fullName: this.state.fullName,
+                            email: this.state.email,
+                            password: this.state.password,
+                            confirmPassword: this.state.confirmPassword,
+                            dateOfBirth: this.state.dateOfBirth,
+                            height: this.state.height,
+                            weight: this.state.weight,
+                            ageOfFirstPeriod: this.state.ageOfFirstPeriod,
+                            maritalStatus: this.state.maritalStatus
                         }}
                     />
                     <stack.Screen
@@ -126,6 +178,18 @@ class initialDetails extends Component {
                             headerStyle: {backgroundColor: '#ED3030'},
                             headerTintColor: 'white',
                         }}
+                        initialParams={{
+                            fullName: this.state.fullName,
+                            email: this.state.email,
+                            password: this.state.password,
+                            confirmPassword: this.state.confirmPassword,
+                            dateOfBirth: this.state.dateOfBirth,
+                            height: this.state.height,
+                            weight: this.state.weight,
+                            ageOfFirstPeriod: this.state.ageOfFirstPeriod,
+                            maritalStatus: this.state.maritalStatus,
+                            breastFeeding: this.state.breastFeeding
+                        }}
                     />
                     <stack.Screen
                         name="Question 8"
@@ -134,6 +198,19 @@ class initialDetails extends Component {
                             title: "8 of 10",
                             headerStyle: {backgroundColor: '#ED3030'},
                             headerTintColor: 'white',
+                        }}
+                        initialParams={{
+                            fullName: this.state.fullName,
+                            email: this.state.email,
+                            password: this.state.password,
+                            confirmPassword: this.state.confirmPassword,
+                            dateOfBirth: this.state.dateOfBirth,
+                            height: this.state.height,
+                            weight: this.state.weight,
+                            ageOfFirstPeriod: this.state.ageOfFirstPeriod,
+                            maritalStatus: this.state.maritalStatus,
+                            breastFeeding: this.state.breastFeeding,
+                            alcohol: this.state.alcohol,
                         }}
                     />
                     <stack.Screen
@@ -144,6 +221,20 @@ class initialDetails extends Component {
                             headerStyle: {backgroundColor: '#ED3030'},
                             headerTintColor: 'white',
                         }}
+                        initialParams={{
+                            fullName: this.state.fullName,
+                            email: this.state.email,
+                            password: this.state.password,
+                            confirmPassword: this.state.confirmPassword,
+                            dateOfBirth: this.state.dateOfBirth,
+                            height: this.state.height,
+                            weight: this.state.weight,
+                            ageOfFirstPeriod: this.state.ageOfFirstPeriod,
+                            maritalStatus: this.state.maritalStatus,
+                            breastFeeding: this.state.breastFeeding,
+                            alcohol: this.state.alcohol,
+                            smoking: this.state.smoking,
+                        }}
                     />
                     <stack.Screen
                         name="Question 10"
@@ -153,6 +244,46 @@ class initialDetails extends Component {
                             headerStyle: {backgroundColor: '#ED3030'},
                             headerTintColor: 'white',
                         }}
+                        initialParams={{
+                            fullName: this.state.fullName,
+                            email: this.state.email,
+                            password: this.state.password,
+                            confirmPassword: this.state.confirmPassword,
+                            dateOfBirth: this.state.dateOfBirth,
+                            height: this.state.height,
+                            weight: this.state.weight,
+                            ageOfFirstPeriod: this.state.ageOfFirstPeriod,
+                            maritalStatus: this.state.maritalStatus,
+                            breastFeeding: this.state.breastFeeding,
+                            alcohol: this.state.alcohol,
+                            smoking: this.state.smoking,
+                            menstrualCycle: this.state.menstrualCycle
+                        }}
+                    />
+                    <stack.Screen
+                        name="Final Page"
+                        component={finalPage}
+                        options={{
+                            title: "10 of 10",
+                            headerStyle: {backgroundColor: '#ED3030'},
+                            headerTintColor: 'white',
+                            headerShown: false
+                        }}
+                        initialParams={{
+                            fullName: this.state.fullName,
+                            email: this.state.email,
+                            password: this.state.password,
+                            confirmPassword: this.state.confirmPassword,
+                            dateOfBirth: this.state.dateOfBirth,
+                            height: this.state.height,
+                            weight: this.state.weight,
+                            ageOfFirstPeriod: this.state.ageOfFirstPeriod,
+                            maritalStatus: this.state.maritalStatus,
+                            breastFeeding: this.state.breastFeeding,
+                            alcohol: this.state.alcohol,
+                            smoking: this.state.smoking,
+                            menstrualCycle: this.state.menstrualCycle
+                        }}
                     />
                 </stack.Navigator>
             /*</NavigationContainer>*/
@@ -161,12 +292,22 @@ class initialDetails extends Component {
 }
 
 function GatherInfo({navigation, route}) {
+    const {fullName, email, password, confirmPassword} = route.params
     return (
         <View style={styles.mainView}>
-            <Text style={styles.title}>Hello {route.params.fullName}</Text>
+            <Text style={styles.title}>Hello {fullName}</Text>
+            {/*<Text>{fullName}</Text>
+            <Text>{email}</Text>
+            <Text>{password}</Text>
+            <Text>{confirmPassword}</Text>*/}
             <Image source={infoIcon2} style={styles.infoIcon}/>
             <Text style={styles.subTitle}>Let's begin with some information gathering!</Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Question 1')}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Question 1', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword
+            })}>
                 <Text style={styles.buttonText} >Get Started</Text>
             </TouchableOpacity>
         </View>
@@ -174,6 +315,7 @@ function GatherInfo({navigation, route}) {
 }
 
 function Question1({navigation, route}) {
+    const {fullName, email, password, confirmPassword} = route.params
 
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
@@ -183,7 +325,6 @@ function Question1({navigation, route}) {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
         setDate(currentDate);
-        console.log(date);
     };
 
     const showMode = currentMode => {
@@ -197,6 +338,10 @@ function Question1({navigation, route}) {
 
     return (
         <View style={styles.Q1View}>
+            {/*<Text>{fullName}</Text>
+            <Text>{email}</Text>
+            <Text>{password}</Text>
+            <Text>{confirmPassword}</Text>*/}
             <Image source={dateIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>What is your Date of Birth?</Text>
             <TouchableOpacity style={styles.dateButton} onPress={showDatePicker}>
@@ -207,7 +352,7 @@ function Question1({navigation, route}) {
                 <DateTimePicker
                     testID="dateTimePicker"
                     timeZoneOffsetInMinutes={0}
-                    value={date}
+                    value={new Date()}
                     mode={mode}
                     is24hours={true}
                     display="spinner"
@@ -239,18 +384,31 @@ function Question1({navigation, route}) {
                 onDateChange={(value) => {console.log(value)}}
             />*/}
 
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 2')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 2', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: date,
+            })}>
                 <Text style={styles.buttonText}>Next Question</Text>
             </TouchableOpacity>
         </View>
     )
 }
 
-function Question2({navigation}) {
+function Question2({navigation, route}) {
+    const {fullName, email, password, confirmPassword, dateOfBirth} = route.params
+    const [answer, setAnswer] = useState(null)
     return (
         <View style={styles.Q2View}>
             <Image source={dateIcon} style={styles.dateIcon}/>
-            <Text style={styles.questionText}>What's your Height?</Text>
+            {/*<Text>{fullName}</Text>
+            <Text>{email}</Text>
+            <Text>{password}</Text>
+            <Text>{confirmPassword}</Text>
+            <Text>{dateOfBirth.toDateString()}</Text>*/}
+            <Text style={styles.questionText}>What's your Height? </Text>
             <TextInput
                 placeholder="Enter in meters"
                 style={{
@@ -266,17 +424,35 @@ function Question2({navigation}) {
                     alignSelf: 'center'
                 }}
                 keyboardType="numeric"
+                onChangeText={(value) => {
+                    setAnswer(value)
+                }}
             />
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 3')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 3', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: answer
+            })}>
                 <Text style={styles.buttonText}>Next Question</Text>
             </TouchableOpacity>
         </View>
     );
 }
 
-function Question3({navigation}) {
+function Question3({navigation, route}) {
+    const {fullName, email, password, confirmPassword, dateOfBirth, height} = route.params
+    const [answer, setAnswer] = useState(null)
     return (
         <View style={styles.Q2View}>
+            {/*<Text>{fullName}</Text>
+            <Text>{email}</Text>
+            <Text>{password}</Text>
+            <Text>{confirmPassword}</Text>
+            <Text>{dateOfBirth.toDateString()}</Text>
+            <Text>{height}</Text>*/}
             <Image source={weightIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>What's your Weight?</Text>
             <TextInput
@@ -294,17 +470,37 @@ function Question3({navigation}) {
                     alignSelf: 'center'
                 }}
                 keyboardType="numeric"
+                onChangeText={(value) => {
+                    setAnswer(value)
+                }}
             />
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 4')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 4', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: answer
+            })}>
                 <Text style={styles.buttonText}>Next Question</Text>
             </TouchableOpacity>
         </View>
     );
 }
 
-function Question4({navigation}) {
+function Question4({navigation, route}) {
+    const {fullName, email, password, confirmPassword, dateOfBirth, height, weight} = route.params
+    const [answer, setAnswer] = useState(null);
     return (
         <View style={styles.Q2View}>
+            {/*<Text>{fullName}</Text>
+            <Text>{email}</Text>
+            <Text>{password}</Text>
+            <Text>{confirmPassword}</Text>
+            <Text>{dateOfBirth.toDateString()}</Text>
+            <Text>{height}</Text>
+            <Text>{weight}</Text>*/}
             <Image source={firstPeriodIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>What's your age at first period?</Text>
             <TextInput
@@ -322,108 +518,338 @@ function Question4({navigation}) {
                     alignSelf: 'center'
                 }}
                 keyboardType="numeric"
+                onChangeText={(value) => {
+                    setAnswer(value)
+                }}
             />
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 5')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 5', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: answer
+            })}>
                 <Text style={styles.buttonText}>Next Question</Text>
             </TouchableOpacity>
         </View>
     );
 }
 
-function Question5({navigation}) {
+function Question5({navigation, route}) {
+    const {fullName, email, password, confirmPassword, dateOfBirth, height, weight, ageOfFirstPeriod} = route.params
     return (
         <View style={styles.Q2View}>
             <Image source={maritalStatusIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>What's your marital status?</Text>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 6')}>
+            {/*<Text>{fullName}</Text>
+            <Text>{email}</Text>
+            <Text>{password}</Text>
+            <Text>{confirmPassword}</Text>
+            <Text>{dateOfBirth.toDateString()}</Text>
+            <Text>{height}</Text>
+            <Text>{weight}</Text>
+            <Text>{ageOfFirstPeriod}</Text>*/}
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 6', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: ageOfFirstPeriod,
+                maritalStatus: "Married"
+            })}>
                 <Text style={styles.buttonText}>Married</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 6')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 6', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: ageOfFirstPeriod,
+                maritalStatus: "Living together"
+            })}>
                 <Text style={styles.buttonText}>Living together</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 6')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 6', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: ageOfFirstPeriod,
+                maritalStatus: "Single"
+            })}>
                 <Text style={styles.buttonText}>Single</Text>
             </TouchableOpacity>
         </View>
     );
 }
 
-function Question6({navigation}) {
+function Question6({navigation, route}) {
+    const {fullName, email, password, confirmPassword, dateOfBirth, height, weight, ageOfFirstPeriod,
+        maritalStatus} = route.params
     return (
         <View style={styles.Q2View}>
             <Image source={breastFeedingIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>Have you ever done breastfeeding?</Text>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 7')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 7', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: ageOfFirstPeriod,
+                maritalStatus: maritalStatus,
+                breastFeeding: "Yes"
+            })}>
                 <Text style={styles.buttonText}>Yes</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 7')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 7', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: ageOfFirstPeriod,
+                maritalStatus: maritalStatus,
+                breastFeeding: "No"
+            })}>
                 <Text style={styles.buttonText}>No</Text>
             </TouchableOpacity>
         </View>
     );
 }
 
-function Question7({navigation}) {
+function Question7({navigation, route}) {
+    const {fullName, email, password, confirmPassword, dateOfBirth, height, weight, ageOfFirstPeriod,
+        maritalStatus, breastFeeding} = route.params
     return (
         <View style={styles.Q2View}>
             <Image source={alcoholIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>Are you an alcoholic?</Text>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 8')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 8', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: ageOfFirstPeriod,
+                maritalStatus: maritalStatus,
+                breastFeeding: breastFeeding,
+                alcohol: "Yes"
+            })}>
                 <Text style={styles.buttonText}>Yes</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 8')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 8', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: ageOfFirstPeriod,
+                maritalStatus: maritalStatus,
+                breastFeeding: breastFeeding,
+                alcohol: "No"
+            })}>
                 <Text style={styles.buttonText}>No</Text>
             </TouchableOpacity>
         </View>
     );
 }
 
-function Question8({navigation}) {
+function Question8({navigation, route}) {
+    const {fullName, email, password, confirmPassword, dateOfBirth, height, weight, ageOfFirstPeriod,
+        maritalStatus, breastFeeding, alcohol} = route.params
     return (
         <View style={styles.Q2View}>
             <Image source={smokeIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>Do you smoke?</Text>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 9')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 9', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: ageOfFirstPeriod,
+                maritalStatus: maritalStatus,
+                breastFeeding: breastFeeding,
+                alcohol: alcohol,
+                smoking: "Yes"
+            })}>
                 <Text style={styles.buttonText}>Yes</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 9')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 9', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: ageOfFirstPeriod,
+                maritalStatus: maritalStatus,
+                breastFeeding: breastFeeding,
+                alcohol: alcohol,
+                smoking: "No"
+            })}>
                 <Text style={styles.buttonText}>No</Text>
             </TouchableOpacity>
         </View>
     );
 }
 
-function Question9({navigation}) {
+function Question9({navigation, route}) {
+    const {fullName, email, password, confirmPassword, dateOfBirth, height, weight, ageOfFirstPeriod,
+        maritalStatus, breastFeeding, alcohol, smoking} = route.params
     return (
         <View style={styles.Q2View}>
             <Image source={menstruationIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>Do you have a menstrual cycle?</Text>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 10')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 10', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: ageOfFirstPeriod,
+                maritalStatus: maritalStatus,
+                breastFeeding: breastFeeding,
+                alcohol: alcohol,
+                smoking: smoking,
+                menstrualCycle: "Yes"
+            })}>
                 <Text style={styles.buttonText}>Yes</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 10')}>
-                <Text style={styles.buttonText}>Yes</Text>
-            </TouchableOpacity>
-        </View>
-    );
-}
-
-function Question10({navigation}) {
-    return (
-        <View style={styles.Q2View}>
-            <Image source={medicalHistoryIcon} style={styles.dateIcon}/>
-            <Text style={styles.questionText}>Is there any close relation of yours had breast cancer history?</Text>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 10')}>
-                <Text style={styles.buttonText}>Yes</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 10')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 10', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: ageOfFirstPeriod,
+                maritalStatus: maritalStatus,
+                breastFeeding: breastFeeding,
+                alcohol: alcohol,
+                smoking: smoking,
+                menstrualCycle: "No"
+            })}>
                 <Text style={styles.buttonText}>No</Text>
             </TouchableOpacity>
         </View>
     );
 }
 
-export default initialDetails;
+function Question10({navigation, route}) {
+    const {fullName, email, password, confirmPassword, dateOfBirth, height, weight, ageOfFirstPeriod,
+        maritalStatus, breastFeeding, alcohol, smoking, menstrualCycle} = route.params
+    return (
+        <View style={styles.Q2View}>
+            <Image source={medicalHistoryIcon} style={styles.dateIcon}/>
+            <Text style={styles.questionText}>Is there any close relation of yours had breast cancer history?</Text>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Final Page', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: ageOfFirstPeriod,
+                maritalStatus: maritalStatus,
+                breastFeeding: breastFeeding,
+                alcohol: alcohol,
+                smoking: smoking,
+                menstrualCycle: menstrualCycle,
+                breastCancerHistory: "Yes"
+            })}>
+                <Text style={styles.buttonText}>Yes</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Final Page', {
+                fullName: fullName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                dateOfBirth: dateOfBirth,
+                height: height,
+                weight: weight,
+                ageOfFirstPeriod: ageOfFirstPeriod,
+                maritalStatus: maritalStatus,
+                breastFeeding: breastFeeding,
+                alcohol: alcohol,
+                smoking: smoking,
+                menstrualCycle: menstrualCycle,
+                breastCancerHistory: "No"
+            })}>
+                <Text style={styles.buttonText}>No</Text>
+            </TouchableOpacity>
+        </View>
+    );
+}
+
+function finalPage({navigation, route}){
+    const {fullName, email, password, confirmPassword, dateOfBirth, height, weight, ageOfFirstPeriod,
+        maritalStatus, breastFeeding, alcohol, smoking, menstrualCycle, breastCancerHistory} = route.params
+    return (
+        <View style={{backgroundColor: 'white', flex:1, justifyContent: 'center', padding: 15}}>
+            <Text style={styles.summaryTitle}>Summary</Text>
+            <View style={{flexDirection: 'row', alignSelf: 'center', padding: 10}}>
+                <View>
+                    <Text style={styles.finalPageText1}>Date Of Birth</Text>
+                    <Text style={styles.finalPageText1}>Height</Text>
+                    <Text style={styles.finalPageText1}>Weight</Text>
+                    <Text style={styles.finalPageText1}>Age Of First Period</Text>
+                    <Text style={styles.finalPageText1}>Marital Status</Text>
+                    <Text style={styles.finalPageText1}>Breast Feeding</Text>
+                    <Text style={styles.finalPageText1}>Alcohol</Text>
+                    <Text style={styles.finalPageText1}>Smoking</Text>
+                    <Text style={styles.finalPageText1}>Menstrual Cycle</Text>
+                    <Text style={styles.finalPageText1}>Breast Cancer History</Text>
+                </View>
+                <View>
+                    <Text style={styles.finalPageText2}>{dateOfBirth.toLocaleDateString()}</Text>
+                    <Text style={styles.finalPageText2}>{height}m</Text>
+                    <Text style={styles.finalPageText2}>{weight}kg</Text>
+                    <Text style={styles.finalPageText2}>{ageOfFirstPeriod} years</Text>
+                    <Text style={styles.finalPageText2}>{maritalStatus}</Text>
+                    <Text style={styles.finalPageText2}>{breastFeeding}</Text>
+                    <Text style={styles.finalPageText2}>{alcohol}</Text>
+                    <Text style={styles.finalPageText2}>{smoking}</Text>
+                    <Text style={styles.finalPageText2}>{menstrualCycle}</Text>
+                    <Text style={styles.finalPageText2}>{breastCancerHistory}</Text>
+                </View>
+            </View>
+            <TouchableOpacity style={styles.predictButton}>
+                <Text style={styles.buttonText}>Start Prediction</Text>
+            </TouchableOpacity>
+        </View>
+    );
+}
+
+export default InitialDetails;
 
 const styles = StyleSheet.create({
     title: {
@@ -515,5 +941,32 @@ const styles = StyleSheet.create({
         flex: 1,
         //justifyContent: 'center',
         paddingTop: 150
+    },
+    finalPageText1: {
+        fontSize: 20,
+        padding: 5,
+        color: "#ED3030",
+        fontWeight: "bold"
+    },
+    finalPageText2: {
+        fontSize: 20,
+        padding: 5,
+    },
+    summaryTitle: {
+        fontWeight: 'bold',
+        fontSize: 35,
+        textAlign: 'center',
+        paddingBottom: 50,
+        paddingTop: 20
+    },
+    predictButton: {
+        alignItems: 'center',
+        backgroundColor: '#ED3030',
+        padding: 10,
+        //marginBottom: 10,
+        width: 350,
+        borderRadius: 25,
+        alignSelf: 'center',
+        marginTop: 50
     }
 });
