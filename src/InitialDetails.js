@@ -21,6 +21,7 @@ import {RadioGroup, RadioButton} from 'react-native-custom-radio-button';
 import { TagSelect } from 'react-native-tag-select';
 import {color} from 'react-native-reanimated';
 import DatePicker from 'react-native-datepicker';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 
 const stack = createStackNavigator();
 
@@ -34,7 +35,7 @@ class initialDetails extends Component {
             email: email,
             password: password,
             confirmPassword: confirmPassword,
-            dateOfBirth: null,
+            dateOfBirth: new Date(),
             height: null,
             weight: null,
             ageOfFirstPeriod: null,
@@ -52,6 +53,7 @@ class initialDetails extends Component {
         console.log(this.state.email)
         console.log(this.state.password)
         console.log(this.state.confirmPassword)
+        //console.log(this.state.dateOfBirth)
         return (
             /*<NavigationContainer>*/
                 <stack.Navigator>
@@ -69,6 +71,7 @@ class initialDetails extends Component {
                             headerStyle: {backgroundColor: '#ED3030'},
                             headerTintColor: 'white',
                         }}
+                        initialParams={{dateOfBirth: this.state.dateOfBirth}}
                     />
                     <stack.Screen
                         name="Question 2"
@@ -170,9 +173,9 @@ function GatherInfo({navigation, route}) {
     );
 }
 
-function Question1({navigation}) {
+function Question1({navigation, route}) {
 
-    /*const [date, setDate] = useState(new Date(1598051730000));
+    const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
@@ -180,6 +183,7 @@ function Question1({navigation}) {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
         setDate(currentDate);
+        console.log(date);
     };
 
     const showMode = currentMode => {
@@ -189,17 +193,17 @@ function Question1({navigation}) {
 
     const showDatePicker = () => {
         showMode('date');
-    }*/
+    }
 
     return (
         <View style={styles.Q1View}>
             <Image source={dateIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>What is your Date of Birth?</Text>
-            {/*<TouchableOpacity style={styles.dateButton} onPress={showDatePicker}>
+            <TouchableOpacity style={styles.dateButton} onPress={showDatePicker}>
                 <Text style={styles.dateButtonText}>Show Date Picker</Text>
-            </TouchableOpacity>*/}
+            </TouchableOpacity>
 
-            {/*{show && (
+            {show && (
                 <DateTimePicker
                     testID="dateTimePicker"
                     timeZoneOffsetInMinutes={0}
@@ -210,7 +214,30 @@ function Question1({navigation}) {
                     onChange={onChange}
                     maximumDate={new Date()}
                 />
-            )}*/}
+            )}
+
+            {/*<DatePicker
+                style={{width: 300, alignSelf: 'center'}}
+                date={new Date()}
+                mode="date"
+                placeholder="Select DOB"
+                format="DD-MM-YYYY"
+                maxDate={new Date()}
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                customStyles={{
+                    dateIcon: {
+                        position: 'absolute',
+                        left: 0,
+                        top: 4,
+                        marginLeft: 0
+                    },
+                    dateInput: {
+                        marginLeft: 36
+                    }
+                }}
+                onDateChange={(value) => {console.log(value)}}
+            />*/}
 
             <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 2')}>
                 <Text style={styles.buttonText}>Next Question</Text>
