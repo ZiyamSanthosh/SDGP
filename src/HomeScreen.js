@@ -4,6 +4,7 @@ import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput} from
 import iCureCropped from './Images/iCure-Cropped.jpg';
 import infoIcon from './Images/infoIcon.png';
 import userIcon from './Images/user.png';
+import iCureText from './Images/iCure-TextOnly.jpg';
 
 class HomeScreen extends Component {
     constructor(props) {
@@ -28,28 +29,30 @@ class HomeScreen extends Component {
 
     render () {
         return (
-            <View style={{flex: 1,}}>
-                <View style={{flex: 0.8, flexDirection: 'row', backgroundColor: 'white', height: 55,}}>
-                    <View style={{flex: 1.5, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{flex: 1, backgroundColor: '#e0dede'}}>
+                <View style={{flex: 0.8, flexDirection: 'row', backgroundColor: 'white', height: 25, paddingLeft: 6, paddingRight: 6}}>
+                    <View style={{flex: 9, justifyContent: 'center'}}>
                         <TouchableOpacity>
-                            <Image source={infoIcon} style={{width: 35, height: 35}} />
+                            <Image source={iCureCropped} style={{width: 110, height: 35, resizeMode: 'contain'}}/>
                         </TouchableOpacity>
                     </View>
-                    <View style={{flex: 7, alignItems: 'center', justifyContent: 'center'}}>
-                        <Image source={iCureCropped} style={{width: 130, height: 45}}/>
-                    </View>
-                    <View style={{flex: 1.5, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={{flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', paddingRight: 3}}>
                         <TouchableOpacity>
-                            <Image source={userIcon} style={{width: 35, height: 35}} />
+                            <Image source={userIcon} style={{width: 25, height: 25}} />
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{flex: 8,}}>
-                    <Text>Hello</Text>
+                <View style={{flex: 7.5,}}>
+                    <View style={{flex:1, margin: 18, backgroundColor: 'white', borderRadius: 25, padding: 15}}>
+                        <Text style={{fontSize: 30}}>Hello, Jane Doe!</Text>
+                    </View>
                 </View>
-                <View style={{flex: 1.2,}}>
+                <View style={{flex: 1.7,}}>
                     <TouchableOpacity style={styles.button}>
                         <Text style={styles.buttonText}>Update Today's Activity</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.buttonText}>View My Reports</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -69,8 +72,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#ED3030',
         padding: 10,
         //marginBottom: 10,
-        width: 350,
+        width: 370,
         borderRadius: 25,
         alignSelf: 'center',
+        marginBottom: 15
     },
 })
