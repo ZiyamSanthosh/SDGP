@@ -123,6 +123,7 @@ import FrontPage from './src/FrontPage.js'
 import LogIn from './src/LogIn';
 import SignUp from './src/SignUp';
 import InitialDetails from './src/InitialDetails';
+import SummaryPage from './src/SummaryPage';
 
 /*class Main extends Component {
 
@@ -159,6 +160,11 @@ function app() {
                 <stack.Screen
                     name="InitialDetails"
                     component={InitialDetails}
+                    options={{headerShown: false}}
+                />
+                <stack.Screen
+                    name="SummaryPage"
+                    component={SummaryPage}
                     options={{headerShown: false}}
                 />
             </stack.Navigator>

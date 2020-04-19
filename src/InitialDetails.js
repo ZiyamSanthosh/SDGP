@@ -260,31 +260,6 @@ class InitialDetails extends Component {
                             menstrualCycle: this.state.menstrualCycle
                         }}
                     />
-                    <stack.Screen
-                        name="Final Page"
-                        component={finalPage}
-                        options={{
-                            title: "10 of 10",
-                            headerStyle: {backgroundColor: '#ED3030'},
-                            headerTintColor: 'white',
-                            headerShown: false
-                        }}
-                        initialParams={{
-                            fullName: this.state.fullName,
-                            email: this.state.email,
-                            password: this.state.password,
-                            confirmPassword: this.state.confirmPassword,
-                            dateOfBirth: this.state.dateOfBirth,
-                            height: this.state.height,
-                            weight: this.state.weight,
-                            ageOfFirstPeriod: this.state.ageOfFirstPeriod,
-                            maritalStatus: this.state.maritalStatus,
-                            breastFeeding: this.state.breastFeeding,
-                            alcohol: this.state.alcohol,
-                            smoking: this.state.smoking,
-                            menstrualCycle: this.state.menstrualCycle
-                        }}
-                    />
                 </stack.Navigator>
             /*</NavigationContainer>*/
         );
@@ -770,7 +745,7 @@ function Question10({navigation, route}) {
         <View style={styles.Q2View}>
             <Image source={medicalHistoryIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>Is there any close relation of yours had breast cancer history?</Text>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Final Page', {
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('SummaryPage', {
                 fullName: fullName,
                 email: email,
                 password: password,
@@ -788,7 +763,7 @@ function Question10({navigation, route}) {
             })}>
                 <Text style={styles.buttonText}>Yes</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Final Page', {
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('SummaryPage', {
                 fullName: fullName,
                 email: email,
                 password: password,
@@ -805,45 +780,6 @@ function Question10({navigation, route}) {
                 breastCancerHistory: "No"
             })}>
                 <Text style={styles.buttonText}>No</Text>
-            </TouchableOpacity>
-        </View>
-    );
-}
-
-function finalPage({navigation, route}){
-    const {fullName, email, password, confirmPassword, dateOfBirth, height, weight, ageOfFirstPeriod,
-        maritalStatus, breastFeeding, alcohol, smoking, menstrualCycle, breastCancerHistory} = route.params
-    return (
-        <View style={{backgroundColor: 'white', flex:1, justifyContent: 'center', padding: 15}}>
-            <Text style={styles.summaryTitle}>Summary</Text>
-            <View style={{flexDirection: 'row', alignSelf: 'center', padding: 10}}>
-                <View>
-                    <Text style={styles.finalPageText1}>Date Of Birth</Text>
-                    <Text style={styles.finalPageText1}>Height</Text>
-                    <Text style={styles.finalPageText1}>Weight</Text>
-                    <Text style={styles.finalPageText1}>Age Of First Period</Text>
-                    <Text style={styles.finalPageText1}>Marital Status</Text>
-                    <Text style={styles.finalPageText1}>Breast Feeding</Text>
-                    <Text style={styles.finalPageText1}>Alcohol</Text>
-                    <Text style={styles.finalPageText1}>Smoking</Text>
-                    <Text style={styles.finalPageText1}>Menstrual Cycle</Text>
-                    <Text style={styles.finalPageText1}>Breast Cancer History</Text>
-                </View>
-                <View>
-                    <Text style={styles.finalPageText2}>{dateOfBirth.toLocaleDateString()}</Text>
-                    <Text style={styles.finalPageText2}>{height}m</Text>
-                    <Text style={styles.finalPageText2}>{weight}kg</Text>
-                    <Text style={styles.finalPageText2}>{ageOfFirstPeriod} years</Text>
-                    <Text style={styles.finalPageText2}>{maritalStatus}</Text>
-                    <Text style={styles.finalPageText2}>{breastFeeding}</Text>
-                    <Text style={styles.finalPageText2}>{alcohol}</Text>
-                    <Text style={styles.finalPageText2}>{smoking}</Text>
-                    <Text style={styles.finalPageText2}>{menstrualCycle}</Text>
-                    <Text style={styles.finalPageText2}>{breastCancerHistory}</Text>
-                </View>
-            </View>
-            <TouchableOpacity style={styles.predictButton}>
-                <Text style={styles.buttonText}>Start Prediction</Text>
             </TouchableOpacity>
         </View>
     );
@@ -942,31 +878,4 @@ const styles = StyleSheet.create({
         //justifyContent: 'center',
         paddingTop: 150
     },
-    finalPageText1: {
-        fontSize: 20,
-        padding: 5,
-        color: "#ED3030",
-        fontWeight: "bold"
-    },
-    finalPageText2: {
-        fontSize: 20,
-        padding: 5,
-    },
-    summaryTitle: {
-        fontWeight: 'bold',
-        fontSize: 35,
-        textAlign: 'center',
-        paddingBottom: 50,
-        paddingTop: 20
-    },
-    predictButton: {
-        alignItems: 'center',
-        backgroundColor: '#ED3030',
-        padding: 10,
-        //marginBottom: 10,
-        width: 350,
-        borderRadius: 25,
-        alignSelf: 'center',
-        marginTop: 50
-    }
 });
