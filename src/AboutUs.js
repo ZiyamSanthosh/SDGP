@@ -25,6 +25,20 @@ class AboutUs extends Component {
                     </View>
                     <View style={{flex: 6, backgroundColor: 'white', margin: 20, marginTop: 0, borderRadius: 25}}>
                         <Text style={{fontSize: 30, textAlign: 'center', padding: 10, textDecorationLine: 'underline'}}>iCure</Text>
+                        <Text>I-cure is an app which was created to predict the possibility
+                            of a woman being diagnosed with breast cancer. As for the studies
+                            it is shown that this sickness is currently the second most diagnosed cancer in
+                            the world. We came up with this solution because majority of the women that have
+                            a risk of being diagnosed with breast cancer cannot keep track of their daily lifestyle.
+                            At first this app will first gather basic details of the user and make an initial
+                            prediction, after that by getting daily data of the user the prediction will update
+                            and vary according to the behavior of the user. By making the prediction then the system
+                            will analyze what has caused the prediction rate to uplift, after identifying the factor which
+                            has led to this situation the system will provide the user a solution in order to minimize the risk.
+                            Since the effectiveness of this sickness can be minimized if the person was able to diagnose this
+                            sickness at the very early stages, We hope that this app will be useful for the user to get an idea
+                            about her status and eventually if there is a risk the user will be able to get obtain medical service
+                            and prevent it at early stages.  </Text>
                     </View>
                 </View>
             </View>
