@@ -124,6 +124,8 @@ import LogIn from './src/LogIn';
 import SignUp from './src/SignUp';
 import InitialDetails from './src/InitialDetails';
 import SummaryPage from './src/SummaryPage';
+import HomeScreen from './src/HomeScreen';
+import AboutUs from './src/AboutUs';
 
 /*class Main extends Component {
 
@@ -165,6 +167,16 @@ function app() {
                 <stack.Screen
                     name="SummaryPage"
                     component={SummaryPage}
+                    options={{headerShown: false}}
+                />
+                <stack.Screen
+                    name="HomeScreen"
+                    component={HomeScreen}
+                    options={{headerShown: false}}
+                />
+                <stack.Screen
+                    name="AboutUs"
+                    component={AboutUs}
                     options={{headerShown: false}}
                 />
             </stack.Navigator>
