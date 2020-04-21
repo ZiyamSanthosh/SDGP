@@ -20,12 +20,13 @@ class AboutUs extends Component {
                     </View>
                 </View>
                 <View style={{flex: 13}}>
-                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <View style={{flex: 1.2, justifyContent: 'center', alignItems: 'center'}}>
                         <Image source={iCureLogoOnly} style={{height:100, width: 100}}/>
                     </View>
-                    <View style={{flex: 6, backgroundColor: 'white', margin: 20, marginTop: 0, borderRadius: 25}}>
+                    <View style={{flex: 6.5, backgroundColor: 'white', margin: 20, marginTop: 0, borderRadius: 25}}>
                         <Text style={{fontSize: 30, textAlign: 'center', padding: 10, textDecorationLine: 'underline'}}>iCure</Text>
-                        <Text>I-cure is an app which was created to predict the possibility
+                        <Text style={{fontSize: 15, padding: 16, paddingTop: 0, paddingBottom: 0, textAlign: 'justify'}}>
+                            iCure is an app which was created to predict the possibility
                             of a woman being diagnosed with breast cancer. As for the studies
                             it is shown that this sickness is currently the second most diagnosed cancer in
                             the world. We came up with this solution because majority of the women that have
@@ -38,7 +39,14 @@ class AboutUs extends Component {
                             Since the effectiveness of this sickness can be minimized if the person was able to diagnose this
                             sickness at the very early stages, We hope that this app will be useful for the user to get an idea
                             about her status and eventually if there is a risk the user will be able to get obtain medical service
-                            and prevent it at early stages.  </Text>
+                            and prevent it at early stages.
+                        </Text>
+                        <Text style={{textAlign: 'center', color: '#e0dede'}}>@Copyrights Reserved</Text>
+                    </View>
+                    <View style={{flex: 0.8}}>
+                        <TouchableOpacity style={styles.button}>
+                            <Text style={styles.buttonText}>Back To Home</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -47,3 +55,20 @@ class AboutUs extends Component {
 }
 
 export default AboutUs
+
+const styles = StyleSheet.create({
+    buttonText: {
+        fontSize: 20,
+        color: 'white'
+    },
+    button: {
+        alignItems: 'center',
+        backgroundColor: '#ED3030',
+        padding: 10,
+        //marginBottom: 10,
+        width: 370,
+        borderRadius: 25,
+        alignSelf: 'center',
+        marginBottom: 15
+    },
+})
