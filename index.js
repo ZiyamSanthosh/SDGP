@@ -12,5 +12,6 @@ import FrontPage from './src/FrontPage';
 import initialDetails from './src/InitialDetails';
 import HomeScreen from './src/HomeScreen';
 import AboutUs from './src/AboutUs';
+import Profile from './src/Profile';
 
-AppRegistry.registerComponent(appName, () => AboutUs);
+AppRegistry.registerComponent(appName, () => App);
