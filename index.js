@@ -13,5 +13,6 @@ import initialDetails from './src/InitialDetails';
 import HomeScreen from './src/HomeScreen';
 import AboutUs from './src/AboutUs';
 import Profile from './src/Profile';
+import ResultsPage from "./src/ResultsPage";
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => ResultsPage);
