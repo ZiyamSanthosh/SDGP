@@ -15,4 +15,4 @@ import AboutUs from './src/AboutUs';
 import Profile from './src/Profile';
 import ResultsPage from "./src/ResultsPage";
 
-AppRegistry.registerComponent(appName, () => ResultsPage);
+AppRegistry.registerComponent(appName, () => HomeScreen);
