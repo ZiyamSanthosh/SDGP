@@ -128,8 +128,47 @@ const registerUser = async (req, res, next) => {
 };
 
 
+//user sign-in
+const loginUser = async (req, res, next) => {
+    const { email, password } = req.body;
+
+    var containuser;
+    try {
+        //find and retrieve user form the databse by email
+        containuser = await userModel.findOne({ email: email });
+    }
+    catch (err) {
+        return next(new httpErr('Login failed, Please try again', 500));
+    }
+
+
+    if (!containuser) {
+        //throw error if user is not found on the database
+        return next(new httpErr('Invalid user credentials. Could not find user.', 401));
+    }
+
+    let passwordstate = false;
+    try {
+        //decrypt and compare passwords
+        passwordstate = await bcrypt.compare(req.body.password, containuser.password);
+    }
+    catch (err) {
+        return next(new httpErr('User login failed. Please check your password and try again ', 500));
+    }
+
+    if (!passwordstate) {
+        //throw error for invalid passwords
+        return next(new httpErr('Invalid password, user login failed', 401));
+    }
+
+    console.log("login successful")
+    res.status(201).json({ userId: containuser.userId, email: containuser.email });
+
+};
+
 //export functions
 exports.registerUser = registerUser;
+exports.loginUser = loginUser;
 exports.getUsers = getUsers;
 exports.findUser = findUser;
 
