@@ -1,6 +1,8 @@
 // api-routes.js
 // Initialize express router
 let router = require("express").Router();
+const validator = require('express-validator');
+
 // Set default API response
 router.get("/", function (req, res) {
   res.json({
@@ -12,6 +14,7 @@ router.get("/", function (req, res) {
 var trackingController = require("../controllers/trackingController");
 // Import initialDetailController
 var initialDetailController = require("../controllers/initialDetailController");
+const userController = require('../controllers/accountcontroller');
 // track routes
 router
   .route("/track")
@@ -37,6 +40,18 @@ router
   .get(initialDetailController.getById) // Route for getting initial prediction details related to particular userid
   .delete(initialDetailController.deleteInitialDetails) // Route for deleting initial prediction details related to particular userid
   .put(initialDetailController.updateInitialDetails); // Route for updating initial prediction details related to particular userid
+
+  
+// route for getting all the users
+router
+  .route('/users')
+  .get(userController.getUsers);
+
+//route for getting user for a given user id
+router
+  .route('/users/:uId')
+  .get(userController.findUser);
+
 
 // Export API routes
 module.exports = router;
