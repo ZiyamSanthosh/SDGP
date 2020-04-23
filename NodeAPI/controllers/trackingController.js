@@ -153,7 +153,7 @@ exports.call = function (req, res) {     // function for generating report
                 if (!err) {
                     des = docs;
 
-                    //  console.log(des);
+                     console.log(des);
 
                     var Artical = [];
 
@@ -185,8 +185,14 @@ exports.call = function (req, res) {     // function for generating report
                         Artical.push(des[7]);
                     }
 
+                    var rand = Math.floor(Math.random()*Artical.length);
+
+                    if (Artical.length == 0){
+                        Artical.push(des[9]);
+                    }
+
                     res.json({
-                        Artical: Artical
+                        Artical: Artical[rand]
                     });
                 }
                 else {
