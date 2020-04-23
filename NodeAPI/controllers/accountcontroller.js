@@ -53,9 +53,83 @@ const findUser = async (req, res, next) => {
 
 };
 
+//register a user
+const registerUser = async (req, res, next) => {
+
+    //throw error for invalid user inputs
+    const errState = validator.validationResult(req);
+    if (!errState.isEmpty()) {
+        return next(new httpErr('Invalid inputs provided, please re-check your data'));
+    }
+
+    const { fullName, email } = req.body;
+    var found;
+    try {
+        //retrieve user from database querying by email
+        found = await userModel.findOne({ email: email });
+    }
+    catch (err) {
+        //throw error for database retrieve errors
+        return next(new httpErr('Signup failed, Please try again', 500));
+    }
+
+    if (found) {
+        //throw error if user is already registered
+        return next(new httpErr("Email already exists. Please Log in"));
+    }
+
+
+
+
+
+    let salt;
+    let hashPass;
+    //generate salt round num. for hashing password
+    salt = await bcrypt.genSalt(10);
+    try {
+        //generate hash for user password
+        hashPass = await bcrypt.hash(req.body.password, salt);
+    }
+    catch (err) {
+        return next(new httpErr('User regsitration failed . Please try again later', 500));
+    }
+
+
+    // var result = emailValidator.validate(email);
+    // console.log(result);
+    // var responce;
+
+    //  emailExist.check(email, function (error, res,callback) {
+    //     console.log(res);   // we have to return this res somehow
+    //     responce = res;
+
+    // });
+
+   // generate unique user id
+    const uniqueId = uuidv4();
+
+    //create new user
+    const newUser = new userModel({
+        userId: uniqueId,
+        fullName,
+        email,
+        password: hashPass,
+        date: new Date()
+    });
+
+    try {
+        //send user object to the database
+        await newUser.save();
+    }
+    catch (err) {
+        return next(new httpErr('User registration failed. Please try again later', 500));
+    }
+    res.status(201).json({ userId: newUser.userId, email: newUser.email, fullName: newUser.fullName });
+};
 
 
 //export functions
+exports.registerUser = registerUser;
 exports.getUsers = getUsers;
 exports.findUser = findUser;
 

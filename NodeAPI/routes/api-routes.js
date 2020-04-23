@@ -52,6 +52,14 @@ router
   .route('/users/:uId')
   .get(userController.findUser);
 
-
+//route for user registration
+router
+  .route('/users/register')
+  .post([
+    validator.check('fullName').not().isEmpty(),
+    validator.check('email').normalizeEmail().isEmail(),
+    validator.check('password').isLength({ min: 8 })
+  ],
+    userController.registerUser);
 // Export API routes
 module.exports = router;
