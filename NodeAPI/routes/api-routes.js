@@ -20,6 +20,7 @@ router.route('/track')
 router
     .route("/track/:track_id")
     .get(trackingController.view)    // additional route. not used for any functionality (used for viewing a data by giving id)
+    .delete(trackingController.delete);   // additional route. not used for any functionality (used for delete a data by giving id)
 
 
 

@@ -243,6 +243,19 @@ exports.view = function (req, res) {       // extra function for viewing a data.
         });
     });
 };
+// addition
+exports.delete = function (req, res) {    // extra function for viewing a data. not using in the code
+    Model.remove({
+        _id: req.params.track_id
+    }, function (err, track) {
+        if (err)
+            res.send(err);
+        res.json({
+            status: "success",
+            message: "Contact deleted"
+        });
+    });
+};
 
 const getPrediction = (data) => {     // helping function for index function
     try {
