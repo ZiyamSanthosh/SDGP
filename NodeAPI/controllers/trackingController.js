@@ -202,6 +202,36 @@ exports.call = function (req, res) {     // function for generating report
 
 };
 
+exports.getAllPrediction = function (req, res) {   // function for getting all the past predictions
+
+    console.log(req.body);
+
+    var ID = req.body.userId;
+
+    AveragePrediction.find({}, function (err, docs) {
+        if (!err) {
+            allData = docs;
+
+            predictionData = [];
+
+            for (let x = 0; x <= allData.length - 1; x++) {
+                if (allData[x].UserID === ID) {
+                    predictionData.push(allData[x]);
+                }
+            }
+
+            console.log(predictionData);
+            res.json({
+                AllPredictions: predictionData
+            });
+
+        }
+        else {
+            throw err;
+        }
+    });
+
+};
 
 const getPrediction = (data) => {     // helping function for index function
     try {

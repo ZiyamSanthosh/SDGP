@@ -15,7 +15,7 @@ router.route('/track')
     .get(trackingController.index) //route for getting the average prediction for curent date
     .post(trackingController.new) //route for updating daily tracking details
     .put(trackingController.call) //rout for getting the artical
-
+    .patch(trackingController.getAllPrediction); //rout for getting all past predictions
 
 
 
