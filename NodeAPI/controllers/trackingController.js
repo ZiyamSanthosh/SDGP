@@ -233,6 +233,30 @@ exports.getAllPrediction = function (req, res) {   // function for getting all t
 
 };
 
+exports.view = function (req, res) {       // extra function for viewing a data. not using in the code
+    Model.findById(req.params.track_id, function (err, track) {
+        if (err)
+            res.send(err);
+        res.json({
+            message: 'Contact details loading..',
+            data: track
+        });
+    });
+};
+// addition
+exports.delete = function (req, res) {    // extra function for viewing a data. not using in the code
+    Model.remove({
+        _id: req.params.track_id
+    }, function (err, track) {
+        if (err)
+            res.send(err);
+        res.json({
+            status: "success",
+            message: "Contact deleted"
+        });
+    });
+};
+
 const getPrediction = (data) => {     // helping function for index function
     try {
         return axios.post("http://localhost:5000/predict", data);

@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
     });
 });
 // Import trackingController
-var trackingController = require('./trackingController');
+var trackingController = require('../controllers/trackingController');
 // track routes
 router.route('/track')
     .get(trackingController.index) //route for getting the average prediction for curent date
@@ -17,6 +17,10 @@ router.route('/track')
     .put(trackingController.call) //rout for getting the artical
     .patch(trackingController.getAllPrediction); //rout for getting all past predictions
 
+router
+    .route("/track/:track_id")
+    .get(trackingController.view)    // additional route. not used for any functionality (used for viewing a data by giving id)
+    .delete(trackingController.delete);   // additional route. not used for any functionality (used for delete a data by giving id)
 
 
 
