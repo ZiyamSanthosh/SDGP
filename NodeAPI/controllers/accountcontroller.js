@@ -220,10 +220,60 @@ const deleteUser = async (req, res, next) => {
 
 };
 
+
+//modify a given user
+const modifyUser = async (req, res, next) => {
+    //obtain useremail and fullname
+    const email = req.body.email;
+    const fullName = req.body.fullName;
+    let modfullName;
+
+    var containuser;
+    try {
+        //find and retrieve user from the database
+        containuser = await userModel.findOne({ email: req.body.email });
+    }
+    catch (err) {
+        return next(new httpErr('User modification failed, please try again', 500));
+    }
+
+    if (!containuser) {
+        //throw error if user not found on the database
+        return next(new httpErr('Invalid user credentials. Could not find user.', 401));
+    }
+
+    //check for user input
+    if (fullName == null || fullName == '') {
+        modfullName = containuser.fullName;
+    }
+    else {
+        modfullName = fullName;
+    }
+
+    try {
+        userModel.findOneAndUpdate({ email: email }, { fullName: modfullName }, { upsert: true, useFindAndModify: false }, function (err, doc) {
+            if (err) {
+                return res.status(400).json({ message: err });
+                // return next(new httpErr('Could not modify user, please try again later', 500));
+            }
+            return res.send('Succesfully saved.');
+        });
+    }
+    catch (err) {
+        // return next(new httpErr('Could not modify user', 500));
+        return res.status(400).json({ message: err });
+    }
+
+    console.log("User modification success");
+
+};
+
+
 //export functions
 exports.registerUser = registerUser;
 exports.loginUser = loginUser;
 exports.deleteUser = deleteUser;
+exports.modifyUser = modifyUser;
 exports.getUsers = getUsers;
 exports.findUser = findUser;
 

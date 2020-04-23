@@ -69,5 +69,10 @@ router
   .route('/users/remove')
   .delete(userController.deleteUser);
 
+//route for user modification
+router
+  .route('/users/modify')
+  .put(userController.modifyUser);
+
 // Export API routes
 module.exports = router;
