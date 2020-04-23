@@ -17,6 +17,9 @@ router.route('/track')
     .put(trackingController.call) //rout for getting the artical
     .patch(trackingController.getAllPrediction); //rout for getting all past predictions
 
+router
+    .route("/track/:track_id")
+    .get(trackingController.view)    // additional route. not used for any functionality (used for viewing a data by giving id)
 
 
 

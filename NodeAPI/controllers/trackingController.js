@@ -233,6 +233,17 @@ exports.getAllPrediction = function (req, res) {   // function for getting all t
 
 };
 
+exports.view = function (req, res) {       // extra function for viewing a data. not using in the code
+    Model.findById(req.params.track_id, function (err, track) {
+        if (err)
+            res.send(err);
+        res.json({
+            message: 'Contact details loading..',
+            data: track
+        });
+    });
+};
+
 const getPrediction = (data) => {     // helping function for index function
     try {
         return axios.post("http://localhost:5000/predict", data);
