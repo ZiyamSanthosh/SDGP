@@ -10,6 +10,8 @@ router.get('/', function (req, res) {
 });
 // Import trackingController
 var trackingController = require('../controllers/trackingController');
+// Import initialDetailController
+var initialDetailController = require("../controllers/initialDetailController");
 // track routes
 router.route('/track')
     .get(trackingController.index) //route for getting the average prediction for curent date
@@ -22,6 +24,15 @@ router
     .get(trackingController.view)    // additional route. not used for any functionality (used for viewing a data by giving id)
     .delete(trackingController.delete);   // additional route. not used for any functionality (used for delete a data by giving id)
 
+//Initial Data Route
+router
+  .route("/detail")    
+  .get(initialDetailController.getAll)      // Route for get all documents related to inital predcition
+
+  router
+  .route("/detail/:user_id") 
+  .get(initialDetailController.getById)        // Route for getting intial prediction details related to preticular userid
+ 
 
 
 // Export API routes
