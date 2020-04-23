@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
     });
 });
 // Import trackingController
-var trackingController = require('./trackingController');
+var trackingController = require('../controllers/trackingController');
 // track routes
 router.route('/track')
     .get(trackingController.index) //route for getting the average prediction for curent date

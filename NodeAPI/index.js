@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-const httpErr = require('./models/httpErr');
+//const httpErr = require('./models/httpErr');
 
 
 
@@ -58,9 +58,9 @@ app.get('/', (req, res) => res.send('Weekly tracking page is loaded'));
 app.use('/api', apiRoutes);
 
 // httperr
-app.use((req, res, next) => {
-    return next(new httpErr("Could not find route", 404));
-});
+// app.use((req, res, next) => {
+//     return next(new httpErr("Could not find route", 404));
+// });
 
 // Launch app to listen to specified port
 app.listen(port, function () {
