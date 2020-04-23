@@ -11,8 +11,30 @@ class LogIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "not defined",
-            password: "not defined"
+            email: null,
+            password: null
+        }
+    }
+
+    validateEmail = (text) => {
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (reg.test(text) === false){
+            //console.log("email")
+            alert("Please enter a valid email address!")
+            //this.setState({email: text})
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    validations = () => {
+        if (this.state.email===null || this.state.password===null){
+            alert("Please fill all the fields!")
+        } else {
+            if (this.validateEmail(this.state.email)){
+                console.log("Done")
+            }
         }
     }
 
@@ -39,7 +61,7 @@ class LogIn extends Component {
                         })
                     }}
                 />
-                <TouchableOpacity style={styles.button} >
+                <TouchableOpacity style={styles.button} onPress={() => this.validations()}>
                     <Text style={styles.buttonText}>LogIn</Text>
                 </TouchableOpacity>
             </View>
