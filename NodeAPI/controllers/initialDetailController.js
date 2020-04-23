@@ -115,6 +115,18 @@ exports.postInitialDetails = function (req, res) {
     });
 };
 
+/*DELETE ROUTE-------------------------------------*/
+
+//Deleting initial details related to a specific userid
+exports.deleteInitialDetails = async function (req, res) {
+  try {
+    console.log(req.params.user_id);
+    const removedPost = await Post.remove({ UserID: req.params.user_id });
+    return res.json(removedPost);
+  } catch (err) {
+    return res.status(400).json({ message: err });
+  }
+};
 
 /*Using AXIOS to get HTTP request------------------------------------*/
 

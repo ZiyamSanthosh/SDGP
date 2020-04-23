@@ -35,6 +35,7 @@ router
 router
 .route("/detail/:user_id")
 .get(initialDetailController.getById); // Route for getting initial prediction details related to preticular userid
-
+.delete(initialDetailController.deleteInitialDetails)  // Route for deleting initial prediction details related to preticular userid
+ 
 // Export API routes
 module.exports = router;
