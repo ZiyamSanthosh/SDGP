@@ -166,9 +166,64 @@ const loginUser = async (req, res, next) => {
 
 };
 
+
+//delete a user
+const deleteUser = async (req, res, next) => {
+
+    const { email, password } = req.body;
+
+    var containuser;
+    try {
+        //find and retrieve user from the database
+        containuser = await userModel.findOne({ email: email });
+    }
+    catch (err) {
+        return next(new httpErr('Could not find user, Please try again', 500));
+    }
+
+
+    if (!containuser) {
+        //throw error if user is not registered/found on the database
+        return next(new httpErr('Invalid user credentials. Could not find user.', 401));
+    }
+
+    let passwordstate = false;
+    try {
+        //decrypt and compare user passwords
+        passwordstate = await bcrypt.compare(req.body.password, containuser.password);
+    }
+    catch (err) {
+        return next(new httpErr('User deletion failed. Please check your password and try again later'), 500);
+    }
+
+    if (!passwordstate) {
+        //throw error for invalid password
+        return next(new httpErr('Invalid password, could not delete user', 401));
+    }
+
+    try {
+        //delete user from the database
+        await userModel.deleteOne({ email: email }, (err, result, next) => {
+            if (err) {
+                res.send(err)
+            }
+            else {
+                console.log("user deletion successful")
+                res.status(201).json({ userId: containuser.userId, email: containuser.email });
+            }
+        });
+    }
+    catch (err) {
+        return next(new httpErr('User deletion failed, please try again later', 401));
+    }
+    console.log("Deletion successful");
+
+};
+
 //export functions
 exports.registerUser = registerUser;
 exports.loginUser = loginUser;
+exports.deleteUser = deleteUser;
 exports.getUsers = getUsers;
 exports.findUser = findUser;
 
