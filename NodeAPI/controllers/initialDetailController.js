@@ -128,6 +128,60 @@ exports.deleteInitialDetails = async function (req, res) {
   }
 };
 
+
+/*UPDATE ROUTE-------------------------------------*/
+
+//Updating initial details related to a specific userid
+exports.updateInitialDetails = async function (req, res) {
+
+  //Initial details with Updated values 
+  try {
+    let postData = {
+      Age: age(req.body.dob),
+      BMI: Number.parseFloat(bmi.bmi(req.body.height, req.body.weight).bmi),
+      Breast_Feeding: yesNoConversion(req.body.breastFeeding),
+      Marital_Status: maritalStatus(req.body.maritalStatus),
+      Alcohol: yesNoConversion(req.body.alcohol),
+      Smoking: yesNoConversion(req.body.smoking),
+      Breast_Cancer_History: yesNoConversion(req.body.breastCancerHistory),
+      Age_at_first_period: req.body.ageAtFirstPeriod,
+      Menstrual_Cycle: menstrualCycle(req.body.menstrualCycle),
+    };
+
+    //Getting updated prediction values for updated details
+    axios.post("http://localhost:5000/predict", postData).then(response => {
+
+      console.log(response.data);
+
+      //Updating the relevant initial detail in the DB
+      Post.findOneAndUpdate({ UserID: req.params.user_id },
+        {
+          Age: age(req.body.dob),
+          BMI: bmi.bmi(req.body.height, req.body.weight).bmi,
+          Breast_Feeding: yesNoConversion(req.body.breastFeeding),
+          Marital_Status: maritalStatus(req.body.maritalStatus),
+          Alcohol: yesNoConversion(req.body.alcohol),
+          Smoking: yesNoConversion(req.body.smoking),
+          Breast_Cancer_History: yesNoConversion(
+            req.body.breastCancerHistory
+          ),
+          Age_at_first_period: req.body.ageAtFirstPeriod,
+          Menstrual_Cycle: menstrualCycle(req.body.menstrualCycle),
+          Prediction: response.data
+        }, { upsert: true, useFindAndModify: false }, function (err, doc) {
+          if (err) {
+            return res.status(400).json({ message: err });
+
+          }
+          return res.send('Successfully saved.');
+        });
+    });
+
+  } catch (err) {
+    res.status(400).json({ message: err });
+  }
+};
+
 /*Using AXIOS to get HTTP request------------------------------------*/
 
 const getPrediction = (data) => {

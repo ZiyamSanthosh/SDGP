@@ -30,12 +30,13 @@ router
   .route("/detail")
   .get(initialDetailController.getAll) // Route for get all documents related to initial prediction
   .post(initialDetailController.postInitialDetails); // Route for inserting initial form details to the DB
-                                                    // and getting the initial prediction
+// and getting the initial prediction
 
 router
-.route("/detail/:user_id")
-.get(initialDetailController.getById); // Route for getting initial prediction details related to preticular userid
-.delete(initialDetailController.deleteInitialDetails)  // Route for deleting initial prediction details related to preticular userid
- 
+  .route("/detail/:user_id")
+  .get(initialDetailController.getById) // Route for getting initial prediction details related to particular userid
+  .delete(initialDetailController.deleteInitialDetails) // Route for deleting initial prediction details related to particular userid
+  .put(initialDetailController.updateInitialDetails); // Route for updating initial prediction details related to particular userid
+
 // Export API routes
 module.exports = router;
