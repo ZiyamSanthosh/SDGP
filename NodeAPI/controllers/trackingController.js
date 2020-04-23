@@ -128,6 +128,81 @@ exports.index = async function (req, res) {    // function for getting the avera
 
 };
 
+exports.call = function (req, res) {     // function for generating report
+
+    console.log(req.body);
+
+    var ID = req.body.userId;
+
+    Model.find({}, function (err, docs) {
+        if (!err) {
+            allData = docs;
+
+            userData = [];
+
+            for (let x = 0; x <= allData.length - 1; x++) {
+                if (allData[x].UserID === ID) {
+                    userData.push(allData[x]);
+                }
+            }
+
+            var last = userData[userData.length - 1];
+            console.log(last);
+
+            Factor.find({}, function (err, docs) {
+                if (!err) {
+                    des = docs;
+
+                    //  console.log(des);
+
+                    var Artical = [];
+
+                    if (last.Age > 45) {
+                        Artical.push(des[0]);
+                    }
+                    if (last.BMI >= 25) {
+                        Artical.push(des[2]);
+                    }
+                    if (last.Marital_Status === 3) {
+                        Artical.push(des[6]);
+                    }
+                    if (last.Breast_Cancer_History === 1) {
+                        Artical.push(des[4]);
+                    }
+                    if (last.Smoking === 1) {
+                        Artical.push(des[8]);
+                    }
+                    if (last.Alcohol === 1) {
+                        Artical.push(des[1]);
+                    }
+                    if (last.BreastFeeding === 0) {
+                        Artical.push(des[3]);
+                    }
+                    if (last.Age_at_first_period < 12 || last.Age_at_first_period > 16) {
+                        Artical.push(des[4]);
+                    }
+                    if (last.Menstrual_Cycle === 0) {
+                        Artical.push(des[7]);
+                    }
+
+                    res.json({
+                        Artical: Artical
+                    });
+                }
+                else {
+                    throw err;
+                }
+            });
+
+        }
+        else {
+            throw err;
+        }
+    });
+
+};
+
+
 const getPrediction = (data) => {     // helping function for index function
     try {
         return axios.post("http://localhost:5000/predict", data);
