@@ -64,7 +64,7 @@ router
   .route("/users/login")
   .post(userController.loginUser);
 
-  //route for user deletion
+//route for user deletion
 router
   .route('/users/remove')
   .delete(userController.deleteUser);

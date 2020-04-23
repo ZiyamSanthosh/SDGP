@@ -1,15 +1,14 @@
-//var emailExist = require('email-existence');
-var emailValidator = require("email-validator");
+
+
 //import required modules
 const bcrypt = require('bcrypt');  //module for password encryption
 const { v4: uuidv4 } = require('uuid');   //module for userid generation
 const validator = require('express-validator');   //module for validating user inputs
+const emailExistence = require('email-existence'); //module for validating email existence
 
 //import httpErr and userModel
 const httpErr = require('../models/httpErr');
 const userModel = require('../models/user');
-// const verifier = new mailverifier('at_T9vDzzLM3Mw3hpNAblQHbcA35h6NC');
-
 
 //retrieve all the users from the database
 const getUsers = async (req, res, next) => {
@@ -50,7 +49,6 @@ const findUser = async (req, res, next) => {
     console.log("User found on the database")
     //return user as a JSON object
     res.status(201).json({ userId: containuser.userId, fullName: containuser.fullName, email: containuser.email, date: containuser.date });
-
 };
 
 //register a user
@@ -78,10 +76,6 @@ const registerUser = async (req, res, next) => {
         return next(new httpErr("Email already exists. Please Log in"));
     }
 
-
-
-
-
     let salt;
     let hashPass;
     //generate salt round num. for hashing password
@@ -93,19 +87,14 @@ const registerUser = async (req, res, next) => {
     catch (err) {
         return next(new httpErr('User regsitration failed . Please try again later', 500));
     }
+ 
+    var result = await doesEmailExist (email);
+    console.log(result);
+    if(!result){
+        return res.status(400).send("Email does not exist, please re-check your email");
+    }
 
-
-    // var result = emailValidator.validate(email);
-    // console.log(result);
-    // var responce;
-
-    //  emailExist.check(email, function (error, res,callback) {
-    //     console.log(res);   // we have to return this res somehow
-    //     responce = res;
-
-    // });
-
-   // generate unique user id
+    // generate unique user id
     const uniqueId = uuidv4();
 
     //create new user
@@ -124,7 +113,7 @@ const registerUser = async (req, res, next) => {
     catch (err) {
         return next(new httpErr('User registration failed. Please try again later', 500));
     }
-    res.status(201).json({ userId: newUser.userId, email: newUser.email, fullName: newUser.fullName });
+    res.status(201).json({ userId: newUser.userId, email: newUser.email, fullName: newUser.fullName});
 };
 
 
@@ -140,7 +129,6 @@ const loginUser = async (req, res, next) => {
     catch (err) {
         return next(new httpErr('Login failed, Please try again', 500));
     }
-
 
     if (!containuser) {
         //throw error if user is not found on the database
@@ -163,61 +151,67 @@ const loginUser = async (req, res, next) => {
 
     console.log("login successful")
     res.status(201).json({ userId: containuser.userId, email: containuser.email });
-
 };
 
 
 //delete a user
 const deleteUser = async (req, res, next) => {
+  const { email, password } = req.body;
 
-    const { email, password } = req.body;
+  var containuser;
+  try {
+    //find and retrieve user from the database
+    containuser = await userModel.findOne({ email: email });
+  } catch (err) {
+    return next(new httpErr("Could not find user, Please try again", 500));
+  }
 
-    var containuser;
-    try {
-        //find and retrieve user from the database
-        containuser = await userModel.findOne({ email: email });
-    }
-    catch (err) {
-        return next(new httpErr('Could not find user, Please try again', 500));
-    }
+  if (!containuser) {
+    //throw error if user is not registered/found on the database
+    return next(
+      new httpErr("Invalid user credentials. Could not find user.", 401)
+    );
+  }
 
+  let passwordstate = false;
+  try {
+    //decrypt and compare user passwords
+    passwordstate = await bcrypt.compare(
+      req.body.password,
+      containuser.password
+    );
+  } catch (err) {
+    return next(
+      new httpErr(
+        "User deletion failed. Please check your password and try again later"
+      ),
+      500
+    );
+  }
 
-    if (!containuser) {
-        //throw error if user is not registered/found on the database
-        return next(new httpErr('Invalid user credentials. Could not find user.', 401));
-    }
+  if (!passwordstate) {
+    //throw error for invalid password
+    return next(new httpErr("Invalid password, could not delete user", 401));
+  }
 
-    let passwordstate = false;
-    try {
-        //decrypt and compare user passwords
-        passwordstate = await bcrypt.compare(req.body.password, containuser.password);
-    }
-    catch (err) {
-        return next(new httpErr('User deletion failed. Please check your password and try again later'), 500);
-    }
-
-    if (!passwordstate) {
-        //throw error for invalid password
-        return next(new httpErr('Invalid password, could not delete user', 401));
-    }
-
-    try {
-        //delete user from the database
-        await userModel.deleteOne({ email: email }, (err, result, next) => {
-            if (err) {
-                res.send(err)
-            }
-            else {
-                console.log("user deletion successful")
-                res.status(201).json({ userId: containuser.userId, email: containuser.email });
-            }
-        });
-    }
-    catch (err) {
-        return next(new httpErr('User deletion failed, please try again later', 401));
-    }
-    console.log("Deletion successful");
-
+  try {
+    //delete user from the database
+    await userModel.deleteOne({ email: email }, (err, result, next) => {
+      if (err) {
+        res.send(err);
+      } else {
+        console.log("user deletion successful");
+        res
+          .status(201)
+          .json({ userId: containuser.userId, email: containuser.email });
+      }
+    });
+  } catch (err) {
+    return next(
+      new httpErr("User deletion failed, please try again later", 401)
+    );
+  }
+  console.log("Deletion successful");
 };
 
 
@@ -268,6 +262,18 @@ const modifyUser = async (req, res, next) => {
 
 };
 
+    
+function  doesEmailExist  (email) {
+    return new Promise((resolve, reject) => {
+        emailExistence.check(email, (err, resp) => err ? reject(err) : resolve(resp));
+    })
+    .then(resp => {
+        return Promise.resolve(resp);
+    })
+    .catch(err => {
+        return Promise.reject(err);
+    });
+};
 
 //export functions
 exports.registerUser = registerUser;
