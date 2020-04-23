@@ -6,8 +6,12 @@ let express = require('express');
 let bodyParser = require('body-parser');
 // Import Mongoose
 let mongoose = require('mongoose');
+// Import cors 
+var cors = require('cors');
 // Initialize the app
 let app = express();
+//enable cors to all routes 
+app.use(cors());
 
 // Import routes
 let apiRoutes = require("./routes/api-routes");
@@ -61,6 +65,7 @@ app.use('/api', apiRoutes);
 app.use((req, res, next) => {
     return next(new httpErr("Could not find route", 404));
 });
+
 
 // Launch app to listen to specified port
 app.listen(port, function () {

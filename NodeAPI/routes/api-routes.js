@@ -10,6 +10,7 @@ router.get("/", function (req, res) {
     message: "Welcome to RESTHub crafted with love!",
   });
 });
+
 // Import trackingController
 var trackingController = require("../controllers/trackingController");
 // Import initialDetailController
