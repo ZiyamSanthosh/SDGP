@@ -6,6 +6,7 @@ import moderate from './Images/Ratings/moderate.png'
 import beAlert from './Images/Ratings/BeAlert.png'
 import atRisk from './Images/Ratings/AtRisk.png'
 import critical from './Images/Ratings/critical.png'
+import axios from 'axios'
 
 class ResultsPage extends Component {
 
@@ -20,6 +21,20 @@ class ResultsPage extends Component {
             result: result,
             //ratingString: 'moderate'
         }
+    }
+
+    componentDidMount() {
+        const data = {
+            "userId": this.state.userId
+        }
+        axios.put("http://10.0.2.2:8000/api/track/", data)
+            .then((response) => {
+                //console.log(response)
+                console.log(response.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     selectRatingImage = (rating) => {
