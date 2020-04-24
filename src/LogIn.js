@@ -5,12 +5,14 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import logo from './Images/icure.jpg'
+import axios from 'axios'
 
 class LogIn extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            userId: null,
             email: null,
             password: null
         }
@@ -28,12 +30,34 @@ class LogIn extends Component {
         }
     }
 
+    loginProcess = () => {
+        const data = {
+            "email": this.state.email,
+            "password": this.state.password
+        }
+        axios.post('http://10.0.2.2:8000/api/users/login', data)
+            .then((response) => {
+                console.log(response.data)
+                this.setState({
+                    userId: response.data.userId
+                })
+                console.log(this.state.userId)
+                this.props.navigation.navigate('HomeScreen', {
+                    userId: this.state.userId
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
     validations = () => {
         if (this.state.email===null || this.state.password===null){
             alert("Please fill all the fields!")
         } else {
             if (this.validateEmail(this.state.email)){
                 console.log("Done")
+                this.loginProcess()
             }
         }
     }
