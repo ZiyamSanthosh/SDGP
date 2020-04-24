@@ -62,7 +62,9 @@ app.use("/api", apiRoutes);
 
 // httperr
 app.use((req, res, next) => {
-  return next(new httpErr("Could not find route", 404));
+  const error = new httpErr("Could not find route", 404);
+  return next(res.json({Error: error.message}))
+  //return next(new httpErr("Could not find route", 404));
 });
 
 // Launch app to listen to specified port

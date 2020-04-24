@@ -17,4 +17,4 @@ const userSchema = mongoose.Schema({
 userSchema.plugin(validator);
 
 //export user schema
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('user', userSchema, 'registeredUsers');
