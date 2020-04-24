@@ -15,7 +15,7 @@ const getUsers = async (req, res, next) => {
     //retireve userid, fullname, email and registered date for users found
     appusers = await userModel.find({}, "userId fullName email  date");
   } catch (err) {
-    return next(res.json({ error: err }));
+    return res.json({ error: err });
   }
 
   //convert user objects to string format
@@ -35,7 +35,7 @@ const findUser = async (req, res, next) => {
     //retrieve the user from databse by userid
     containuser = await userModel.findOne({ userId: id });
   } catch (err) {
-    return next(res.json({ error: err }));
+    return res.json({ error: err });
   }
 
   //handle error for user not found in the database
@@ -44,7 +44,7 @@ const findUser = async (req, res, next) => {
       "Invalid user credentials. Could not find user.",
       404
     );
-    return next(res.json({ error: error.message }));
+    return res.json({ error: error.message });
   }
 
   console.log("User found on the database");
@@ -65,7 +65,7 @@ const registerUser = async (req, res, next) => {
     const error = new httpErr(
       "Invalid inputs provided. Please re-check your data"
     );
-    return next(res.json({ error: error.message }));
+    return res.json({ error: error.message });
   }
 
   const { fullName, email } = req.body;
@@ -74,13 +74,13 @@ const registerUser = async (req, res, next) => {
     //retrieve user from database using email
     found = await userModel.findOne({ email: email });
   } catch (err) {
-    return next(res.json({ error: err }));
+    return res.json({ error: err });
   }
 
   //return error message if user is already registered
   if (found) {
     const error = "Email already exists. Please Log in";
-    return next(res.json({ error: error.message }));
+    return res.json({ error: error.message });
   }
 
   let salt;
@@ -95,7 +95,7 @@ const registerUser = async (req, res, next) => {
       "User registration failed. Plese try again later",
       500
     );
-    return next(res.json({ error: error.message }));
+    return res.json({ error: error.message });
   }
 
   var result = await doesEmailExist(email);
@@ -107,7 +107,7 @@ const registerUser = async (req, res, next) => {
       "Email does not exist, please re-check your email.",
       401
     );
-    return next(res.status(404).json({ error: error.message }));
+    return res.status(404).json({ error: error.message });
   }
 
   // generate unique user id
@@ -126,7 +126,7 @@ const registerUser = async (req, res, next) => {
     //store user in the database
     await newUser.save();
   } catch (err) {
-    return next(res.json({ error: err }));
+    return res.json({ error: err });
   }
   res.status(201).json({
     userId: newUser.userId,
@@ -144,7 +144,7 @@ const loginUser = async (req, res, next) => {
     //find and retrieve user
     containuser = await userModel.findOne({ email: email });
   } catch (err) {
-    return next(res.json({ error: err }));
+    return res.json({ error: err });
   }
 
   //stop authorization if user not found
@@ -153,7 +153,7 @@ const loginUser = async (req, res, next) => {
       "Invalid user credentials. Could not find user",
       404
     );
-    return next(res.json({ error: error.message }));
+    return res.json({ error: error.message });
   }
 
   let passwordstate = false;
@@ -164,13 +164,13 @@ const loginUser = async (req, res, next) => {
       containuser.password
     );
   } catch (err) {
-    return next(res.json({ error: err }));
+    return res.json({ error: err });
   }
 
   //error for invalid password
   if (!passwordstate) {
     const error = new httpErr("Invalid password, user login failed", 401);
-    return next(res.json({ error: error.message }));
+    return res.json({ error: error.message });
   }
 
   console.log("login successful");
@@ -188,7 +188,7 @@ const deleteUser = async (req, res, next) => {
     //find and retrieve user
     containuser = await userModel.findOne({ email: email });
   } catch (err) {
-    return next(res.json({ error: err }));
+    return res.json({ error: err });
   }
 
   //error for user not found
@@ -197,7 +197,7 @@ const deleteUser = async (req, res, next) => {
       "Invalid user credentials, could not find user",
       404
     );
-    return next(res.json({ error: error.message }));
+    return res.json({ error: error.message });
   }
 
   let passwordstate = false;
@@ -208,7 +208,7 @@ const deleteUser = async (req, res, next) => {
       containuser.password
     );
   } catch (err) {
-    return next(res.json({ error: err }));
+    return res.json({ error: err });
   }
 
   //error for invalid password
@@ -217,14 +217,14 @@ const deleteUser = async (req, res, next) => {
       "Invalid password, please re-check your password",
       401
     );
-    return next(res.json({ error: error.message }));
+    return res.json({ error: error.message });
   }
 
   try {
     //delete user from the database
     await userModel.deleteOne({ email: email }, (err, result, next) => {
       if (err) {
-        return next(res.json({ error: err }));
+        return res.json({ error: err });
       } else {
         console.log("user deletion successful");
         res
@@ -237,7 +237,7 @@ const deleteUser = async (req, res, next) => {
       "User deletion failed, please try again later",
       401
     );
-    return next(res.json({ error: error.message }));
+    return res.json({ error: error.message });
   }
   console.log("Deletion successful");
   res.status(200).json({message: 'success'})
@@ -259,7 +259,7 @@ const modifyUser = async (req, res, next) => {
       "User modification failed, please try again",
       500
     );
-    return next(res.json({ error: error.message }));
+    return res.json({ error: error.message });
   }
 
   //error for user not found
@@ -268,7 +268,7 @@ const modifyUser = async (req, res, next) => {
       "Invalid user credentials. Could not find user",
       404
     );
-    return next(res.json({ error: error.message }));
+    return res.json({ error: error.message });
   }
 
   //check for user input
