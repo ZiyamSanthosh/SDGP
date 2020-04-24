@@ -10,15 +10,17 @@ import moderate from './Images/Ratings/moderate.png'
 import beAlert from './Images/Ratings/BeAlert.png'
 import atRisk from './Images/Ratings/AtRisk.png'
 import critical from './Images/Ratings/critical.png'
+import axios from 'axios'
 
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
+        const {userId} = this.props.route.params
         this.state = {
+            userId: userId,
             fullName: "Scarlett Johannson",
             email: null,
             password: null,
-            confirmPassword: null,
             dateOfBirth: null,
             height: null,
             weight: null,
@@ -32,6 +34,29 @@ class HomeScreen extends Component {
             lastPredictedDate: new Date(),
             lastRatingString: 'safe'
         }
+    }
+
+    componentDidMount() {
+        axios.get("http://10.0.2.2:8000/api/users/"+this.state.userId)
+            .then((response) => {
+                console.log(response.data)
+                this.setState({
+                    fullName: response.data.fullName
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        const data = {
+            "userId": this.state.userId
+        }
+        axios.patch('http://10.0.2.2:8000/api/track/', data)
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     selectRatingImage = (rating) => {

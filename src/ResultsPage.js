@@ -19,6 +19,8 @@ class ResultsPage extends Component {
             password: password,
             userId: userId,
             result: result,
+            factor: null,
+            factorMessage: null
             //ratingString: 'moderate'
         }
     }
@@ -29,8 +31,10 @@ class ResultsPage extends Component {
         }
         axios.put("http://10.0.2.2:8000/api/track/", data)
             .then((response) => {
-                //console.log(response)
-                console.log(response.data)
+                this.setState({
+                    factor: response.data.Artical.Keyword,
+                    factorMessage: response.data.Artical.Description
+                })
             })
             .catch((err) => {
                 console.log(err)
@@ -86,40 +90,22 @@ class ResultsPage extends Component {
                     <Text style={{fontSize: 20, fontWeight: 'bold'}}>Results</Text>
                 </View>
                 <View style={{flex: 14, padding: 20}}>
-                    <View style={{flex: 5, backgroundColor: 'white', borderRadius: 25, alignItems: 'center', padding: 15, paddingTop: 30}}>
+                    <View style={{flex: 4.5, backgroundColor: 'white', borderRadius: 25, alignItems: 'center', padding: 15, paddingTop: 30}}>
                         <Image source={this.selectRatingImage(this.state.result)} style={{width: 180, height: 180}}/>
                         <Text style={{fontSize: 30, fontWeight: 'bold', marginTop: 15}}>{this.renderRating(this.state.result)}</Text>
                         <Text>{this.renderSubMessage(this.state.result)}</Text>
                     </View>
-                    <View style={{flex: 3, backgroundColor: 'white', borderRadius: 25, marginTop: 15, padding: 20}}>
+                    <View style={{flex: 3.5, backgroundColor: 'white', borderRadius: 25, marginTop: 15, padding: 20}}>
                         <ScrollView>
-                            <Text style={{textAlign: 'justify',}}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut accumsan,
-                                turpis id luctus vestibulum, neque ex tempor sapien, sit amet molestie eros neque quis arcu.
-                                Sed fringilla vulputate justo, eu ornare erat euismod vel. Nam tincidunt quam lectus,
-                                nec bibendum nisi ornare ac. Etiam at blandit tellus. Vestibulum condimentum orci est,
-                                sed vestibulum odio consectetur ut. Proin commodo magna ac maximus tempus. Donec vel
-                                pellentesque nisi. Donec et velit venenatis, gravida orci nec, laoreet est. Pellentesque
-                                vel justo semper, tempus dolor vel, pellentesque lectus. Sed consequat pulvinar urna eget
-                                condimentum. Donec finibus ullamcorper ex, et vehicula tellus. Nullam imperdiet, est vel
-                                molestie fringilla, ante leo hendrerit odio, vitae vestibulum nunc leo vel mi. In tincidunt
-                                ultricies tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-                                cubilia curae; Phasellus vitae neque eget lectus tincidunt vestibulum.
-                                Nulla sed magna quis dolor malesuada placerat. Curabitur ullamcorper non odio ac tempus.
-                                Fusce vestibulum ornare nibh id auctor. Nunc tristique sed justo quis molestie. Aliquam
-                                purus sapien, iaculis sed lacus vitae, porttitor rutrum massa. Cras commodo odio quis
-                                dignissim elementum. Orci varius natoque penatibus et magnis dis parturient montes,
-                                nascetur ridiculus mus. Fusce vestibulum lectus finibus turpis efficitur, ut
-                                venenatis metus ultricies. Nulla id purus sit amet neque congue dictum vel id lacus.
-                                Donec non efficitur dui. Donec lobortis rhoncus tortor, eu laoreet leo auctor vel.
-                                Quisque ornare aliquam metus, sed facilisis sapien fringilla eu. Integer rutrum
-                                ullamcorper ante, et placerat leo finibus vel. Maecenas a risus et nisl ullamcorper
-                                posuere ac et metus. Aliquam erat volutpat.
-                            </Text>
+                            <Text style={{fontWeight: 'bold', fontSize: 15, textAlign: 'center', marginBottom: 5}}>{this.state.factor}</Text>
+                            <Text style={{textAlign: 'justify',}}>{this.state.factorMessage}</Text>
                         </ScrollView>
                     </View>
                     <View style={{flex: 1, marginTop: 15}}>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={() => {
+                                this.props.navigation.navigate("HomeScreen", {userId: this.state.userId})
+                            }
+                        }>
                             <Text style={styles.buttonText}>Back to Home</Text>
                         </TouchableOpacity>
                     </View>
