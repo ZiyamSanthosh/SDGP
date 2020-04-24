@@ -79,7 +79,7 @@ const registerUser = async (req, res, next) => {
 
   //return error message if user is already registered
   if (found) {
-    const error = "Email already exists. Please Log in";
+    const error = new httpErr("Email already exists. Please Log in");
     return res.json({ error: error.message });
   }
 
@@ -295,8 +295,6 @@ const modifyUser = async (req, res, next) => {
   }
 
   console.log("User modification success");
-  let modified = await userModel.findOne({ email: req.body.email });
-  res.json({ fullName: modified.fullName, email: modified.email });
 };
 
 function doesEmailExist(email) {

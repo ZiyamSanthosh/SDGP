@@ -54,7 +54,7 @@ router
   .post(
     [
       validator.check("fullName").not().isEmpty(),
-      validator.check("email").normalizeEmail().isEmail(),
+      validator.check("email").isEmail(),
       validator.check("password").isLength({ min: 8 }),
     ],
     userController.registerUser
