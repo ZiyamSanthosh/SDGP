@@ -2,18 +2,19 @@ import * as React from 'react';
 import {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput} from 'react-native';
 import style from 'react-native-datepicker/style';
+import axios from 'axios';
 
 class SummaryPage extends Component {
 
     constructor(props) {
         super(props);
-        const {fullName, email, password, confirmPassword, dateOfBirth, height, weight, ageOfFirstPeriod, maritalStatus,
+        const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod, maritalStatus,
             breastFeeding, alcohol, smoking, menstrualCycle, breastCancerHistory} = this.props.route.params
         this.state = {
             fullName: fullName,
             email: email,
             password: password,
-            confirmPassword: confirmPassword,
+            userId: userId,
             dateOfBirth: dateOfBirth,
             height: height,
             weight: weight,
@@ -24,13 +25,48 @@ class SummaryPage extends Component {
             smoking: smoking,
             menstrualCycle: menstrualCycle,
             breastCancerHistory: breastCancerHistory,
+            result: null
         }
+    }
+
+    startPrediction = () => {
+        const data = {
+            "userId": this.state.userId,
+            "dob": this.state.dateOfBirth.toISOString(),
+            "height": this.state.height,
+            "weight": this.state.weight,
+            "ageAtFirstPeriod": this.state.ageOfFirstPeriod,
+            "maritalStatus": this.state.maritalStatus,
+            "breastFeeding": this.state.breastFeeding,
+            "alcohol": this.state.alcohol,
+            "smoking": this.state.smoking,
+            "menstrualCycle": this.state.menstrualCycle,
+            "breastCancerHistory": this.state.breastCancerHistory
+        }
+        axios.post("http://10.0.2.2:8000/api/detail/", data)
+            .then((response) => {
+                this.setState({
+                    result: response.data.result
+                })
+                console.log(this.state.result)
+                this.props.navigation.navigate("ResultsPage", {
+                    fullName: this.state.fullName,
+                    email: this.state.email,
+                    password: this.state.password,
+                    userId: this.state.userId,
+                    result: this.state.result
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     render () {
         return(
             <View style={{backgroundColor: 'white', flex:1, justifyContent: 'center', padding: 15}}>
                 <Text style={styles.summaryTitle}>Summary</Text>
+                <Text>{this.state.userId}</Text>
                 <View style={{flexDirection: 'row', alignSelf: 'center', padding: 10}}>
                     <View>
                         <Text style={styles.finalPageText1}>Date Of Birth</Text>
@@ -57,7 +93,7 @@ class SummaryPage extends Component {
                         <Text style={styles.finalPageText2}>{this.state.breastCancerHistory}</Text>
                     </View>
                 </View>
-                <TouchableOpacity style={styles.predictButton}>
+                <TouchableOpacity style={styles.predictButton} onPress={() => this.startPrediction()}>
                     <Text style={styles.buttonText}>Start Prediction</Text>
                 </TouchableOpacity>
             </View>

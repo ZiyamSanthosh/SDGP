@@ -11,35 +11,55 @@ class ResultsPage extends Component {
 
     constructor(props) {
         super(props);
+        const {fullName, email, password, userId, result} = this.props.route.params
         this.state = {
-            ratingString: 'moderate'
+            fullName: fullName,
+            email: email,
+            password: password,
+            userId: userId,
+            result: result,
+            //ratingString: 'moderate'
         }
     }
 
     selectRatingImage = (rating) => {
-        if (rating==="safe"){
+        if (rating===1){
             return safe
-        } else if (rating==="moderate"){
+        } else if (rating===2){
             return moderate
-        } else if (rating==="be alert"){
+        } else if (rating===3){
             return beAlert
-        } else if (rating==="at risk"){
+        } else if (rating===4){
             return atRisk
-        } else if (rating==="critical"){
+        } else if (rating===5){
             return critical
         }
     }
 
+    renderRating = (rating) => {
+        if (rating===1){
+            return "SAFE"
+        } else if (rating===2){
+            return "MODERATE"
+        } else if (rating===3){
+            return "BE ALERT"
+        } else if (rating===4){
+            return "AT RISK"
+        } else if (rating===5){
+            return "CRITICAL"
+        }
+    }
+
     renderSubMessage = (rating) => {
-        if (rating==="safe"){
+        if (rating===1){
             return "Your risk possibility is between 0-20%"
-        } else if (rating==="moderate"){
+        } else if (rating===2){
             return "Your risk possibility is between 21-40%"
-        } else if (rating==="be alert"){
+        } else if (rating===3){
             return "Your risk possibility is between 41-60%"
-        } else if (rating==="at risk"){
+        } else if (rating===4){
             return "Your risk possibility is between 61-80%"
-        } else if (rating==="critical"){
+        } else if (rating===5){
             return "Your risk possibility is between 81-100%"
         }
     }
@@ -52,9 +72,9 @@ class ResultsPage extends Component {
                 </View>
                 <View style={{flex: 14, padding: 20}}>
                     <View style={{flex: 5, backgroundColor: 'white', borderRadius: 25, alignItems: 'center', padding: 15, paddingTop: 30}}>
-                        <Image source={this.selectRatingImage(this.state.ratingString)} style={{width: 180, height: 180}}/>
-                        <Text style={{fontSize: 30, fontWeight: 'bold', marginTop: 15}}>{this.state.ratingString.toUpperCase()}</Text>
-                        <Text>{this.renderSubMessage(this.state.ratingString)}</Text>
+                        <Image source={this.selectRatingImage(this.state.result)} style={{width: 180, height: 180}}/>
+                        <Text style={{fontSize: 30, fontWeight: 'bold', marginTop: 15}}>{this.renderRating(this.state.result)}</Text>
+                        <Text>{this.renderSubMessage(this.state.result)}</Text>
                     </View>
                     <View style={{flex: 3, backgroundColor: 'white', borderRadius: 25, marginTop: 15, padding: 20}}>
                         <ScrollView>

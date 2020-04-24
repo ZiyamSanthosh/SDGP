@@ -78,6 +78,7 @@ class InitialDetails extends Component {
                             fullName: this.state.fullName,
                             email: this.state.email,
                             password: this.state.password,
+                            userId: this.state.userId
                         }}
                     />
                     <stack.Screen
@@ -92,6 +93,7 @@ class InitialDetails extends Component {
                             fullName: this.state.fullName,
                             email: this.state.email,
                             password: this.state.password,
+                            userId: this.state.userId,
                             dateOfBirth: this.state.dateOfBirth
                         }}
                     />
@@ -107,6 +109,7 @@ class InitialDetails extends Component {
                             fullName: this.state.fullName,
                             email: this.state.email,
                             password: this.state.password,
+                            userId: this.state.userId,
                             dateOfBirth: this.state.dateOfBirth,
                             height: this.state.height
                         }}
@@ -123,6 +126,7 @@ class InitialDetails extends Component {
                             fullName: this.state.fullName,
                             email: this.state.email,
                             password: this.state.password,
+                            userId: this.state.userId,
                             dateOfBirth: this.state.dateOfBirth,
                             height: this.state.height,
                             weight: this.state.weight
@@ -140,6 +144,7 @@ class InitialDetails extends Component {
                             fullName: this.state.fullName,
                             email: this.state.email,
                             password: this.state.password,
+                            userId: this.state.userId,
                             dateOfBirth: this.state.dateOfBirth,
                             height: this.state.height,
                             weight: this.state.weight,
@@ -158,6 +163,7 @@ class InitialDetails extends Component {
                             fullName: this.state.fullName,
                             email: this.state.email,
                             password: this.state.password,
+                            userId: this.state.userId,
                             dateOfBirth: this.state.dateOfBirth,
                             height: this.state.height,
                             weight: this.state.weight,
@@ -177,6 +183,7 @@ class InitialDetails extends Component {
                             fullName: this.state.fullName,
                             email: this.state.email,
                             password: this.state.password,
+                            userId: this.state.userId,
                             dateOfBirth: this.state.dateOfBirth,
                             height: this.state.height,
                             weight: this.state.weight,
@@ -197,6 +204,7 @@ class InitialDetails extends Component {
                             fullName: this.state.fullName,
                             email: this.state.email,
                             password: this.state.password,
+                            userId: this.state.userId,
                             dateOfBirth: this.state.dateOfBirth,
                             height: this.state.height,
                             weight: this.state.weight,
@@ -218,6 +226,7 @@ class InitialDetails extends Component {
                             fullName: this.state.fullName,
                             email: this.state.email,
                             password: this.state.password,
+                            userId: this.state.userId,
                             dateOfBirth: this.state.dateOfBirth,
                             height: this.state.height,
                             weight: this.state.weight,
@@ -240,6 +249,7 @@ class InitialDetails extends Component {
                             fullName: this.state.fullName,
                             email: this.state.email,
                             password: this.state.password,
+                            userId: this.state.userId,
                             dateOfBirth: this.state.dateOfBirth,
                             height: this.state.height,
                             weight: this.state.weight,
@@ -263,9 +273,6 @@ function GatherInfo({navigation, route}) {
     return (
         <View style={styles.mainView}>
             <Text style={styles.title}>Hello {fullName}</Text>
-            <Text>Hello {email}</Text>
-            <Text>Hello {password}</Text>
-            <Text>Hello {userId}</Text>
             {/*<Text>{fullName}</Text>
             <Text>{email}</Text>
             <Text>{password}</Text>
@@ -276,6 +283,7 @@ function GatherInfo({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
             })}>
                 <Text style={styles.buttonText} >Get Started</Text>
             </TouchableOpacity>
@@ -284,7 +292,7 @@ function GatherInfo({navigation, route}) {
 }
 
 function Question1({navigation, route}) {
-    const {fullName, email, password,} = route.params
+    const {fullName, email, password, userId} = route.params
 
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
@@ -357,6 +365,7 @@ function Question1({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: date,
             })}>
                 <Text style={styles.buttonText}>Next Question</Text>
@@ -366,7 +375,7 @@ function Question1({navigation, route}) {
 }
 
 function Question2({navigation, route}) {
-    const {fullName, email, password, dateOfBirth} = route.params
+    const {fullName, email, password, userId, dateOfBirth } = route.params
     const [answer, setAnswer] = useState(null)
     return (
         <View style={styles.Q2View}>
@@ -400,6 +409,7 @@ function Question2({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: answer
             })}>
@@ -410,7 +420,7 @@ function Question2({navigation, route}) {
 }
 
 function Question3({navigation, route}) {
-    const {fullName, email, password, dateOfBirth, height} = route.params
+    const {fullName, email, password, userId, dateOfBirth, height } = route.params
     const [answer, setAnswer] = useState(null)
     return (
         <View style={styles.Q2View}>
@@ -445,6 +455,7 @@ function Question3({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: height,
                 weight: answer
@@ -456,7 +467,7 @@ function Question3({navigation, route}) {
 }
 
 function Question4({navigation, route}) {
-    const {fullName, email, password, dateOfBirth, height, weight} = route.params
+    const {fullName, email, password, userId, dateOfBirth, height, weight} = route.params
     const [answer, setAnswer] = useState(null);
     return (
         <View style={styles.Q2View}>
@@ -492,6 +503,7 @@ function Question4({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: height,
                 weight: weight,
@@ -504,7 +516,7 @@ function Question4({navigation, route}) {
 }
 
 function Question5({navigation, route}) {
-    const {fullName, email, password, dateOfBirth, height, weight, ageOfFirstPeriod} = route.params
+    const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod} = route.params
     return (
         <View style={styles.Q2View}>
             <Image source={maritalStatusIcon} style={styles.dateIcon}/>
@@ -521,6 +533,7 @@ function Question5({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: height,
                 weight: weight,
@@ -533,6 +546,7 @@ function Question5({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: height,
                 weight: weight,
@@ -545,6 +559,7 @@ function Question5({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: height,
                 weight: weight,
@@ -558,7 +573,7 @@ function Question5({navigation, route}) {
 }
 
 function Question6({navigation, route}) {
-    const {fullName, email, password, dateOfBirth, height, weight, ageOfFirstPeriod,
+    const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus} = route.params
     return (
         <View style={styles.Q2View}>
@@ -568,6 +583,7 @@ function Question6({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: height,
                 weight: weight,
@@ -581,6 +597,7 @@ function Question6({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: height,
                 weight: weight,
@@ -595,7 +612,7 @@ function Question6({navigation, route}) {
 }
 
 function Question7({navigation, route}) {
-    const {fullName, email, password, dateOfBirth, height, weight, ageOfFirstPeriod,
+    const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus, breastFeeding} = route.params
     return (
         <View style={styles.Q2View}>
@@ -605,6 +622,7 @@ function Question7({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: height,
                 weight: weight,
@@ -619,6 +637,7 @@ function Question7({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: height,
                 weight: weight,
@@ -634,7 +653,7 @@ function Question7({navigation, route}) {
 }
 
 function Question8({navigation, route}) {
-    const {fullName, email, password, dateOfBirth, height, weight, ageOfFirstPeriod,
+    const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus, breastFeeding, alcohol} = route.params
     return (
         <View style={styles.Q2View}>
@@ -644,6 +663,7 @@ function Question8({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: height,
                 weight: weight,
@@ -659,6 +679,7 @@ function Question8({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: height,
                 weight: weight,
@@ -720,7 +741,7 @@ function Question9({navigation, route}) {
 }
 
 function Question10({navigation, route}) {
-    const {fullName, email, password, dateOfBirth, height, weight, ageOfFirstPeriod,
+    const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus, breastFeeding, alcohol, smoking, menstrualCycle} = route.params
     return (
         <View style={styles.Q2View}>
@@ -730,6 +751,7 @@ function Question10({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: height,
                 weight: weight,
@@ -747,6 +769,7 @@ function Question10({navigation, route}) {
                 fullName: fullName,
                 email: email,
                 password: password,
+                userId: userId,
                 dateOfBirth: dateOfBirth,
                 height: height,
                 weight: weight,
