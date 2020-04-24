@@ -16,4 +16,4 @@ import Profile from './src/Profile';
 import ResultsPage from "./src/ResultsPage";
 import AllResults from './src/AllResults';
 
-AppRegistry.registerComponent(appName, () => LogIn);
+AppRegistry.registerComponent(appName, () => SignUp);

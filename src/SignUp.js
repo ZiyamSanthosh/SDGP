@@ -5,6 +5,7 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import logo from './Images/icure.jpg'
+import axios from 'axios';
 
 class SignUp extends Component {
 
@@ -40,12 +41,28 @@ class SignUp extends Component {
         }
     }
 
+    sendData = () => {
+        const data = {
+            "fullName": this.state.fullName,
+            "email": this.state.email,
+            "password": this.state.password
+        }
+        axios.post('http://127.0.0.1:8000/api/users/register', data)
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
     validations = () => {
         //console.log(this.validateEmail(this.state.email))
         //console.log(this.validatePasswords(this.state.password,this.state.confirmPassword))
         if (this.state.fullName!==null && this.state.email!==null && this.state.password!==null && this.state.confirmPassword!==null){
             if (this.validateEmail(this.state.email) && this.validatePasswords(this.state.password,this.state.confirmPassword)){
                 console.log("All done")
+                this.sendData()
                 this.props.navigation.navigate("InitialDetails", {
                     fullName: this.state.fullName,
                     email: this.state.email,
