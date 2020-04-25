@@ -1,17 +1,20 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput,ScrollView} from 'react-native';
 import homeIcon from './Images/home.png';
 import userIcon2 from './Images/user2.png';
 import editIcon from './Images/edit.png';
 import DialogInput from 'react-native-dialog-input';
 import RNPickerSelect from 'react-native-picker-select';
+import axios from 'axios';
 
 class Profile extends Component {
 
     constructor(props) {
         super(props);
+        const {userId}=this.props.route.params
         this.state = {
+            userId: userId,
             fullName: "Scarlett Johannsson",
             email: "scarlett@gmail.com",
             dateOfBirth: new Date(1990,5,10),
@@ -30,6 +33,7 @@ class Profile extends Component {
             isFirstPeriodAlertVisible: false,
         }
     }
+
 
     render() {
         return (
@@ -74,7 +78,8 @@ class Profile extends Component {
                         </View>
                     </View>
                     <View style={{flex: 7.2, backgroundColor: 'white', margin: 20, marginTop: 0, borderRadius: 25, padding: 20}}>
-                        <View style={{flexDirection: 'row',}}>
+                        <ScrollView>
+                        <View style={{flexDirection: 'row'}}>
                             <View style={{flex: 2.75, justifyContent: 'center'}}>
                                 <Text style={{fontSize: 18, fontWeight: 'bold'}}>Date Of Birth</Text>
                             </View>
@@ -87,7 +92,7 @@ class Profile extends Component {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <View style={{flexDirection: 'row', marginTop: 10}}>
+                        <View style={{flexDirection: 'row', marginTop: 20}}>
                             <View style={{flex: 2.75, justifyContent: 'center'}}>
                                 <Text style={{fontSize: 18, fontWeight: 'bold'}}>Height</Text>
                             </View>
@@ -110,7 +115,7 @@ class Profile extends Component {
                                 </DialogInput>
                             </View>
                         </View>
-                        <View style={{flexDirection: 'row', marginTop: 10}}>
+                        <View style={{flexDirection: 'row', marginTop: 20}}>
                             <View style={{flex: 2.75, justifyContent: 'center'}}>
                                 <Text style={{fontSize: 18, fontWeight: 'bold'}}>Weight</Text>
                             </View>
@@ -133,7 +138,7 @@ class Profile extends Component {
                                 </DialogInput>
                             </View>
                         </View>
-                        <View style={{flexDirection: 'row', marginTop: 10}}>
+                        <View style={{flexDirection: 'row', marginTop: 20}}>
                             <View style={{flex: 2.75, justifyContent: 'center'}}>
                                 <Text style={{fontSize: 18, fontWeight: 'bold'}}>Age at First Period</Text>
                                 {/*<Text style={{fontSize: 18, fontWeight: 'bold'}}>Period</Text>*/}
@@ -157,7 +162,7 @@ class Profile extends Component {
                                 </DialogInput>
                             </View>
                         </View>
-                        <View style={{flexDirection: 'row', marginTop: 0}}>
+                        <View style={{flexDirection: 'row', marginTop: 10}}>
                             <View style={{flex: 2.75, justifyContent: 'center'}}>
                                 <Text style={{fontSize: 18, fontWeight: 'bold'}}>Marital Status</Text>
                             </View>
@@ -279,6 +284,7 @@ class Profile extends Component {
                                 />
                             </View>
                         </View>
+                        </ScrollView>
                     </View>
                     <View style={{flex: 1, alignItems: 'center'}}>
                         <TouchableOpacity style={styles.button}>
