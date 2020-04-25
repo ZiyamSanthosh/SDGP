@@ -15,5 +15,6 @@ import AboutUs from './src/AboutUs';
 import Profile from './src/Profile';
 import ResultsPage from "./src/ResultsPage";
 import AllResults from './src/AllResults';
+import DailyTracking from "./src/DailyTracking";
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => DailyTracking);
