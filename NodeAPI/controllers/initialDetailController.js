@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/initialDetailModel");
 const Model = require("../models/trackingModel");
+const AveragePrediction = require('../models/avgPredictionModel');    // connecting avgPredictionModel
 var bmi = require("bmi-calculator-function");
 const axios = require("axios");
 
@@ -19,7 +20,7 @@ exports.getAll = async function (req, res) {
     res.status(400).json({ message: err });
   }
 };
-
+ 
 
 //GET Back initial detail related to specific user id
 exports.getById = async function (req, res) {
@@ -82,6 +83,14 @@ exports.postInitialDetails = function (req, res) {
         Prediction: response.data,
       });
 
+      let avgPrediction = new AveragePrediction();
+      var today = new Date();
+      var day = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + (today.getDate());
+
+      avgPrediction.UserID = req.body.userId;
+      avgPrediction.PredictedDate = day;
+      avgPrediction.AveragePrediction = response.data;
+
       //Sending initial details to the Track Collection in the DB
       var Track = new Model();
 
@@ -98,7 +107,13 @@ exports.postInitialDetails = function (req, res) {
       Track.Age_at_first_period = req.body.ageAtFirstPeriod;
       Track.Menstrual_Cycle = menstrualCycle(req.body.menstrualCycle);
 
+
+
       const savedPost = post.save().catch((err) => {
+        return res.status(400).json({ message: err });
+      });
+
+      const savedPrediction = avgPrediction.save().catch((err) => {
         return res.status(400).json({ message: err });
       });
 
