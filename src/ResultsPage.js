@@ -73,13 +73,13 @@ class ResultsPage extends Component {
         if (rating===1){
             return "Your risk possibility is between 0-20%"
         } else if (rating===2){
-            return "Your risk possibility is between 21-40%"
+            return "Your risk possibility is between 20-40%"
         } else if (rating===3){
-            return "Your risk possibility is between 41-60%"
+            return "Your risk possibility is between 40-60%"
         } else if (rating===4){
-            return "Your risk possibility is between 61-80%"
+            return "Your risk possibility is between 60-80%"
         } else if (rating===5){
-            return "Your risk possibility is between 81-100%"
+            return "Your risk possibility is between 80-100%"
         }
     }
 

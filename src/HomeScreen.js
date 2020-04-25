@@ -32,7 +32,8 @@ class HomeScreen extends Component {
             menstrualCycle: null,
             breastCancerHistory: null,
             lastPredictedDate: new Date(),
-            lastRatingString: 'safe'
+            AllPredictions: [],
+            lastPrediction: null
         }
     }
 
@@ -52,7 +53,19 @@ class HomeScreen extends Component {
         }
         axios.patch('http://10.0.2.2:8000/api/track/', data)
             .then((response) => {
-                console.log(response.data)
+                //console.log(response.data)
+                //console.log(response.data.AllPredictions)
+                this.setState({
+                    AllPredictions: response.data.AllPredictions,
+                })
+                console.log(this.state.AllPredictions)
+                console.log(this.state.AllPredictions[0])
+                console.log(this.state.AllPredictions[0].AveragePrediction)
+                console.log(this.state.AllPredictions[this.state.AllPredictions.length-1].AveragePrediction)
+                this.setState({
+                    lastPrediction: this.state.AllPredictions[this.state.AllPredictions.length-1].AveragePrediction
+                })
+                console.log(this.state.lastPrediction)
             })
             .catch((err) => {
                 console.log(err)
@@ -60,30 +73,44 @@ class HomeScreen extends Component {
     }
 
     selectRatingImage = (rating) => {
-        if (rating==="safe"){
+        if (0<=rating && rating<=20){
             return safe
-        } else if (rating==="moderate"){
+        } else if (20<rating && rating<=40){
             return moderate
-        } else if (rating==="be alert"){
+        } else if (40<rating && rating<=60){
             return beAlert
-        } else if (rating==="at risk"){
+        } else if (60<rating && rating<=80){
             return atRisk
-        } else if (rating==="critical"){
+        } else if (80<rating && rating<=100){
             return critical
         }
     }
 
     renderSubMessage = (rating) => {
-        if (rating==="safe"){
+        if (0<=rating && rating<=20){
             return "Your risk possibility was between 0-20%"
-        } else if (rating==="moderate"){
-            return "Your risk possibility was between 21-40%"
-        } else if (rating==="be alert"){
-            return "Your risk possibility was between 41-60%"
-        } else if (rating==="at risk"){
-            return "Your risk possibility was between 61-80%"
-        } else if (rating==="critical"){
-            return "Your risk possibility was between 81-100%"
+        } else if (20<rating && rating<=40){
+            return "Your risk possibility was between 20-40%"
+        } else if (40<rating && rating<=60){
+            return "Your risk possibility was between 40-60%"
+        } else if (60<rating && rating<=80){
+            return "Your risk possibility was between 60-80%"
+        } else if (80<rating && rating<=100){
+            return "Your risk possibility was between 80-100%"
+        }
+    }
+
+    renderMessage = (rating) => {
+        if (0<=rating && rating<=20){
+            return "SAFE"
+        } else if (20<rating && rating<=40){
+            return "MODERATE"
+        } else if (40<rating && rating<=60){
+            return "BE ALERT"
+        } else if (60<rating && rating<=80){
+            return "AT RISK"
+        } else if (80<rating && rating<=100){
+            return "CRITICAL"
         }
     }
 
@@ -92,12 +119,12 @@ class HomeScreen extends Component {
             <View style={{flex: 1, backgroundColor: '#e0dede'}}>
                 <View style={{flex: 0.8, flexDirection: 'row', backgroundColor: 'white', height: 25, paddingLeft: 6, paddingRight: 6}}>
                     <View style={{flex: 9, justifyContent: 'center'}}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress = {() => {this.props.navigation.navigate('AboutUs')}}>
                             <Image source={iCureCropped} style={{width: 110, height: 35, resizeMode: 'contain'}}/>
                         </TouchableOpacity>
                     </View>
                     <View style={{flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', paddingRight: 3}}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => {this.props.navigation.navigate('Profile', {userId: this.state.userId})}}>
                             <Image source={userIcon} style={{width: 25, height: 25}} />
                         </TouchableOpacity>
                     </View>
@@ -111,11 +138,11 @@ class HomeScreen extends Component {
                         <Text>Last Predicted: {this.state.lastPredictedDate.toDateString()}</Text>
                         <View style={{flexDirection: 'row', marginTop: 15,}}>
                             <View style={{flex:0.8}}>
-                                <Image source={this.selectRatingImage(this.state.lastRatingString)} style={{width: 130, height: 130}}/>
+                                <Image source={this.selectRatingImage(this.state.lastPrediction)} style={{width: 130, height: 130}}/>
                             </View>
                             <View style={{flex: 1.2, justifyContent: 'center'}}>
-                                <Text style={{fontSize: 30, fontWeight: 'bold',}}>{this.state.lastRatingString.toUpperCase()}</Text>
-                                <Text>{this.renderSubMessage(this.state.lastRatingString)}</Text>
+                                <Text style={{fontSize: 30, fontWeight: 'bold',}}>{this.renderMessage(this.state.lastPrediction)}</Text>
+                                <Text>{this.renderSubMessage(this.state.lastPrediction)}</Text>
                             </View>
                         </View>
                     </View>

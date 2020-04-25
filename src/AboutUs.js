@@ -44,7 +44,7 @@ class AboutUs extends Component {
                         <Text style={{textAlign: 'center', color: '#e0dede'}}>@Copyrights Reserved</Text>
                     </View>
                     <View style={{flex: 0.8}}>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.goBack()}}>
                             <Text style={styles.buttonText}>Back To Home</Text>
                         </TouchableOpacity>
                     </View>
