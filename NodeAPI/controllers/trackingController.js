@@ -30,7 +30,6 @@ exports.new = function (req, res) {      //  function for updating daily trackin
     Track.BreastFeeding = req.body.breastFeeding;
     Track.Age_at_first_period = req.body.ageAtFirstPeriod;
     Track.Menstrual_Cycle = req.body.menstrualCycle;
-    //Track.AveragePrediction = req.body.AveragePrediction;
 
     Model.find({}, function (err, docs) {
         if (!err) {
@@ -58,6 +57,7 @@ exports.new = function (req, res) {      //  function for updating daily trackin
                 });
             }
 
+
             if (isNaN(req.body.age)) { console.log("age is null"); Track.Age = last.Age; }
 
             if (isNaN(req.body.maritalStatus)) { console.log("marital is null"); Track.Marital_Status = last.Marital_Status; }
@@ -70,7 +70,11 @@ exports.new = function (req, res) {      //  function for updating daily trackin
 
             if (isNaN(req.body.menstrualCycle)) { console.log("menopause is null"); Track.Menstrual_Cycle = last.Menstrual_Cycle; }
 
-           // if (isNaN(req.body.AveragePrediction)) { console.log("age is null"); Track.AveragePrediction = last.AveragePrediction; }
+            if (isNaN(req.body.smoking)) { console.log("smoking is null"); Track.Smoking = last.Smoking; }
+
+            if (isNaN(req.body.alcohol)) { console.log("alcohol is null"); Track.Alcohol = last.Alcohol; }
+
+            if (isNaN(BMI)) { console.log("BMI is null"); Track.BMI = last.BMI; }  
 
             // save the contact and check for errors
             Track.save(function (err) {
@@ -113,7 +117,7 @@ exports.index = async function (req, res) {    // function for getting the avera
                 AveragePrediction: response.data
             });
 
-            const savedPost = Track.save().catch((err) => {         //============================================
+            const savedPost = Track.save().catch((err) => {         
                 return res.status(400).json({ message: err });
             });
 
@@ -153,7 +157,7 @@ exports.call = function (req, res) {     // function for generating report
                 if (!err) {
                     des = docs;
 
-                     console.log(des);
+                    //  console.log(des);
 
                     var Artical = [];
 
@@ -238,6 +242,42 @@ exports.getAllPrediction = function (req, res) {   // function for getting all t
     });
 
 };
+
+
+exports.getLast = function (req, res) {     // function for getting the last details of a user(for showing in the profile)
+
+    console.log(req.body);
+
+    var ID = req.body.userId;                               
+
+    Model.find({}, function (err, docs) {
+        if (!err) {
+            allData = docs;
+
+            userData = [];
+
+            for (let x = 0; x <= allData.length - 1; x++) {
+                if (allData[x].UserID === ID) {
+                    userData.push(allData[x]);
+                }
+            }
+
+            var last = userData[userData.length - 1];
+            
+            console.log(last);
+
+            res.json({
+                LastData : last
+            });
+
+        }
+        else {
+            throw err;
+        }
+    });
+
+};
+
 
 exports.view = function (req, res) {       // extra function for viewing a data. not using in the code
     Model.findById(req.params.track_id, function (err, track) {
