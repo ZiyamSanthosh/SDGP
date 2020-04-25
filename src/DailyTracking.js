@@ -2,17 +2,51 @@ import * as React from 'react';
 import {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput, ScrollView} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+import axios from 'axios';
 
 class DailyTracking extends Component {
 
     constructor(props) {
         super(props);
+        const{userId} = this.props.route.params
         this.state = {
+            userId: userId,
             height: null,
             weight: null,
             alcohol: null,
             smoking: null
         }
+    }
+
+    updateDataAndPredict = () => {
+        const data = {
+            "userId": this.state.userId,
+            "height": this.state.height,
+            "weight": this.state.weight,
+            "alcohol": this.state.alcohol,
+            "smoking": this.state.smoking
+        }
+        axios.post('http://10.0.2.2:8000/api/track/', data)
+            .then((response) =>{
+                console.log(response.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        console.log("First done")
+        const data2 = {
+            "userId": this.state.userId
+        }
+        axios.get('http://10.0.2.2:8000/api/track/', data2)
+            .then((response2) => {
+                console.log(response2)
+                console.log(response2.data)
+            })
+            .catch((err2) => {
+                console.log(err2)
+            })
+        console.log("Second done")
+
     }
 
     render () {
@@ -68,7 +102,7 @@ class DailyTracking extends Component {
                             />
                         </View>
                         <View style={{flex: 1.1, borderRadius: 25}}>
-                            <TouchableOpacity style={styles.button}>
+                            <TouchableOpacity style={styles.button} onPress={ () => this.updateDataAndPredict() }>
                                 <Text style={styles.buttonText}>Get New Prediction Results</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.button}>

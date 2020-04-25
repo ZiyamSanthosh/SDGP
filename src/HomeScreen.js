@@ -165,7 +165,7 @@ class HomeScreen extends Component {
                     </ScrollView>
                 </View>
                 <View style={{flex: 2,}}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('DailyTracking', {userId: this.state.userId})}}>
                         <Text style={styles.buttonText}>Update Today's Activity</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}>

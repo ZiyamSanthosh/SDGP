@@ -128,6 +128,7 @@ import HomeScreen from './src/HomeScreen';
 import AboutUs from './src/AboutUs';
 import ResultsPage from './src/ResultsPage';
 import Profile from './src/Profile';
+import DailyTracking from "./src/DailyTracking";
 
 /*class Main extends Component {
 
@@ -189,6 +190,11 @@ function app() {
                 <stack.Screen
                     name="Profile"
                     component={Profile}
+                    options={{headerShown: false}}
+                />
+                <stack.Screen
+                    name="DailyTracking"
+                    component={DailyTracking}
                     options={{headerShown: false}}
                 />
             </stack.Navigator>
