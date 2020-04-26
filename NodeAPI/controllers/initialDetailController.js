@@ -4,6 +4,7 @@ const router = express.Router();
 const Post = require("../models/initialDetailModel");
 const Model = require("../models/trackingModel");
 const AveragePrediction = require('../models/avgPredictionModel');    // connecting avgPredictionModel
+const UserDetail = require('../models/userDetailModel')    // connecting userDetailModel
 var bmi = require("bmi-calculator-function");
 const axios = require("axios");
 
@@ -107,7 +108,13 @@ exports.postInitialDetails = function (req, res) {
       Track.Age_at_first_period = req.body.ageAtFirstPeriod;
       Track.Menstrual_Cycle = menstrualCycle(req.body.menstrualCycle);
 
+      var userDetails = new UserDetail();
+      userDetails.UserID = req.body.userId;
+      userDetails.DOB = req.body.dob;
+      userDetails.Height=req.body.height;
+      userDetails.Weight =req.body.weight;
 
+      console.log(userDetails);
 
       const savedPost = post.save().catch((err) => {
         return res.status(400).json({ message: err });
@@ -118,6 +125,10 @@ exports.postInitialDetails = function (req, res) {
       });
 
       const save = Track.save().catch((err) => {
+        return res.status(400).json({ message: err });
+      });
+
+      const saveUserDetails = userDetails.save().catch((err) => {
         return res.status(400).json({ message: err });
       });
 
