@@ -1,11 +1,11 @@
 // trackingController.js
 const axios = require("axios");  // connecting axios
 
-Model = require('../models/trackingModel');    // connecting trackingModel
+const Model = require('../models/trackingModel');    // connecting trackingModel
 
-Factor = require('../models/factorModel');   // connecting factorModel
+const Factor = require('../models/factorModel');   // connecting factorModel
 
-AveragePrediction = require('../models/avgPredictionModel');    // connecting avgPredictionModel
+const AveragePrediction = require('../models/avgPredictionModel');    // connecting avgPredictionModel
 
 
 exports.new = function (req, res) {      //  function for updating daily tracking data
@@ -17,19 +17,12 @@ exports.new = function (req, res) {      //  function for updating daily trackin
 
     var BMI = (weight / Math.pow((height), 2));
 
-
     var Track = new Model();
 
     Track.UserID = req.body.userId;
-    Track.Age = req.body.age;
+    
     Track.BMI = BMI;
-    Track.Marital_Status = req.body.maritalStatus;
-    Track.Breast_Cancer_History = req.body.breastCancerHistory;
-    Track.Smoking = req.body.smoking;
-    Track.Alcohol = req.body.alcohol;
-    Track.BreastFeeding = req.body.breastFeeding;
-    Track.Age_at_first_period = req.body.ageAtFirstPeriod;
-    Track.Menstrual_Cycle = req.body.menstrualCycle;
+    
 
     Model.find({}, function (err, docs) {
         if (!err) {
@@ -58,21 +51,29 @@ exports.new = function (req, res) {      //  function for updating daily trackin
             }
 
 
-            if (isNaN(req.body.age)) { console.log("age is null"); Track.Age = last.Age; }
+            if (!req.body.dob) { console.log("age is null"); Track.Age = last.Age; }
+            else{Track.Age = age(req.body.dob);}
 
-            if (isNaN(req.body.maritalStatus)) { console.log("marital is null"); Track.Marital_Status = last.Marital_Status; }
+            if (!req.body.maritalStatus) { console.log("marital is null"); Track.Marital_Status = last.Marital_Status; }
+            else{Track.Marital_Status = Number(req.body.maritalStatus);}
 
-            if (isNaN(req.body.breastCancerHistory)) { console.log("medicalHistory is null"); Track.Breast_Cancer_History = last.Breast_Cancer_History; }
+            if (!req.body.breastCancerHistory) { console.log("medicalHistory is null"); Track.Breast_Cancer_History = last.Breast_Cancer_History; }
+            else{Track.Breast_Cancer_History = Number(req.body.breastCancerHistory);}
 
-            if (isNaN(req.body.breastFeeding)) { console.log("breasfeed is null"); Track.BreastFeeding = last.BreastFeeding; }
+            if (!req.body.breastFeeding) { console.log("breasfeed is null"); Track.BreastFeeding = last.BreastFeeding; }
+            else{Track.BreastFeeding = Number(req.body.breastFeeding);}
 
-            if (isNaN(req.body.ageAtFirstPeriod)) { console.log("firstperiod is null"); Track.Age_at_first_period = last.Age_at_first_period; }
+            if (!req.body.ageAtFirstPeriod) { console.log("firstperiod is null"); Track.Age_at_first_period = last.Age_at_first_period; }
+            else{Track.Age_at_first_period = Number(req.body.ageAtFirstPeriod);}
 
-            if (isNaN(req.body.menstrualCycle)) { console.log("menopause is null"); Track.Menstrual_Cycle = last.Menstrual_Cycle; }
+            if (!req.body.menstrualCycle) { console.log("menopause is null"); Track.Menstrual_Cycle = last.Menstrual_Cycle; }
+            else{Track.Menstrual_Cycle = Number(req.body.menstrualCycle);}
 
-            if (isNaN(req.body.smoking)) { console.log("smoking is null"); Track.Smoking = last.Smoking; }
+            if (!req.body.smoking) { console.log("smoking is null"); Track.Smoking = last.Smoking; }
+            else{Track.Smoking = Number(req.body.smoking);}
 
-            if (isNaN(req.body.alcohol)) { console.log("alcohol is null"); Track.Alcohol = last.Alcohol; }
+            if (!req.body.alcohol) { console.log("alcohol is null"); Track.Alcohol = last.Alcohol; }
+            else{Track.Alcohol = Number(req.body.alcohol);}
 
             if (isNaN(BMI)) { console.log("BMI is null"); Track.BMI = last.BMI; }  
 
@@ -109,7 +110,7 @@ exports.index = async function (req, res) {    // function for getting the avera
             console.log(response.data);
 
             var today = new Date();
-            var day = today.getFullYear()+"-"+today.getMonth()+"-"+today.getDate();
+            var day = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
 
             var Track = new AveragePrediction({
                 UserID: ID,
@@ -226,13 +227,15 @@ exports.getAllPrediction = function (req, res) {   // function for getting all t
 
             for (let x = 0; x <= allData.length - 1; x++) {
                 if (allData[x].UserID === ID) {
+                    allData[x].AveragePrediction =  predictionRange(allData[x].AveragePrediction);
                     predictionData.push(allData[x]);
                 }
             }
 
             console.log(predictionData);
             res.json({
-                AllPredictions: predictionData
+                allPredictions: predictionData,
+                latestPrediction : predictionData[predictionData.length -1]
             });
 
         }
@@ -391,4 +394,15 @@ function predictionRange(doc) {    // helping function for index function
     }
     return status;
   }
+  // age calculate function
+  function getYears(x) {
+    return Math.floor(x / 1000 / 60 / 60 / 24 / 365);
+  }
   
+  function age(doc) {
+    //  console.log(doc);
+    let n = Date.now();
+    let d = new Date(doc);
+    doc = getYears(n - d);
+    return doc;
+  }
