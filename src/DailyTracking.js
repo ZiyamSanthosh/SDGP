@@ -11,11 +11,28 @@ class DailyTracking extends Component {
         const{userId} = this.props.route.params
         this.state = {
             userId: userId,
+            dateOfBirth: null,
             height: null,
             weight: null,
+            ageOfFirstPeriod: null,
+            maritalStatus: null,
+            breastFeeding: null,
             alcohol: null,
-            smoking: null
+            smoking: null,
+            menstrualCycle: null,
+            breastCancerHistory: null
         }
+    }
+
+    componentDidMount() {
+        const data = {
+            "userId": this.state.userId
+        }
+        axios.post('http://10.0.2.2:8000/api/track/predict/', data)
+            .then((response) =>{
+                console.log(response.data)
+                console.log(response.data.LastData)
+            })
     }
 
     updateDataAndPredict = () => {
@@ -26,27 +43,6 @@ class DailyTracking extends Component {
             "alcohol": this.state.alcohol,
             "smoking": this.state.smoking
         }
-        axios.post('http://10.0.2.2:8000/api/track/', data)
-            .then((response) =>{
-                console.log(response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-        console.log("First done")
-        const data2 = {
-            "userId": this.state.userId
-        }
-        axios.get('http://10.0.2.2:8000/api/track/', data2)
-            .then((response2) => {
-                console.log(response2)
-                console.log(response2.data)
-            })
-            .catch((err2) => {
-                console.log(err2)
-            })
-        console.log("Second done")
-
     }
 
     render () {

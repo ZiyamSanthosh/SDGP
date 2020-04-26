@@ -31,8 +31,7 @@ class HomeScreen extends Component {
             smoking: null,
             menstrualCycle: null,
             breastCancerHistory: null,
-            lastPredictedDate: new Date(),
-            AllPredictions: [],
+            lastPredictedDate: null,
             lastPrediction: null
         }
     }
@@ -42,7 +41,9 @@ class HomeScreen extends Component {
             .then((response) => {
                 console.log(response.data)
                 this.setState({
-                    fullName: response.data.fullName
+                    fullName: response.data.fullName,
+                    email: response.data.email,
+                    password: response.data.password
                 })
             })
             .catch((err) => {
@@ -53,19 +54,14 @@ class HomeScreen extends Component {
         }
         axios.patch('http://10.0.2.2:8000/api/track/', data)
             .then((response) => {
-                //console.log(response.data)
-                //console.log(response.data.AllPredictions)
+                console.log(response.data.latestPrediction.AveragePrediction)
+                console.log(response.data.latestPrediction.PredictedDate)
                 this.setState({
-                    AllPredictions: response.data.AllPredictions,
-                })
-                console.log(this.state.AllPredictions)
-                console.log(this.state.AllPredictions[0])
-                console.log(this.state.AllPredictions[0].AveragePrediction)
-                console.log(this.state.AllPredictions[this.state.AllPredictions.length-1].AveragePrediction)
-                this.setState({
-                    lastPrediction: this.state.AllPredictions[this.state.AllPredictions.length-1].AveragePrediction
+                    lastPrediction: response.data.latestPrediction.AveragePrediction,
+                    lastPredictionDate: response.data.latestPrediction.PredictedDate
                 })
                 console.log(this.state.lastPrediction)
+                console.log(this.state.lastPredictedDate)
             })
             .catch((err) => {
                 console.log(err)
@@ -73,43 +69,43 @@ class HomeScreen extends Component {
     }
 
     selectRatingImage = (rating) => {
-        if (0<=rating && rating<=20){
+        if (rating===1){
             return safe
-        } else if (20<rating && rating<=40){
+        } else if (rating===2){
             return moderate
-        } else if (40<rating && rating<=60){
+        } else if (rating===3){
             return beAlert
-        } else if (60<rating && rating<=80){
+        } else if (rating===4){
             return atRisk
-        } else if (80<rating && rating<=100){
+        } else if (rating===5){
             return critical
         }
     }
 
     renderSubMessage = (rating) => {
-        if (0<=rating && rating<=20){
+        if (rating===1){
             return "Your risk possibility was between 0-20%"
-        } else if (20<rating && rating<=40){
+        } else if (rating===2){
             return "Your risk possibility was between 20-40%"
-        } else if (40<rating && rating<=60){
+        } else if (rating===3){
             return "Your risk possibility was between 40-60%"
-        } else if (60<rating && rating<=80){
+        } else if (rating===4){
             return "Your risk possibility was between 60-80%"
-        } else if (80<rating && rating<=100){
+        } else if (rating===5){
             return "Your risk possibility was between 80-100%"
         }
     }
 
     renderMessage = (rating) => {
-        if (0<=rating && rating<=20){
+        if (rating===1){
             return "SAFE"
-        } else if (20<rating && rating<=40){
+        } else if (rating===2){
             return "MODERATE"
-        } else if (40<rating && rating<=60){
+        } else if (rating===3){
             return "BE ALERT"
-        } else if (60<rating && rating<=80){
+        } else if (rating===4){
             return "AT RISK"
-        } else if (80<rating && rating<=100){
+        } else if (rating===5){
             return "CRITICAL"
         }
     }
@@ -165,7 +161,12 @@ class HomeScreen extends Component {
                     </ScrollView>
                 </View>
                 <View style={{flex: 2,}}>
-                    <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('DailyTracking', {userId: this.state.userId})}}>
+                    <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('DailyTracking', {
+                        userId: this.state.userId,
+                        fullName: this.state.fullName,
+                        email: this.state.email,
+                        password: this.state.password
+                    })}}>
                         <Text style={styles.buttonText}>Update Today's Activity</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}>
