@@ -7,10 +7,18 @@ const Factor = require('../models/factorModel');   // connecting factorModel
 
 const AveragePrediction = require('../models/avgPredictionModel');    // connecting avgPredictionModel
 
+const UserDetail = require('../models/userDetailModel')    // connecting userDetailModel
 
-exports.new = function (req, res) {      //  function for updating daily tracking data
-    console.log(req.body);
 
+exports.new = async function (req, res) {      //  function for updating daily tracking data
+
+    console.log( req.body.userId );
+
+    let userData = await UserDetail.findOne({ UserID: req.body.userId });
+    console.log(userData);
+
+    // if (!error){
+    //     console.log(docu);
 
     var weight = Number(req.body.weight);
     var height = Number(req.body.height);
@@ -20,9 +28,9 @@ exports.new = function (req, res) {      //  function for updating daily trackin
     var Track = new Model();
 
     Track.UserID = req.body.userId;
-    
+
     Track.BMI = BMI;
-    
+
 
     Model.find({}, function (err, docs) {
         if (!err) {
@@ -37,8 +45,8 @@ exports.new = function (req, res) {      //  function for updating daily trackin
             }
 
             var last = userData[userData.length - 1];
-            console.log(last);
-            console.log(last._id);
+           // console.log(last);
+           // console.log(last._id);
 
             var day = new Date();
             if (last._id.getTimestamp().getDate() + "-" + last._id.getTimestamp().getMonth() + "-" + last._id.getTimestamp().getFullYear() === day.getDate() + "-" + day.getMonth() + "-" + day.getFullYear()) {
@@ -52,30 +60,30 @@ exports.new = function (req, res) {      //  function for updating daily trackin
 
 
             if (!req.body.dob) { console.log("age is null"); Track.Age = last.Age; }
-            else{Track.Age = age(req.body.dob);}
+            else { Track.Age = age(req.body.dob); }
 
             if (!req.body.maritalStatus) { console.log("marital is null"); Track.Marital_Status = last.Marital_Status; }
-            else{Track.Marital_Status = Number(req.body.maritalStatus);}
+            else { Track.Marital_Status = Number(req.body.maritalStatus); }
 
             if (!req.body.breastCancerHistory) { console.log("medicalHistory is null"); Track.Breast_Cancer_History = last.Breast_Cancer_History; }
-            else{Track.Breast_Cancer_History = Number(req.body.breastCancerHistory);}
+            else { Track.Breast_Cancer_History = Number(req.body.breastCancerHistory); }
 
             if (!req.body.breastFeeding) { console.log("breasfeed is null"); Track.BreastFeeding = last.BreastFeeding; }
-            else{Track.BreastFeeding = Number(req.body.breastFeeding);}
+            else { Track.BreastFeeding = Number(req.body.breastFeeding); }
 
             if (!req.body.ageAtFirstPeriod) { console.log("firstperiod is null"); Track.Age_at_first_period = last.Age_at_first_period; }
-            else{Track.Age_at_first_period = Number(req.body.ageAtFirstPeriod);}
+            else { Track.Age_at_first_period = Number(req.body.ageAtFirstPeriod); }
 
             if (!req.body.menstrualCycle) { console.log("menopause is null"); Track.Menstrual_Cycle = last.Menstrual_Cycle; }
-            else{Track.Menstrual_Cycle = Number(req.body.menstrualCycle);}
+            else { Track.Menstrual_Cycle = Number(req.body.menstrualCycle); }
 
             if (!req.body.smoking) { console.log("smoking is null"); Track.Smoking = last.Smoking; }
-            else{Track.Smoking = Number(req.body.smoking);}
+            else { Track.Smoking = Number(req.body.smoking); }
 
             if (!req.body.alcohol) { console.log("alcohol is null"); Track.Alcohol = last.Alcohol; }
-            else{Track.Alcohol = Number(req.body.alcohol);}
+            else { Track.Alcohol = Number(req.body.alcohol); }
 
-            if (isNaN(BMI)) { console.log("BMI is null"); Track.BMI = last.BMI; }  
+            if (isNaN(BMI)) { console.log("BMI is null"); Track.BMI = last.BMI; }
 
             // save the contact and check for errors
             Track.save(function (err) {
@@ -94,7 +102,11 @@ exports.new = function (req, res) {      //  function for updating daily trackin
             throw err;
         }
     });
-
+    // }
+    // else {
+    //     throw error;
+    // }
+    // });
 };
 
 exports.index = async function (req, res) {    // function for getting the average prediction for current date
@@ -110,7 +122,7 @@ exports.index = async function (req, res) {    // function for getting the avera
             console.log(response.data);
 
             var today = new Date();
-            var day = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+            var day = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
             var Track = new AveragePrediction({
                 UserID: ID,
@@ -118,12 +130,12 @@ exports.index = async function (req, res) {    // function for getting the avera
                 AveragePrediction: response.data
             });
 
-            const savedPost = Track.save().catch((err) => {         
+            const savedPost = Track.save().catch((err) => {
                 return res.status(400).json({ message: err });
             });
 
             return res.send({
-                result:predictionRange(response.data)
+                result: predictionRange(response.data)
             });
         })
         .catch((error) => {
@@ -190,9 +202,9 @@ exports.call = function (req, res) {     // function for generating report
                         Artical.push(des[7]);
                     }
 
-                    var rand = Math.floor(Math.random()*Artical.length);
+                    var rand = Math.floor(Math.random() * Artical.length);
 
-                    if (Artical.length == 0){
+                    if (Artical.length == 0) {
                         Artical.push(des[9]);
                     }
 
@@ -227,7 +239,7 @@ exports.getAllPrediction = function (req, res) {   // function for getting all t
 
             for (let x = 0; x <= allData.length - 1; x++) {
                 if (allData[x].UserID === ID) {
-                    allData[x].AveragePrediction =  predictionRange(allData[x].AveragePrediction);
+                    allData[x].AveragePrediction = predictionRange(allData[x].AveragePrediction);
                     predictionData.push(allData[x]);
                 }
             }
@@ -235,7 +247,7 @@ exports.getAllPrediction = function (req, res) {   // function for getting all t
             console.log(predictionData);
             res.json({
                 allPredictions: predictionData,
-                latestPrediction : predictionData[predictionData.length -1]
+                latestPrediction: predictionData[predictionData.length - 1]
             });
 
         }
@@ -251,7 +263,7 @@ exports.getLast = function (req, res) {     // function for getting the last det
 
     console.log(req.body);
 
-    var ID = req.body.userId;                               
+    var ID = req.body.userId;
 
     Model.find({}, function (err, docs) {
         if (!err) {
@@ -266,11 +278,12 @@ exports.getLast = function (req, res) {     // function for getting the last det
             }
 
             var last = userData[userData.length - 1];
-            
+
             console.log(last);
 
             res.json({
-                LastData : last
+                LastData: last,
+                DOB: "2005-5-5"
             });
 
         }
@@ -356,7 +369,7 @@ const getTrackingModel = async (id) => {   // helping function for index functio
     else {
         avgSmoking = 0;
     }
-
+    
 
     let predictData = {
         Age: last.Age,
@@ -382,27 +395,27 @@ function predictionRange(doc) {    // helping function for index function
     val = Number.parseFloat(doc);
     let status;
     if (0 <= val && val <= 20) {
-      status = 1;
+        status = 1;
     } else if (20 < val && val <= 40) {
-      status = 2;
+        status = 2;
     } else if (40 < val && val <= 60) {
-      status = 3;
+        status = 3;
     } else if (60 < val && val <= 80) {
-      status = 4;
+        status = 4;
     } else if (80 < val && val <= 100) {
-      status = 5;
+        status = 5;
     }
     return status;
-  }
-  // age calculate function
-  function getYears(x) {
+}
+// age calculate function
+function getYears(x) {
     return Math.floor(x / 1000 / 60 / 60 / 24 / 365);
-  }
-  
-  function age(doc) {
+}
+
+function age(doc) {
     //  console.log(doc);
     let n = Date.now();
     let d = new Date(doc);
     doc = getYears(n - d);
     return doc;
-  }
+}
