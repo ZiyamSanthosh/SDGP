@@ -14,14 +14,21 @@ exports.new = async function (req, res) {      //  function for updating daily t
 
     console.log( req.body.userId );
 
-    let userData = await UserDetail.findOne({ UserID: req.body.userId });
-    console.log(userData);
+    let userDetails = await UserDetail.findOne({ UserID: req.body.userId });
+    //console.log(userData);
 
-    // if (!error){
-    //     console.log(docu);
+    var weight;
+    var height;
 
-    var weight = Number(req.body.weight);
-    var height = Number(req.body.height);
+
+
+    if (!req.body.weight) { console.log("weight is null"); weight = userDetails.Weight; }
+    else { weight = Number(req.body.weight); userDetails.Weight = weight}
+
+    if (!req.body.height) { console.log("height is null"); height = userDetails.Height; }
+    else { height = Number(req.body.height); userDetails.Height = height}
+
+    
 
     var BMI = (weight / Math.pow((height), 2));
 
@@ -60,7 +67,7 @@ exports.new = async function (req, res) {      //  function for updating daily t
 
 
             if (!req.body.dob) { console.log("age is null"); Track.Age = last.Age; }
-            else { Track.Age = age(req.body.dob); }
+            else { Track.Age = age(req.body.dob); userDetails.DOB = req.body.dob}
 
             if (!req.body.maritalStatus) { console.log("marital is null"); Track.Marital_Status = last.Marital_Status; }
             else { Track.Marital_Status = Number(req.body.maritalStatus); }
@@ -83,20 +90,24 @@ exports.new = async function (req, res) {      //  function for updating daily t
             if (!req.body.alcohol) { console.log("alcohol is null"); Track.Alcohol = last.Alcohol; }
             else { Track.Alcohol = Number(req.body.alcohol); }
 
-            if (isNaN(BMI)) { console.log("BMI is null"); Track.BMI = last.BMI; }
-
             // save the contact and check for errors
             Track.save(function (err) {
                 // Check for validation error
                 if (err)
                     res.json(err);
-                else
-                    res.json({
-                        message: 'New contact created!',
-                        data: Track
-                    });
             });
 
+            userDetails.save(function (err) {
+                // Check for validation error
+                if (err)
+                    res.json(err);
+            });
+
+            res.json({
+                message: 'New contact created!',
+                data: Track,
+                UserData: userDetails
+            });
         }
         else {
             throw err;
@@ -259,11 +270,15 @@ exports.getAllPrediction = function (req, res) {   // function for getting all t
 };
 
 
-exports.getLast = function (req, res) {     // function for getting the last details of a user(for showing in the profile)
+exports.getLast = async function (req, res) {     // function for getting the last details of a user(for showing in the profile)
+
+    
 
     console.log(req.body);
 
     var ID = req.body.userId;
+
+    let userDetails = await UserDetail.findOne({ UserID: ID });
 
     Model.find({}, function (err, docs) {
         if (!err) {
@@ -283,7 +298,9 @@ exports.getLast = function (req, res) {     // function for getting the last det
 
             res.json({
                 LastData: last,
-                DOB: "2005-5-5"
+                height : userDetails.Height,
+                weight : userDetails.Weight,
+                DOB: userDetails.DOB
             });
 
         }
