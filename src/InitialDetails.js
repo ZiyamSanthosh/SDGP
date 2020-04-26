@@ -272,6 +272,7 @@ function GatherInfo({navigation, route}) {
     const {fullName, email, password, userId} = route.params
     return (
         <View style={styles.mainView}>
+            <Text>{userId}</Text>
             <Text style={styles.title}>Hello {fullName}</Text>
             {/*<Text>{fullName}</Text>
             <Text>{email}</Text>

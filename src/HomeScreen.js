@@ -58,7 +58,7 @@ class HomeScreen extends Component {
                 console.log(response.data.latestPrediction.PredictedDate)
                 this.setState({
                     lastPrediction: response.data.latestPrediction.AveragePrediction,
-                    lastPredictionDate: response.data.latestPrediction.PredictedDate
+                    lastPredictedDate: response.data.latestPrediction.PredictedDate
                 })
                 console.log(this.state.lastPrediction)
                 console.log(this.state.lastPredictedDate)
@@ -131,7 +131,7 @@ class HomeScreen extends Component {
                         <Text style={{fontSize: 30, fontWeight: 'bold'}}>{this.state.fullName}!</Text>
                     </View>
                     <View style={{flex: 4.5, marginTop: 20}}>
-                        <Text>Last Predicted: {this.state.lastPredictedDate.toDateString()}</Text>
+                        <Text>Last Predicted: {this.state.lastPredictedDate}</Text>
                         <View style={{flexDirection: 'row', marginTop: 15,}}>
                             <View style={{flex:0.8}}>
                                 <Image source={this.selectRatingImage(this.state.lastPrediction)} style={{width: 130, height: 130}}/>

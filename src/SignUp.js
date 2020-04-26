@@ -52,6 +52,8 @@ class SignUp extends Component {
         }
         axios.post('http://10.0.2.2:8000/api/users/register', data)
             .then((response) => {
+                console.log(response)
+                console.log(response.data)
                 console.log(response.data.userId)
                 this.setState({
                     userId: response.data.userId,
@@ -80,7 +82,7 @@ class SignUp extends Component {
                     message: "This is a message",
                     isCancelable: true
                 }
-                DialogProgress.show(options)
+                //DialogProgress.show(options)
                 this.sendData()
             } else {
                 console.log("Not done")
