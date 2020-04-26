@@ -82,7 +82,7 @@ class SignUp extends Component {
                     message: "This is a message",
                     isCancelable: true
                 }
-                //DialogProgress.show(options)
+                DialogProgress.show(options)
                 this.sendData()
             } else {
                 console.log("Not done")

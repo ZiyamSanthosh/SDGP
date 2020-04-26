@@ -20,7 +20,8 @@ class DailyTracking extends Component {
             alcohol: null,
             smoking: null,
             menstrualCycle: null,
-            breastCancerHistory: null
+            breastCancerHistory: null,
+            result: null
         }
     }
 
@@ -32,17 +33,60 @@ class DailyTracking extends Component {
             .then((response) =>{
                 console.log(response.data)
                 console.log(response.data.LastData)
+                this.setState({
+                    dateOfBirth: response.data.DOB,
+                    height: response.data.height,
+                    weight: response.data.weight,
+                    ageOfFirstPeriod: response.data.LastData.Age_at_first_period,
+                    maritalStatus: response.data.LastData.Marital_Status,
+                    breastFeeding: response.data.LastData.BreastFeeding,
+                    alcohol: response.data.LastData.Alcohol,
+                    smoking: response.data.LastData.Smoking,
+                    menstrualCycle: response.data.LastData.Menstrual_Cycle,
+                    breastCancerHistory: response.data.LastData.Breast_Cancer_History
+                })
+            })
+            .catch((err) => {
+                console.log(err)
             })
     }
 
     updateDataAndPredict = () => {
         const data = {
             "userId": this.state.userId,
+            "dob": this.state.dateOfBirth,
             "height": this.state.height,
             "weight": this.state.weight,
+            "ageAtFirstPeriod": this.state.ageOfFirstPeriod,
+            "maritalStatus": this.state.maritalStatus,
+            "breastFeeding": this.state.breastFeeding,
             "alcohol": this.state.alcohol,
-            "smoking": this.state.smoking
+            "smoking": this.state.smoking,
+            "menstrualCycle": this.state.menstrualCycle,
+            "breastCancerHistory": this.state.breastCancerHistory
         }
+        axios.post('http://10.0.2.2:8000/api/track/', data)
+            .then((response) => {
+                const data2 = {
+                    'userId': this.state.userId
+                }
+                axios.post('http://10.0.2.2:8000/api/track/result/', data2)
+                    .then((response) => {
+                        this.setState({
+                            result: response.data.result
+                        })
+                        this.props.navigation.navigate('ResultsPage', {
+                            userId: this.state.userId,
+                            result: this.state.result
+                        })
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     render () {
@@ -80,7 +124,18 @@ class DailyTracking extends Component {
                         <View style={{flex: 1, backgroundColor: 'white', borderRadius: 25, padding: 15, marginBottom: 20}}>
                             <Text style={{fontWeight: 'bold', fontSize: 25}}>Did you take alcohol today?</Text>
                             <RNPickerSelect
-                                onValueChange={(value) => {this.setState({alcohol: value})}}
+                                onValueChange={(value) => {
+                                    if (value==='Yes') {
+                                        this.setState({
+                                            alcohol: 1
+                                        })
+                                    } else{
+                                        this.setState({
+                                            alcohol: 0
+                                        })
+                                    }
+
+                                }}
                                 items={[
                                     {label: 'Yes', value:'Yes'},
                                     {label: 'No', value: 'No'},
@@ -90,7 +145,18 @@ class DailyTracking extends Component {
                         <View style={{flex: 1, backgroundColor: 'white', borderRadius: 25, padding: 15, marginBottom: 20}}>
                             <Text style={{fontWeight: 'bold', fontSize: 25}}>Did you smoke today?</Text>
                             <RNPickerSelect
-                                onValueChange={(value) => {this.setState({smoking: value})}}
+                                onValueChange={(value) => {
+                                    if (value==='Yes'){
+                                        this.setState({
+                                            smoking: 1
+                                        })
+                                    } else {
+                                        this.setState({
+                                            smoking: 0
+                                        })
+                                    }
+
+                                }}
                                 items={[
                                     {label: 'Yes', value:'Yes'},
                                     {label: 'No', value: 'No'},
