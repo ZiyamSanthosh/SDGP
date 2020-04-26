@@ -23,7 +23,11 @@ router
   .post(trackingController.new) //route for updating daily tracking details
   .put(trackingController.call) //route for getting the artical
   .patch(trackingController.getAllPrediction) //route for getting all past predictions( this includes the initial prediction too)...
-  .copy(trackingController.getLast);  // route for getting the last details of a user(for showing in the profile)
+  
+
+router
+  .route("/track/predict")
+  .post(trackingController.getLast);  // route for getting the last details of a user(for showing in the profile)
 
 router
   .route("/track/:track_id")
