@@ -89,6 +89,33 @@ class DailyTracking extends Component {
             })
     }
 
+    updateDataOnly= () => {
+        const data = {
+            "userId": this.state.userId,
+            "dob": this.state.dateOfBirth,
+            "height": this.state.height,
+            "weight": this.state.weight,
+            "ageAtFirstPeriod": this.state.ageOfFirstPeriod,
+            "maritalStatus": this.state.maritalStatus,
+            "breastFeeding": this.state.breastFeeding,
+            "alcohol": this.state.alcohol,
+            "smoking": this.state.smoking,
+            "menstrualCycle": this.state.menstrualCycle,
+            "breastCancerHistory": this.state.breastCancerHistory
+        }
+        axios.post('http://10.0.2.2:8000/api/track/', data)
+            .then((response) => {
+                console.log(response)
+                console.log(response.data)
+                console.log("Latest Data Saved Successfully")
+                this.props.navigation.navigate('HomeScreen', {userId: this.state.userId})
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
     render () {
         return (
             <View style={{flex:1, backgroundColor: '#e0dede'}}>
@@ -167,7 +194,7 @@ class DailyTracking extends Component {
                             <TouchableOpacity style={styles.button} onPress={ () => this.updateDataAndPredict() }>
                                 <Text style={styles.buttonText}>Get New Prediction Results</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.button}>
+                            <TouchableOpacity style={styles.button} onPress={ () => this.updateDataOnly()}>
                                 <Text style={styles.buttonText}>Update Details</Text>
                             </TouchableOpacity>
                         </View>
