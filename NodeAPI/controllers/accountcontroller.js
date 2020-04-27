@@ -101,8 +101,15 @@ const registerUser = async (req, res, next) => {
     return res.json({ error: error.message });
   }
 
-  var result = await doesEmailExist(email);
-  console.log(result);
+  try{
+    var result = await doesEmailExist(email);
+    console.log(result);
+  }
+  catch(err){
+    const error = new httpErr('Error, could not verify email. Please check your connection and try again', 500);
+    return res.json({error: error.message}); 
+  }
+  
 
   //stop authorization if email provided does not exist
   if (!result) {
@@ -307,18 +314,16 @@ const modifyUser = async (req, res, next) => {
   console.log("User modification success");
 };
 
-function doesEmailExist(email) {
-  return new Promise((resolve, reject) => {
-    emailExistence.check(email, (err, resp) =>
-      err ? reject(err) : resolve(resp)
-    );
-  })
-    .then((resp) => {
-      return Promise.resolve(resp);
-    })
-    .catch((err) => {
-      return Promise.reject(err);
+async function doesEmailExist(email) {
+  try {
+    const resp = await new Promise((resolve, reject) => {
+      emailExistence.check(email, (err, resp) => err ? reject(err) : resolve(resp), 8000);
     });
+    return Promise.resolve(resp);
+  }
+  catch (err) {
+    return Promise.reject(err);
+  }
 }
 
 //export functions
