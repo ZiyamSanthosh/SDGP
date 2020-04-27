@@ -101,6 +101,7 @@ const registerUser = async (req, res, next) => {
     return res.json({ error: error.message });
   }
 
+/*
   try{
     var result = await doesEmailExist(email);
     console.log(result);
@@ -108,7 +109,7 @@ const registerUser = async (req, res, next) => {
   catch(err){
     const error = new httpErr('Error, could not verify email. Please check your connection and try again', 500);
     return res.json({error: error.message}); 
-  }
+  } 
   
 
   //stop authorization if email provided does not exist
@@ -119,6 +120,7 @@ const registerUser = async (req, res, next) => {
     );
     return res.json({ error: error.message });
   }
+*/
 
   // generate unique user id
   const uniqueId = uuidv4();
@@ -314,17 +316,18 @@ const modifyUser = async (req, res, next) => {
   console.log("User modification success");
 };
 
-async function doesEmailExist(email) {
-  try {
-    const resp = await new Promise((resolve, reject) => {
-      emailExistence.check(email, (err, resp) => err ? reject(err) : resolve(resp), 8000);
-    });
-    return Promise.resolve(resp);
-  }
-  catch (err) {
-    return Promise.reject(err);
-  }
-}
+//function to check email existence
+function doesEmailExist (email) {
+  return new Promise((resolve, reject) => {
+      emailExistence.check(email, (err, resp) => err ? reject(err) : resolve(resp));
+  })
+      .then(resp => {
+          return Promise.resolve(resp);
+      })
+      .catch(err => {
+          return Promise.reject(err);
+      });
+};
 
 //export functions
 exports.registerUser = registerUser;
