@@ -15,7 +15,8 @@ const getUsers = async (req, res, next) => {
     //retireve userid, fullname, email and registered date for users found
     appusers = await userModel.find({}, "userId fullName email  date");
   } catch (err) {
-    return res.json({ error: err });
+    const error = new httpErr('Error occured, Could not get users, please try again.', 500);
+    return res.json({ error: error.message });
   }
 
   //convert user objects to string format
@@ -35,7 +36,8 @@ const findUser = async (req, res, next) => {
     //retrieve the user from databse by userid
     containuser = await userModel.findOne({ userId: id });
   } catch (err) {
-    return res.json({ error: err });
+    const error = new httpErr('Error occured. Could not find user, please try again', 500);
+    return res.json({ error: error.message });
   }
 
   //handle error for user not found in the database
@@ -74,7 +76,8 @@ const registerUser = async (req, res, next) => {
     //retrieve user from database using email
     found = await userModel.findOne({ email: email });
   } catch (err) {
-    return res.json({ error: err });
+    const error = new httpErr('Error, Could not find user. Please try again', 500);
+    return res.json({ error: error.message });
   }
 
   //return error message if user is already registered
@@ -98,8 +101,16 @@ const registerUser = async (req, res, next) => {
     return res.json({ error: error.message });
   }
 
-  var result = await doesEmailExist(email);
-  console.log(result);
+/*
+  try{
+    var result = await doesEmailExist(email);
+    console.log(result);
+  }
+  catch(err){
+    const error = new httpErr('Error, could not verify email. Please check your connection and try again', 500);
+    return res.json({error: error.message}); 
+  } 
+  
 
   //stop authorization if email provided does not exist
   if (!result) {
@@ -107,8 +118,9 @@ const registerUser = async (req, res, next) => {
       "Email does not exist, please re-check your email.",
       401
     );
-    return res.status(404).json({ error: error.message });
+    return res.json({ error: error.message });
   }
+*/
 
   // generate unique user id
   const uniqueId = uuidv4();
@@ -126,7 +138,8 @@ const registerUser = async (req, res, next) => {
     //store user in the database
     await newUser.save();
   } catch (err) {
-    return res.json({ error: err });
+    const error = new httpErr('Error, could not register user. Please try again', 500);
+    return res.json({ error: error.message });
   }
   res.status(201).json({
     userId: newUser.userId,
@@ -144,7 +157,8 @@ const loginUser = async (req, res, next) => {
     //find and retrieve user
     containuser = await userModel.findOne({ email: email });
   } catch (err) {
-    return res.json({ error: err });
+    const error = new httpErr('Error, could not find user. Please try again', 500);
+    return res.json({ error: error.message });
   }
 
   //stop authorization if user not found
@@ -164,7 +178,8 @@ const loginUser = async (req, res, next) => {
       containuser.password
     );
   } catch (err) {
-    return res.json({ error: err });
+    const error = new httpErr('Error, could not authenticate user. Please try again');
+    return res.json({ error: error.message });
   }
 
   //error for invalid password
@@ -188,7 +203,8 @@ const deleteUser = async (req, res, next) => {
     //find and retrieve user
     containuser = await userModel.findOne({ email: email });
   } catch (err) {
-    return res.json({ error: err });
+    const error = new httpErr('Error, could not find user. Please try again ', 500);
+    return res.json({ error: error.message });
   }
 
   //error for user not found
@@ -208,7 +224,8 @@ const deleteUser = async (req, res, next) => {
       containuser.password
     );
   } catch (err) {
-    return res.json({ error: err });
+    const error = new httpErr('Error, could not authenticate user. Please try again', 500);
+    return res.json({ error: error.message });
   }
 
   //error for invalid password
@@ -224,7 +241,8 @@ const deleteUser = async (req, res, next) => {
     //delete user from the database
     await userModel.deleteOne({ email: email }, (err, result, next) => {
       if (err) {
-        return res.json({ error: err });
+        const error = new httpErr('Error, could not delete user. Please try again', 500);
+        return res.json({ error: error.message });
       } else {
         console.log("user deletion successful");
         res
@@ -240,7 +258,6 @@ const deleteUser = async (req, res, next) => {
     return res.json({ error: error.message });
   }
   console.log("Deletion successful");
-  res.status(200).json({message: 'success'})
 };
 
 //modify a given user
@@ -285,31 +302,32 @@ const modifyUser = async (req, res, next) => {
       { upsert: true, useFindAndModify: false },
       function (err, doc) {
         if (err) {
-          return res.status(400).json({ message: err });
+          const error = new httpErr('Error, could not modify user. Please try again', 500);
+          return res.json({ message: error.message });
         }
         return res.send("Succesfully saved.");
       }
     );
   } catch (err) {
-    return res.status(400).json({ message: err });
+    const error = new httpErr('Error, could not modify user. Please try again', 500);
+    return res.json({ message: error.message });
   }
 
   console.log("User modification success");
 };
 
-function doesEmailExist(email) {
+//function to check email existence
+function doesEmailExist (email) {
   return new Promise((resolve, reject) => {
-    emailExistence.check(email, (err, resp) =>
-      err ? reject(err) : resolve(resp)
-    );
+      emailExistence.check(email, (err, resp) => err ? reject(err) : resolve(resp));
   })
-    .then((resp) => {
-      return Promise.resolve(resp);
-    })
-    .catch((err) => {
-      return Promise.reject(err);
-    });
-}
+      .then(resp => {
+          return Promise.resolve(resp);
+      })
+      .catch(err => {
+          return Promise.reject(err);
+      });
+};
 
 //export functions
 exports.registerUser = registerUser;
