@@ -135,6 +135,21 @@ class Profile extends Component {
                 console.log(err)
             })
     }
+    editName=()=>{
+        console.log(this.state.fullName)
+        const data={
+            "email":this.state.email,
+            "fullName":this.state.fullName
+        }
+        axios.put('http://10.0.2.2:8000/api/users/modify',data)
+            .then((response)=>{
+                console.log(response)
+                console.log(response.data)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+    }
 
     render() {
         return (
@@ -172,7 +187,12 @@ class Profile extends Component {
                                             title={"Edit Full Name"}
                                             //message={"Enter here"}
                                             hintInput={"Enter here"}
-                                            submitInput={(inputText)=>{this.setState({fullName: inputText, isNameAlertVisible:false})}}
+                                            submitInput={(inputText)=>{this.setState({
+                                                fullName: inputText,
+                                                isNameAlertVisible:false},
+                                                ()=>{this.editName()}
+                                                )
+                                            }}
                                             closeDialog={()=>this.setState({isNameAlertVisible:false})}
                                             >
 
