@@ -113,7 +113,7 @@ class HomeScreen extends Component {
     render () {
         return (
             <View style={{flex: 1, backgroundColor: '#e0dede'}}>
-                <View style={{flex: 0.8, flexDirection: 'row', backgroundColor: 'white', height: 25, paddingLeft: 6, paddingRight: 6}}>
+                <View style={{flex: 1, flexDirection: 'row', backgroundColor: 'white', height: 25, paddingLeft: 6, paddingRight: 6}}>
                     <View style={{flex: 9, justifyContent: 'center'}}>
                         <TouchableOpacity onPress = {() => {this.props.navigation.navigate('AboutUs')}}>
                             <Image source={iCureCropped} style={{width: 110, height: 35, resizeMode: 'contain'}}/>
@@ -125,42 +125,36 @@ class HomeScreen extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{flex: 4.2, backgroundColor: 'white', borderRadius: 25, margin: 18, padding: 15}}>
-                    <View style={{flex:1, marginBottom: 30}}>
+                <View style={{flex: 10, backgroundColor: 'white', borderRadius: 25, margin: 18, padding: 15}}>
+                    <View style={{flex:1, marginBottom: 10}}>
                         <Text style={{fontSize: 30, fontWeight: 'bold'}}>Hello,</Text>
                         <Text style={{fontSize: 30, fontWeight: 'bold'}}>{this.state.fullName}!</Text>
                     </View>
-                    <View style={{flex: 4.5, marginTop: 20}}>
+                    <View style={{flex: 4.5,}}>
                         <Text>Last Predicted: {this.state.lastPredictedDate}</Text>
-                        <View style={{flexDirection: 'row', marginTop: 15,}}>
-                            <View style={{flex:0.8}}>
+                        <View style={{flexDirection: 'row', marginTop: 15, flex:1.2, padding: 5, justifyContent: 'center', alignItems: 'center'}}>
+                            <View style={{flex:0.9, alignItems: 'center'}}>
                                 <Image source={this.selectRatingImage(this.state.lastPrediction)} style={{width: 130, height: 130}}/>
                             </View>
-                            <View style={{flex: 1.2, justifyContent: 'center'}}>
+                            <View style={{flex: 1.1, justifyContent: 'center'}}>
                                 <Text style={{fontSize: 30, fontWeight: 'bold',}}>{this.renderMessage(this.state.lastPrediction)}</Text>
                                 <Text>{this.renderSubMessage(this.state.lastPrediction)}</Text>
                             </View>
                         </View>
+                        <View style={{backgroundColor: '#e0dede', flex: 1.8, borderRadius: 25, marginTop:20, padding: 20}}>
+                            <ScrollView>
+                                <Text style={{textAlign: 'justify'}}>
+                                    Breast cancer is an uncontrolled growth of breast cells. To better understand breast cancer, it helps to understand how any cancer can develop.
+
+                                    Cancer occurs as a result of mutations, or abnormal changes, in the genes responsible for regulating the growth of cells and keeping them healthy. The genes are in each cell’s nucleus, which acts as the “control room” of each cell. Normally, the cells in our bodies replace themselves through an orderly process of cell growth: healthy new cells take over as old ones die out. But over time, mutations can “turn on” certain genes and “turn off” others in a cell. That changed cell gains the ability to keep dividing without control or order, producing more cells just like it and forming a tumor.
+
+                                    A tumor can be benign (not dangerous to health) or malignant (has the potential to be dangerous). Benign tumors are not considered cancerous: their cells are close to normal in appearance, they grow slowly, and they do not invade nearby tissues or spread to other parts of the body. Malignant tumors are cancerous. Left unchecked, malignant cells eventually can spread beyond the original tumor to other parts of the body.
+                                </Text>
+                            </ScrollView>
+                        </View>
                     </View>
                 </View>
-                <View style={{flex: 3.2, backgroundColor: 'white', borderRadius: 25, padding: 20, margin: 15, marginTop: 0, marginBottom: 25}}>
-                    <ScrollView>
-                        <Text style={{textAlign: 'justify'}}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut accumsan,
-                            turpis id luctus vestibulum, neque ex tempor sapien, sit amet molestie eros neque quis arcu.
-                            Sed fringilla vulputate justo, eu ornare erat euismod vel. Nam tincidunt quam lectus,
-                            nec bibendum nisi ornare ac. Etiam at blandit tellus. Vestibulum condimentum orci est,
-                            sed vestibulum odio consectetur ut. Proin commodo magna ac maximus tempus. Donec vel
-                            pellentesque nisi. Donec et velit venenatis, gravida orci nec, laoreet est. Pellentesque
-                            vel justo semper, tempus dolor vel, pellentesque lectus. Sed consequat pulvinar urna eget
-                            condimentum. Donec finibus ullamcorper ex, et vehicula tellus. Nullam imperdiet, est vel
-                            molestie fringilla, ante leo hendrerit odio, vitae vestibulum nunc leo vel mi. In tincidunt
-                            ultricies tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-                            cubilia curae; Phasellus vitae neque eget lectus tincidunt vestibulum.
-                        </Text>
-                    </ScrollView>
-                </View>
-                <View style={{flex: 2,}}>
+                <View style={{flex: 3,}}>
                     <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('DailyTracking', {
                         userId: this.state.userId,
                         fullName: this.state.fullName,
