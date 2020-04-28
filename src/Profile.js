@@ -31,6 +31,8 @@ class Profile extends Component {
             isHeightAlertVisible: false,
             isWeightAlertVisible: false,
             isFirstPeriodAlertVisible: false,
+            isDeleteAlertVisible: false,
+            password: " ",
         }
     }
 
@@ -90,7 +92,48 @@ class Profile extends Component {
     }
 
     updateDetails = () =>{
-        console.log(this.state.fullName)
+        const data= {
+            "userId": this.state.userId,
+            "dob": this.state.dateOfBirth,
+            "height": this.state.height,
+            "weight": this.state.weight,
+            "ageAtFirstPeriod": this.state.ageOfFirstPeriod,
+            "maritalStatus": this.state.maritalStatus,
+            "breastFeeding": this.state.breastFeeding,
+            "alcohol": this.state.alcohol,
+            "smoking": this.state.smoking,
+            "menstrualCycle": this.state.menstrualCycle,
+            "breastCancerHistory": this.state.breastCancerHistory
+        }
+        axios.post('http://10.0.2.2:8000/api/track/', data)
+            .then((response)=>{
+                console.log(response)
+                this.props.navigation.navigate("HomeScreen",{userId: this.state.userId})
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+    }
+
+    deleteAccount=()=>{
+        console.log("Deleting")
+        console.log(this.state.password)
+        console.log(ths.state.email)
+        axios.delete('http://10.0.2.2:8000/api/users/remove', {data: {"email":this.state.email, "password": this.state.password}})
+            .then((response)=>{
+                console.log(response.data)
+                console.log(JSON.stringify(reponse.data))
+                if(JSON.stringify(response.data)==='{"error":"Invalid password, please re-check your password"}'){
+                    alert("Invalid password: Please enter the correct password to delete your account!")
+                }else{
+                    console.log("I am gone")
+                    alert("Account Deleted Successfully")
+                    this.props.navigation.navigate("FrontPage")
+                }
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
     }
 
     render() {
@@ -142,12 +185,12 @@ class Profile extends Component {
                                 <Text style={{fontSize: 18, fontWeight: 'bold'}}>Date Of Birth</Text>
                             </View>
                             <View style={{flex: 1.75, justifyContent: 'center'}}>
-                                <Text style={{fontSize: 18}}>{this.state.dateOfBirth}</Text>
+                                <Text style={{fontSize: 18}}>{this.state.dateOfBirth.substr(0,10)}</Text>
                             </View>
                             <View style={{flex: 0.5, justifyContent: 'center'}}>
-                                <TouchableOpacity>
+                                {/*<TouchableOpacity>
                                     <Image source={editIcon} style={{height: 20, width: 20}} />
-                                </TouchableOpacity>
+                                </TouchableOpacity>*/}
                             </View>
                         </View>
                         <View style={{flexDirection: 'row', marginTop: 20}}>
@@ -263,7 +306,7 @@ class Profile extends Component {
                         </View>
                         <View style={{flexDirection: 'row', marginTop: 0}}>
                             <View style={{flex: 2.75, justifyContent: 'center'}}>
-                                <Text style={{fontSize: 18, fontWeight: 'bold'}}>Alcoholic</Text>
+                                <Text style={{fontSize: 18, fontWeight: 'bold'}}>Alcohol Consumer</Text>
                             </View>
                             <View style={{flex: 1.75, justifyContent: 'center'}}>
                                 <Text style={{fontSize: 18}}>{this.getYesOrNo(this.state.alcohol)}</Text>
@@ -348,9 +391,27 @@ class Profile extends Component {
                         <TouchableOpacity style={styles.button} onPress={() => this.updateDetails()}>
                             <Text style={styles.buttonText}>Save or Return Home</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={()=>{this.setState({isDeleteAlertVisible:true})}}>
                             <Text style={styles.buttonText}>Delete Account</Text>
                         </TouchableOpacity>
+                        <DialogInput
+                            isDialogVisible={this.state.isDeleteAlertVisible}
+                            title={"Confirm Deletion"}
+                            message={"Enter your password"}
+                            hintInput ={"Enter here"}
+                            //textInputProps={{keyboardType: 'numeric'}}
+                            submitInput={ (inputText) => {
+                                console.log(inputText)
+                                this.setState({
+                                password: inputText,
+                                isDeleteAlertVisible: false
+                                },
+                                    ()=>{this.deleteAccount()}
+                            )
+                            }}
+                            closeDialog={ () =>this.setState({isDeleteAlertVisible:false})}
+                        >
+                        </DialogInput>
                     </View>
                 </View>
             </View>
