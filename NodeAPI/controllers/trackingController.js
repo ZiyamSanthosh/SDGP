@@ -146,7 +146,8 @@ exports.index = async function (req, res) {    // function for getting the avera
             });
 
             return res.send({
-                result: predictionRange(response.data)
+                result: predictionRange(response.data),
+                date : day
             });
         })
         .catch((error) => {
