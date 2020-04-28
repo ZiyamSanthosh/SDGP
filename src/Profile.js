@@ -118,11 +118,11 @@ class Profile extends Component {
     deleteAccount=()=>{
         console.log("Deleting")
         console.log(this.state.password)
-        console.log(ths.state.email)
+        console.log(this.state.email)
         axios.delete('http://10.0.2.2:8000/api/users/remove', {data: {"email":this.state.email, "password": this.state.password}})
             .then((response)=>{
                 console.log(response.data)
-                console.log(JSON.stringify(reponse.data))
+                console.log(JSON.stringify(response.data))
                 if(JSON.stringify(response.data)==='{"error":"Invalid password, please re-check your password"}'){
                     alert("Invalid password: Please enter the correct password to delete your account!")
                 }else{
@@ -155,14 +155,35 @@ class Profile extends Component {
                     </View>*/}
                     <View style={{flex: 1.2, backgroundColor: 'white', margin: 20, borderRadius: 25, padding: 15, justifyContent: 'center'}}>
                         <View style={{flexDirection: 'row'}}>
-                            <View style={{flex: 1.5, justifyContent: 'center'}}>
+                            <View style={{flex: 1.3, justifyContent: 'center'}}>
                                 <Image source={userIcon2} style={{height: 70, width: 70}} />
                             </View>
-                            <View style={{ flex: 3.8, justifyContent: 'center'}}>
-                                <Text style={{fontSize: 25, fontWeight: 'bold'}}>{this.state.fullName}</Text>
-                                <Text style={{fontSize: 15}}>{this.state.email}</Text>
+                            <View style={{ flex: 4, justifyContent: 'center'}}>
+                                <View style={{flexDirection: 'row'}}>
+                                    <View style={{flex:2.4}}>
+                                        <Text style={{fontSize: 25, fontWeight: 'bold'}}>{this.state.fullName}</Text>
+                                    </View>
+                                    <View style={{flex: 0.6, alignItems: 'center', justifyContent: 'center'}}>
+                                        <TouchableOpacity onPress={()=>this.setState({isNameAlertVisible: true})}>
+                                            <Image source={editIcon} style={{height: 20, width: 20}}/>
+                                        </TouchableOpacity>
+                                        <DialogInput
+                                            isDialogVisible={this.state.isNameAlertVisible}
+                                            title={"Edit Full Name"}
+                                            //message={"Enter here"}
+                                            hintInput={"Enter here"}
+                                            submitInput={(inputText)=>{this.setState({fullName: inputText, isNameAlertVisible:false})}}
+                                            closeDialog={()=>this.setState({isNameAlertVisible:false})}
+                                            >
+
+                                        </DialogInput>
+                                    </View>
+                                </View>
+                                <View>
+                                    <Text style={{fontSize: 15}}>{this.state.email}</Text>
+                                </View>
                             </View>
-                            <View style={{flex: 0.7, justifyContent: 'center',}}>
+                            {/*<View style={{flex: 0.7, justifyContent: 'center',}}>
                                 <TouchableOpacity onPress={() => this.setState({isNameAlertVisible: true})}>
                                     <Image source={editIcon} style={{height: 20, width: 20}} />
                                 </TouchableOpacity>
@@ -175,7 +196,7 @@ class Profile extends Component {
                                     closeDialog={ () =>this.setState({isNameAlertVisible:false})}
                                 >
                                 </DialogInput>
-                            </View>
+                            </View>*/}
                         </View>
                     </View>
                     <View style={{flex: 6.2, backgroundColor: 'white', margin: 20, marginTop: 0, borderRadius: 25, padding: 20}}>
