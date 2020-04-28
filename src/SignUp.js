@@ -96,11 +96,6 @@ class SignUp extends Component {
         return(
             <View style={styles.mainView}>
                 <Text style={styles.title}>Sign Up</Text>
-                <Text>fullName: {this.state.fullName}</Text>
-                <Text>email: {this.state.email}</Text>
-                <Text>password: {this.state.password}</Text>
-                <Text>confirmPassword: {this.state.confirmPassword}</Text>
-                <Text>userId: {this.state.userId}</Text>
                 <TextInput
                     style={styles.textBox}
                     placeholder = "Full name"
