@@ -22,10 +22,10 @@ exports.new = async function (req, res) {      //  function for updating daily t
 
 
 
-    if (!req.body.weight) { console.log("weight is null"); weight = userDetails.Weight; }
+    if (!req.body.weight) { console.log("weight is null"); weight = userDetails.Weight; }   // if weight is null replace it with the last entered value
     else { weight = Number(req.body.weight); userDetails.Weight = weight}
 
-    if (!req.body.height) { console.log("height is null"); height = userDetails.Height; }
+    if (!req.body.height) { console.log("height is null"); height = userDetails.Height; }  // if height is null replace it with the last entered value
     else { height = Number(req.body.height); userDetails.Height = height}
 
     
@@ -55,6 +55,7 @@ exports.new = async function (req, res) {      //  function for updating daily t
            // console.log(last);
            // console.log(last._id);
 
+           // if user enters data several times a day the database will record only the last entered data
             var day = new Date();
             if (last._id.getTimestamp().getDate() + "-" + last._id.getTimestamp().getMonth() + "-" + last._id.getTimestamp().getFullYear() === day.getDate() + "-" + day.getMonth() + "-" + day.getFullYear()) {
                 console.log("same day");
@@ -66,32 +67,32 @@ exports.new = async function (req, res) {      //  function for updating daily t
             }
 
 
-            if (!req.body.dob) { console.log("age is null"); Track.Age = last.Age; }
+            if (!req.body.dob) { console.log("age is null"); Track.Age = last.Age; }  // if age is null replace it with the last entered value
             else { Track.Age = age(req.body.dob); userDetails.DOB = req.body.dob}
 
-            if (!req.body.maritalStatus) { console.log("marital is null"); Track.Marital_Status = last.Marital_Status; }
+            if (!req.body.maritalStatus) { console.log("marital is null"); Track.Marital_Status = last.Marital_Status; }  // if marital state is null replace it with the last entered value
             else { Track.Marital_Status = Number(req.body.maritalStatus); }
 
-            if (!req.body.breastCancerHistory) { console.log("medicalHistory is null"); Track.Breast_Cancer_History = last.Breast_Cancer_History; }
+            if (!req.body.breastCancerHistory) { console.log("medicalHistory is null"); Track.Breast_Cancer_History = last.Breast_Cancer_History; } // if breastCancerHistory is null replace it with the last entered value
             else { Track.Breast_Cancer_History = Number(req.body.breastCancerHistory); }
 
-            if (!req.body.breastFeeding) { console.log("breasfeed is null"); Track.BreastFeeding = last.BreastFeeding; }
+            if (!req.body.breastFeeding) { console.log("breasfeed is null"); Track.BreastFeeding = last.BreastFeeding; }  // if breast feeding is null replace it with the last entered value
             else { Track.BreastFeeding = Number(req.body.breastFeeding); }
 
-            if (!req.body.ageAtFirstPeriod) { console.log("firstperiod is null"); Track.Age_at_first_period = last.Age_at_first_period; }
+            if (!req.body.ageAtFirstPeriod) { console.log("firstperiod is null"); Track.Age_at_first_period = last.Age_at_first_period; }  // if ageAtFirstPeriod is null replace it with the last entered value
             else { Track.Age_at_first_period = Number(req.body.ageAtFirstPeriod); }
 
-            if (!req.body.menstrualCycle) { console.log("menopause is null"); Track.Menstrual_Cycle = last.Menstrual_Cycle; }
+            if (!req.body.menstrualCycle) { console.log("menopause is null"); Track.Menstrual_Cycle = last.Menstrual_Cycle; }  // if menopause is null replace it with the last entered value
             else { Track.Menstrual_Cycle = Number(req.body.menstrualCycle); }
 
-            if (!req.body.smoking) { console.log("smoking is null"); Track.Smoking = last.Smoking; }
+            if (!req.body.smoking) { console.log("smoking is null"); Track.Smoking = last.Smoking; }   // if smoking is null replace it with the last entered value
             else { Track.Smoking = Number(req.body.smoking); }
 
-            if (!req.body.alcohol) { console.log("alcohol is null"); Track.Alcohol = last.Alcohol; }
+            if (!req.body.alcohol) { console.log("alcohol is null"); Track.Alcohol = last.Alcohol; } // if alcohol is null replace it with the last entered value
             else { Track.Alcohol = Number(req.body.alcohol); }
 
             // save the contact and check for errors
-            Track.save(function (err) {
+            Track.save(function (err) {     
                 // Check for validation error
                 if (err)
                     res.json(err);
@@ -113,11 +114,7 @@ exports.new = async function (req, res) {      //  function for updating daily t
             throw err;
         }
     });
-    // }
-    // else {
-    //     throw error;
-    // }
-    // });
+
 };
 
 exports.index = async function (req, res) {    // function for getting the average prediction for current date
@@ -182,7 +179,8 @@ exports.call = function (req, res) {     // function for generating report
                 if (!err) {
                     des = docs;
 
-                    //  console.log(des);
+                    //  this method shows the user one artical randomly chosed related to the user
+                    // we use critical points which we got from the data science model to generate articals 
 
                     var Artical = [];
 
@@ -361,17 +359,16 @@ const getTrackingModel = async (id) => {   // helping function for index functio
 
     var last = userData[userData.length - 1];
 
-    var avgBMI = 0;
+    // we use the average value of smoking and alcohol consumptions
+
     var avgAlcohol = 0;
     var avgSmoking = 0;
 
-    for (let y = 0; y <= userData.length - 1; y++) {
-        avgBMI += userData[y].BMI;
+    for (let y = 0; y <= userData.length - 1; y++) { 
         avgAlcohol += userData[y].Alcohol;
         avgSmoking += userData[y].Smoking;
     }
 
-    avgBMI = avgBMI / userData.length;
     avgAlcohol = avgAlcohol / userData.length;
     avgSmoking = avgSmoking / userData.length;
 
@@ -387,11 +384,10 @@ const getTrackingModel = async (id) => {   // helping function for index functio
     else {
         avgSmoking = 0;
     }
-    
 
-    let predictData = {
+    let predictData = {     // these are the data we send to the data science model for getting the prediction
         Age: last.Age,
-        BMI: avgBMI,
+        BMI: last.BMI,
         Breast_Feeding: last.BreastFeeding,
         Marital_Status: last.Marital_Status,
         Alcohol: avgAlcohol,
@@ -425,13 +421,12 @@ function predictionRange(doc) {    // helping function for index function
     }
     return status;
 }
-// age calculate function
+
+// age calculate functions from getting the date of birth
 function getYears(x) {
     return Math.floor(x / 1000 / 60 / 60 / 24 / 365);
 }
-
 function age(doc) {
-    //  console.log(doc);
     let n = Date.now();
     let d = new Date(doc);
     doc = getYears(n - d);
