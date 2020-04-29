@@ -84,6 +84,7 @@ exports.postInitialDetails = function (req, res) {
         Prediction: response.data,
       });
 
+      //Sending the initial Prediction to avgPrediction collection in the database
       let avgPrediction = new AveragePrediction();
       var today = new Date();
       var day = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + (today.getDate());
@@ -108,14 +109,17 @@ exports.postInitialDetails = function (req, res) {
       Track.Age_at_first_period = req.body.ageAtFirstPeriod;
       Track.Menstrual_Cycle = menstrualCycle(req.body.menstrualCycle);
 
+      //Sending the UserID, Date of Birth, Height, Weight to the userDetail Collection in the DB
       var userDetails = new UserDetail();
       userDetails.UserID = req.body.userId;
       userDetails.DOB = req.body.dob;
       userDetails.Height=req.body.height;
       userDetails.Weight =req.body.weight;
 
-      console.log(userDetails);
+      //Debugging Purposes using console log
+      //console.log(userDetails);
 
+      //Saving to the database collections 
       const savedPost = post.save().catch((err) => {
         return res.status(400).json({ message: err });
       });
