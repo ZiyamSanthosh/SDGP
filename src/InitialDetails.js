@@ -271,13 +271,13 @@ function GatherInfo({navigation, route}) {
     DialogProgress.hide()
     const {fullName, email, password, userId} = route.params
     return (
-        <View style={styles.mainView}>
+        /*<View style={styles.mainView}>
             <Text>{userId}</Text>
             <Text style={styles.title}>Hello {fullName}</Text>
-            {/*<Text>{fullName}</Text>
+            {/!*<Text>{fullName}</Text>
             <Text>{email}</Text>
             <Text>{password}</Text>
-            <Text>{confirmPassword}</Text>*/}
+            <Text>{confirmPassword}</Text>*!/}
             <Image source={infoIcon2} style={styles.infoIcon}/>
             <Text style={styles.subTitle}>Let's begin with some information gathering!</Text>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Question 1', {
@@ -288,6 +288,52 @@ function GatherInfo({navigation, route}) {
             })}>
                 <Text style={styles.buttonText} >Get Started</Text>
             </TouchableOpacity>
+        </View>*/
+        <View style={{flex: 1, backgroundColor: '#e0dede'}}>
+            <View style={{flex:1.2, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Initial Tracking</Text>
+            </View>
+            <View style={{flex: 14, padding: 20}}>
+                <View style={{flex: 1.3, backgroundColor: 'white', borderRadius: 25, padding: 20, marginBottom: 20}}>
+                    <Text style={{fontSize: 25, fontWeight: 'bold'}}>Hello,</Text>
+                    <Text style={{fontSize: 30, fontWeight: 'bold'}}>{fullName}!</Text>
+                </View>
+                <View style={{flex: 6.7, backgroundColor: 'white', borderRadius: 25, padding: 20}}>
+                    <View style={{flexDirection: 'row'}}>
+                        <View style={{marginRight: 10}}>
+                            <Image source={infoIcon2} style={{height: 100, width: 100}} />
+                        </View>
+                        <View style={{justifyContent: 'center'}}>
+                            <Text style={{fontSize: 25, fontWeight: 'bold'}}>Information</Text>
+                            <Text style={{fontSize: 25, fontWeight: 'bold'}}>Gathering</Text>
+                        </View>
+                    </View>
+                    <View style={{backgroundColor: "#e0dede", marginTop: 20, borderRadius: 25, padding: 15}}>
+                        <Text>
+                            Breast cancer
+                        </Text>
+                    </View>
+                </View>
+                <View style={{flex: 2, justifyContent: 'center'}}>
+                    <TouchableOpacity style={{
+                        alignItems: 'center',
+                        backgroundColor: '#ED3030',
+                        padding: 10,
+                        marginBottom: 10,
+                        width: 370,
+                        borderRadius: 25,
+                        alignSelf: 'center',
+                        marginTop: 20
+                    }} onPress={() => navigation.navigate('Question 1', {
+                        fullName: fullName,
+                        email: email,
+                        password: password,
+                        userId: userId,
+                    })}>
+                        <Text style={styles.buttonText} >Get Started</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </View>
     );
 }
