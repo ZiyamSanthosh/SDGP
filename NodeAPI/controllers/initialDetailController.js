@@ -57,7 +57,7 @@ exports.postInitialDetails = function (req, res) {
     Smoking: yesNoConversion(req.body.smoking),
     Breast_Cancer_History: yesNoConversion(req.body.breastCancerHistory),
     Age_at_first_period: req.body.ageAtFirstPeriod,
-    Menstrual_Cycle: menstrualCycle(req.body.menstrualCycle),
+    Menstrual_Cycle: yesNoConversion(req.body.menstrualCycle),
   };
 
 
@@ -80,7 +80,7 @@ exports.postInitialDetails = function (req, res) {
         Smoking: yesNoConversion(req.body.smoking),
         Breast_Cancer_History: yesNoConversion(req.body.breastCancerHistory),
         Age_at_first_period: req.body.ageAtFirstPeriod,
-        Menstrual_Cycle: menstrualCycle(req.body.menstrualCycle),
+        Menstrual_Cycle: yesNoConversion(req.body.menstrualCycle),
         Prediction: response.data,
       });
 
@@ -107,7 +107,7 @@ exports.postInitialDetails = function (req, res) {
       Track.Alcohol = yesNoConversion(req.body.alcohol);
       Track.BreastFeeding = yesNoConversion(req.body.breastFeeding);
       Track.Age_at_first_period = req.body.ageAtFirstPeriod;
-      Track.Menstrual_Cycle = menstrualCycle(req.body.menstrualCycle);
+      Track.Menstrual_Cycle = yesNoConversion(req.body.menstrualCycle);
 
       //Sending the UserID, Date of Birth, Height, Weight to the userDetail Collection in the DB
       var userDetails = new UserDetail();
@@ -175,7 +175,7 @@ exports.updateInitialDetails = async function (req, res) {
       Smoking: yesNoConversion(req.body.smoking),
       Breast_Cancer_History: yesNoConversion(req.body.breastCancerHistory),
       Age_at_first_period: req.body.ageAtFirstPeriod,
-      Menstrual_Cycle: menstrualCycle(req.body.menstrualCycle),
+      Menstrual_Cycle: yesNoConversion(req.body.menstrualCycle),
     };
 
     //Getting updated prediction values for updated details
@@ -196,7 +196,7 @@ exports.updateInitialDetails = async function (req, res) {
             req.body.breastCancerHistory
           ),
           Age_at_first_period: req.body.ageAtFirstPeriod,
-          Menstrual_Cycle: menstrualCycle(req.body.menstrualCycle),
+          Menstrual_Cycle: yesNoConversion(req.body.menstrualCycle),
           Prediction: response.data
         }, { upsert: true, useFindAndModify: false }, function (err, doc) {
           if (err) {
@@ -251,20 +251,20 @@ function yesNoConversion(doc) {
 }
 
 //Function for conversion of HAS-CYCLE - NO-CYCLE inputs
-function menstrualCycle(doc) {
-  if (doc.toString().toLowerCase() === "hascycle") {
-    doc = 1;
-  } else {
-    doc = 0;
-  }
-  return doc;
-}
+// function menstrualCycle(doc) {
+//   if (doc.toString().toLowerCase() === "yes") {
+//     doc = 1;
+//   } else {
+//     doc = 0;
+//   }
+//   return doc;
+// }
 
 //Function for conversion of MARRIED-TOGETHER-SINGLE inputs
 function maritalStatus(doc) {
   if (doc.toString().toLowerCase() === "married") {
     doc = 1;
-  } else if (doc.toString().toLowerCase() === "together") {
+  } else if (doc.toString().toLowerCase() === "living together") {
     doc = 2;
   } else {
     doc = 3;
