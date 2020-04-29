@@ -129,6 +129,7 @@ import AboutUs from './src/AboutUs';
 import ResultsPage from './src/ResultsPage';
 import Profile from './src/Profile';
 import DailyTracking from "./src/DailyTracking";
+import ViewAllPredictions from "./src/ViewAllPredictions";
 
 /*class Main extends Component {
 
@@ -195,6 +196,11 @@ function app() {
                 <stack.Screen
                     name="DailyTracking"
                     component={DailyTracking}
+                    options={{headerShown: false}}
+                />
+                <stack.Screen
+                    name="ViewAllPredictions"
+                    component={ViewAllPredictions}
                     options={{headerShown: false}}
                 />
             </stack.Navigator>

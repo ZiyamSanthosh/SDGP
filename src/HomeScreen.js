@@ -167,7 +167,9 @@ class HomeScreen extends Component {
                     })}}>
                         <Text style={styles.buttonText}>Update Today's Activity</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('ViewAllPredictions', {
+                        userId: this.state.userId
+                    })}}>
                         <Text style={styles.buttonText}>View Previous Results</Text>
                     </TouchableOpacity>
                 </View>
