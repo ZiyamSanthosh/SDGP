@@ -32,11 +32,15 @@ class HomeScreen extends Component {
             menstrualCycle: null,
             breastCancerHistory: null,
             lastPredictedDate: null,
-            lastPrediction: null
+            lastPrediction: null,
         }
     }
 
     componentDidMount() {
+        this.initialDataRouting()
+    }
+
+    initialDataRouting = () => {
         axios.get("http://10.0.2.2:8000/api/users/"+this.state.userId)
             .then((response) => {
                 console.log(response.data)

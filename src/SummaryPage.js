@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput, ScrollView} from 'react-native';
 import style from 'react-native-datepicker/style';
 import axios from 'axios';
 
@@ -64,38 +64,85 @@ class SummaryPage extends Component {
 
     render () {
         return(
-            <View style={{backgroundColor: 'white', flex:1, justifyContent: 'center', padding: 15}}>
-                <Text style={styles.summaryTitle}>Summary</Text>
-                <Text>{this.state.userId}</Text>
-                <View style={{flexDirection: 'row', alignSelf: 'center', padding: 10}}>
-                    <View>
-                        <Text style={styles.finalPageText1}>Date Of Birth</Text>
-                        <Text style={styles.finalPageText1}>Height</Text>
-                        <Text style={styles.finalPageText1}>Weight</Text>
-                        <Text style={styles.finalPageText1}>Age Of First Period</Text>
-                        <Text style={styles.finalPageText1}>Marital Status</Text>
-                        <Text style={styles.finalPageText1}>Breast Feeding</Text>
-                        <Text style={styles.finalPageText1}>Alcohol</Text>
-                        <Text style={styles.finalPageText1}>Smoking</Text>
-                        <Text style={styles.finalPageText1}>Menstrual Cycle</Text>
-                        <Text style={styles.finalPageText1}>Breast Cancer History</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.finalPageText2}>{this.state.dateOfBirth.toLocaleDateString()}</Text>
-                        <Text style={styles.finalPageText2}>{this.state.height}m</Text>
-                        <Text style={styles.finalPageText2}>{this.state.weight}kg</Text>
-                        <Text style={styles.finalPageText2}>{this.state.ageOfFirstPeriod} years</Text>
-                        <Text style={styles.finalPageText2}>{this.state.maritalStatus}</Text>
-                        <Text style={styles.finalPageText2}>{this.state.breastFeeding}</Text>
-                        <Text style={styles.finalPageText2}>{this.state.alcohol}</Text>
-                        <Text style={styles.finalPageText2}>{this.state.smoking}</Text>
-                        <Text style={styles.finalPageText2}>{this.state.menstrualCycle}</Text>
-                        <Text style={styles.finalPageText2}>{this.state.breastCancerHistory}</Text>
-                    </View>
+            <View style={{backgroundColor: '#e0dede', flex:1, justifyContent: 'center'}}>
+                <View style={{flex:1.2, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>Summary</Text>
                 </View>
-                <TouchableOpacity style={styles.predictButton} onPress={() => this.startPrediction()}>
-                    <Text style={styles.buttonText}>Start Prediction</Text>
-                </TouchableOpacity>
+                <View style={{flex:14, justifyContent: 'center', padding: 20}}>
+                    {/*<View style={{flexDirection: 'row', alignSelf: 'center', padding: 20, marginTop: 20, backgroundColor: 'white', borderRadius: 25}}>
+                        <View>
+                            <Text style={styles.finalPageText1}>Date Of Birth</Text>
+                            <Text style={styles.finalPageText1}>Height</Text>
+                            <Text style={styles.finalPageText1}>Weight</Text>
+                            <Text style={styles.finalPageText1}>Age Of First Period</Text>
+                            <Text style={styles.finalPageText1}>Marital Status</Text>
+                            <Text style={styles.finalPageText1}>Breast Feeding</Text>
+                            <Text style={styles.finalPageText1}>Alcohol</Text>
+                            <Text style={styles.finalPageText1}>Smoking</Text>
+                            <Text style={styles.finalPageText1}>Menstrual Cycle</Text>
+                            <Text style={styles.finalPageText1}>Breast Cancer History</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.finalPageText2}>{this.state.dateOfBirth.toLocaleDateString()}</Text>
+                            <Text style={styles.finalPageText2}>{this.state.height}m</Text>
+                            <Text style={styles.finalPageText2}>{this.state.weight}kg</Text>
+                            <Text style={styles.finalPageText2}>{this.state.ageOfFirstPeriod} years</Text>
+                            <Text style={styles.finalPageText2}>{this.state.maritalStatus}</Text>
+                            <Text style={styles.finalPageText2}>{this.state.breastFeeding}</Text>
+                            <Text style={styles.finalPageText2}>{this.state.alcohol}</Text>
+                            <Text style={styles.finalPageText2}>{this.state.smoking}</Text>
+                            <Text style={styles.finalPageText2}>{this.state.menstrualCycle}</Text>
+                            <Text style={styles.finalPageText2}>{this.state.breastCancerHistory}</Text>
+                        </View>
+                    </View>*/}
+                    <ScrollView>
+                        <View style={{backgroundColor: 'white', flex: 1, borderRadius: 25, padding: 15}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>What is your Date of Birth?</Text>
+                            <Text style={{fontSize: 18, marginTop: 5}}>{this.state.dateOfBirth.toDateString()}</Text>
+                        </View>
+                        <View style={{backgroundColor: 'white', flex: 1, borderRadius: 25, padding: 15, marginTop: 15}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>What is your Height?</Text>
+                            <Text style={{fontSize: 18, marginTop: 5}}>{this.state.height} meters</Text>
+                        </View>
+                        <View style={{backgroundColor: 'white', flex: 1, borderRadius: 25, padding: 15, marginTop: 15}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>What is your Weight?</Text>
+                            <Text style={{fontSize: 18, marginTop: 5}}>{this.state.weight} kilograms</Text>
+                        </View>
+                        <View style={{backgroundColor: 'white', flex: 1, borderRadius: 25, padding: 15, marginTop: 15}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>What is your Age at First Period?</Text>
+                            <Text style={{fontSize: 18, marginTop: 5}}>{this.state.ageOfFirstPeriod} years</Text>
+                        </View>
+                        <View style={{backgroundColor: 'white', flex: 1, borderRadius: 25, padding: 15, marginTop: 15}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>What is your Marital Status?</Text>
+                            <Text style={{fontSize: 18, marginTop: 5}}>{this.state.maritalStatus}</Text>
+                        </View>
+                        <View style={{backgroundColor: 'white', flex: 1, borderRadius: 25, padding: 15, marginTop: 15}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Have you ever done Breast Feeding?</Text>
+                            <Text style={{fontSize: 18, marginTop: 5}}>{this.state.breastFeeding}</Text>
+                        </View>
+                        <View style={{backgroundColor: 'white', flex: 1, borderRadius: 25, padding: 15, marginTop: 15}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Are you an Alcoholic?</Text>
+                            <Text style={{fontSize: 18, marginTop: 5}}>{this.state.alcohol}</Text>
+                        </View>
+                        <View style={{backgroundColor: 'white', flex: 1, borderRadius: 25, padding: 15, marginTop: 15}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Do you Smoke?</Text>
+                            <Text style={{fontSize: 18, marginTop: 5}}>{this.state.smoking}</Text>
+                        </View>
+                        <View style={{backgroundColor: 'white', flex: 1, borderRadius: 25, padding: 15, marginTop: 15}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Do you have a Menstrual Cycle?</Text>
+                            <Text style={{fontSize: 18, marginTop: 5}}>{this.state.menstrualCycle}</Text>
+                        </View>
+                        <View style={{backgroundColor: 'white', flex: 1, borderRadius: 25, padding: 15, marginTop: 15}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Is there any close relation of yours had breast cancer history?</Text>
+                            <Text style={{fontSize: 18, marginTop: 5}}>{this.state.breastCancerHistory}</Text>
+                        </View>
+                    </ScrollView>
+                </View>
+                <View style={{flex:2}}>
+                    <TouchableOpacity style={styles.predictButton} onPress={() => this.startPrediction()}>
+                        <Text style={styles.buttonText}>Start Prediction</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
@@ -129,7 +176,7 @@ const styles = StyleSheet.create({
         width: 350,
         borderRadius: 25,
         alignSelf: 'center',
-        marginTop: 50
+        marginTop: 20
     },
     buttonText: {
         fontSize: 20,
