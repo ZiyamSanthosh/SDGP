@@ -310,7 +310,12 @@ function GatherInfo({navigation, route}) {
                     </View>
                     <View style={{backgroundColor: "#e0dede", marginTop: 20, borderRadius: 25, padding: 15}}>
                         <Text>
-                            Breast cancer
+                            Following information is gathered in order to predict the possibility of being diagnosed
+                            with breast cancer. All the data which is gathered will be solely used to calculate the prediction.
+                            As for the research done by professionals it is clear that sensitive details such as consumption of alcohol,
+                            smoking and breast feeding have a direct impact on creating cancer cells,So in this section sensitive data likewise
+                            will be collected from the user to make the prediction more accurate and reliable.
+
                         </Text>
                     </View>
                 </View>
