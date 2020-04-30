@@ -11,6 +11,7 @@ import beAlert from './Images/Ratings/BeAlert.png'
 import atRisk from './Images/Ratings/AtRisk.png'
 import critical from './Images/Ratings/critical.png'
 import axios from 'axios'
+import {useFocusEffect} from '@react-navigation/native';
 
 class HomeScreen extends Component {
     constructor(props) {
@@ -34,10 +35,32 @@ class HomeScreen extends Component {
             lastPredictedDate: null,
             lastPrediction: null,
         }
+        /*useFocusEffect(
+            React.useCallback(() =>{
+                console.log('Screen was focused');
+                return () => {
+                    console.log('Screen was not focused')
+                };
+            }, [])
+        );*/
+        /*React.useEffect(()=> {
+            const fetchData = this.props.navigation.addListener('focus', () => {
+                console.log('Focused')
+            });
+            return fetchData;
+        }, [])*/
     }
 
     componentDidMount() {
         this.initialDataRouting()
+        this.fetchData = this.props.navigation.addListener('focus', () => {
+            console.log('Focused')
+            this.initialDataRouting()
+        });
+    }
+
+    componentWillUnmount() {
+        this.fetchData()
     }
 
     initialDataRouting = () => {
