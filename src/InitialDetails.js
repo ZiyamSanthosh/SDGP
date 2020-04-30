@@ -54,214 +54,214 @@ class InitialDetails extends Component {
     render() {
         return (
             /*<NavigationContainer>*/
-                <stack.Navigator>
-                    <stack.Screen
-                        name="InitialPage"
-                        component={GatherInfo}
-                        options={{headerShown: false,}}
-                        initialParams={{
-                            fullName: this.state.fullName,
-                            email: this.state.email,
-                            password: this.state.password,
-                            userId: this.state.userId
-                        }}
-                    />
-                    <stack.Screen
-                        name="Question 1"
-                        component={Question1}
-                        options={{
-                            title: "1 of 10",
-                            headerStyle: {backgroundColor: '#ED3030'},
-                            headerTintColor: 'white',
-                        }}
-                        initialParams={{
-                            fullName: this.state.fullName,
-                            email: this.state.email,
-                            password: this.state.password,
-                            userId: this.state.userId
-                        }}
-                    />
-                    <stack.Screen
-                        name="Question 2"
-                        component={Question2}
-                        options={{
-                            title: "2 of 10",
-                            headerStyle: {backgroundColor: '#ED3030'},
-                            headerTintColor: 'white',
-                        }}
-                        initialParams={{
-                            fullName: this.state.fullName,
-                            email: this.state.email,
-                            password: this.state.password,
-                            userId: this.state.userId,
-                            dateOfBirth: this.state.dateOfBirth
-                        }}
-                    />
-                    <stack.Screen
-                        name="Question 3"
-                        component={Question3}
-                        options={{
-                            title: "3 of 10",
-                            headerStyle: {backgroundColor: '#ED3030'},
-                            headerTintColor: 'white',
-                        }}
-                        initialParams={{
-                            fullName: this.state.fullName,
-                            email: this.state.email,
-                            password: this.state.password,
-                            userId: this.state.userId,
-                            dateOfBirth: this.state.dateOfBirth,
-                            height: this.state.height
-                        }}
-                    />
-                    <stack.Screen
-                        name="Question 4"
-                        component={Question4}
-                        options={{
-                            title: "4 of 10",
-                            headerStyle: {backgroundColor: '#ED3030'},
-                            headerTintColor: 'white',
-                        }}
-                        initialParams={{
-                            fullName: this.state.fullName,
-                            email: this.state.email,
-                            password: this.state.password,
-                            userId: this.state.userId,
-                            dateOfBirth: this.state.dateOfBirth,
-                            height: this.state.height,
-                            weight: this.state.weight
-                        }}
-                    />
-                    <stack.Screen
-                        name="Question 5"
-                        component={Question5}
-                        options={{
-                            title: "5 of 10",
-                            headerStyle: {backgroundColor: '#ED3030'},
-                            headerTintColor: 'white',
-                        }}
-                        initialParams={{
-                            fullName: this.state.fullName,
-                            email: this.state.email,
-                            password: this.state.password,
-                            userId: this.state.userId,
-                            dateOfBirth: this.state.dateOfBirth,
-                            height: this.state.height,
-                            weight: this.state.weight,
-                            ageOfFirstPeriod: this.state.ageOfFirstPeriod
-                        }}
-                    />
-                    <stack.Screen
-                        name="Question 6"
-                        component={Question6}
-                        options={{
-                            title: "6 of 10",
-                            headerStyle: {backgroundColor: '#ED3030'},
-                            headerTintColor: 'white',
-                        }}
-                        initialParams={{
-                            fullName: this.state.fullName,
-                            email: this.state.email,
-                            password: this.state.password,
-                            userId: this.state.userId,
-                            dateOfBirth: this.state.dateOfBirth,
-                            height: this.state.height,
-                            weight: this.state.weight,
-                            ageOfFirstPeriod: this.state.ageOfFirstPeriod,
-                            maritalStatus: this.state.maritalStatus
-                        }}
-                    />
-                    <stack.Screen
-                        name="Question 7"
-                        component={Question7}
-                        options={{
-                            title: "7 of 10",
-                            headerStyle: {backgroundColor: '#ED3030'},
-                            headerTintColor: 'white',
-                        }}
-                        initialParams={{
-                            fullName: this.state.fullName,
-                            email: this.state.email,
-                            password: this.state.password,
-                            userId: this.state.userId,
-                            dateOfBirth: this.state.dateOfBirth,
-                            height: this.state.height,
-                            weight: this.state.weight,
-                            ageOfFirstPeriod: this.state.ageOfFirstPeriod,
-                            maritalStatus: this.state.maritalStatus,
-                            breastFeeding: this.state.breastFeeding
-                        }}
-                    />
-                    <stack.Screen
-                        name="Question 8"
-                        component={Question8}
-                        options={{
-                            title: "8 of 10",
-                            headerStyle: {backgroundColor: '#ED3030'},
-                            headerTintColor: 'white',
-                        }}
-                        initialParams={{
-                            fullName: this.state.fullName,
-                            email: this.state.email,
-                            password: this.state.password,
-                            userId: this.state.userId,
-                            dateOfBirth: this.state.dateOfBirth,
-                            height: this.state.height,
-                            weight: this.state.weight,
-                            ageOfFirstPeriod: this.state.ageOfFirstPeriod,
-                            maritalStatus: this.state.maritalStatus,
-                            breastFeeding: this.state.breastFeeding,
-                            alcohol: this.state.alcohol,
-                        }}
-                    />
-                    <stack.Screen
-                        name="Question 9"
-                        component={Question9}
-                        options={{
-                            title: "9 of 10",
-                            headerStyle: {backgroundColor: '#ED3030'},
-                            headerTintColor: 'white',
-                        }}
-                        initialParams={{
-                            fullName: this.state.fullName,
-                            email: this.state.email,
-                            password: this.state.password,
-                            userId: this.state.userId,
-                            dateOfBirth: this.state.dateOfBirth,
-                            height: this.state.height,
-                            weight: this.state.weight,
-                            ageOfFirstPeriod: this.state.ageOfFirstPeriod,
-                            maritalStatus: this.state.maritalStatus,
-                            breastFeeding: this.state.breastFeeding,
-                            alcohol: this.state.alcohol,
-                            smoking: this.state.smoking,
-                        }}
-                    />
-                    <stack.Screen
-                        name="Question 10"
-                        component={Question10}
-                        options={{
-                            title: "10 of 10",
-                            headerStyle: {backgroundColor: '#ED3030'},
-                            headerTintColor: 'white',
-                        }}
-                        initialParams={{
-                            fullName: this.state.fullName,
-                            email: this.state.email,
-                            password: this.state.password,
-                            userId: this.state.userId,
-                            dateOfBirth: this.state.dateOfBirth,
-                            height: this.state.height,
-                            weight: this.state.weight,
-                            ageOfFirstPeriod: this.state.ageOfFirstPeriod,
-                            maritalStatus: this.state.maritalStatus,
-                            breastFeeding: this.state.breastFeeding,
-                            alcohol: this.state.alcohol,
-                            smoking: this.state.smoking,
-                            menstrualCycle: this.state.menstrualCycle
-                        }}
-                    />
-                </stack.Navigator>
+            <stack.Navigator>
+                <stack.Screen
+                    name="InitialPage"
+                    component={GatherInfo}
+                    options={{headerShown: false,}}
+                    initialParams={{
+                        fullName: this.state.fullName,
+                        email: this.state.email,
+                        password: this.state.password,
+                        userId: this.state.userId
+                    }}
+                />
+                <stack.Screen
+                    name="Question 1"
+                    component={Question1}
+                    options={{
+                        title: "1 of 10",
+                        headerStyle: {backgroundColor: '#ED3030'},
+                        headerTintColor: 'white',
+                    }}
+                    initialParams={{
+                        fullName: this.state.fullName,
+                        email: this.state.email,
+                        password: this.state.password,
+                        userId: this.state.userId
+                    }}
+                />
+                <stack.Screen
+                    name="Question 2"
+                    component={Question2}
+                    options={{
+                        title: "2 of 10",
+                        headerStyle: {backgroundColor: '#ED3030'},
+                        headerTintColor: 'white',
+                    }}
+                    initialParams={{
+                        fullName: this.state.fullName,
+                        email: this.state.email,
+                        password: this.state.password,
+                        userId: this.state.userId,
+                        dateOfBirth: this.state.dateOfBirth
+                    }}
+                />
+                <stack.Screen
+                    name="Question 3"
+                    component={Question3}
+                    options={{
+                        title: "3 of 10",
+                        headerStyle: {backgroundColor: '#ED3030'},
+                        headerTintColor: 'white',
+                    }}
+                    initialParams={{
+                        fullName: this.state.fullName,
+                        email: this.state.email,
+                        password: this.state.password,
+                        userId: this.state.userId,
+                        dateOfBirth: this.state.dateOfBirth,
+                        height: this.state.height
+                    }}
+                />
+                <stack.Screen
+                    name="Question 4"
+                    component={Question4}
+                    options={{
+                        title: "4 of 10",
+                        headerStyle: {backgroundColor: '#ED3030'},
+                        headerTintColor: 'white',
+                    }}
+                    initialParams={{
+                        fullName: this.state.fullName,
+                        email: this.state.email,
+                        password: this.state.password,
+                        userId: this.state.userId,
+                        dateOfBirth: this.state.dateOfBirth,
+                        height: this.state.height,
+                        weight: this.state.weight
+                    }}
+                />
+                <stack.Screen
+                    name="Question 5"
+                    component={Question5}
+                    options={{
+                        title: "5 of 10",
+                        headerStyle: {backgroundColor: '#ED3030'},
+                        headerTintColor: 'white',
+                    }}
+                    initialParams={{
+                        fullName: this.state.fullName,
+                        email: this.state.email,
+                        password: this.state.password,
+                        userId: this.state.userId,
+                        dateOfBirth: this.state.dateOfBirth,
+                        height: this.state.height,
+                        weight: this.state.weight,
+                        ageOfFirstPeriod: this.state.ageOfFirstPeriod
+                    }}
+                />
+                <stack.Screen
+                    name="Question 6"
+                    component={Question6}
+                    options={{
+                        title: "6 of 10",
+                        headerStyle: {backgroundColor: '#ED3030'},
+                        headerTintColor: 'white',
+                    }}
+                    initialParams={{
+                        fullName: this.state.fullName,
+                        email: this.state.email,
+                        password: this.state.password,
+                        userId: this.state.userId,
+                        dateOfBirth: this.state.dateOfBirth,
+                        height: this.state.height,
+                        weight: this.state.weight,
+                        ageOfFirstPeriod: this.state.ageOfFirstPeriod,
+                        maritalStatus: this.state.maritalStatus
+                    }}
+                />
+                <stack.Screen
+                    name="Question 7"
+                    component={Question7}
+                    options={{
+                        title: "7 of 10",
+                        headerStyle: {backgroundColor: '#ED3030'},
+                        headerTintColor: 'white',
+                    }}
+                    initialParams={{
+                        fullName: this.state.fullName,
+                        email: this.state.email,
+                        password: this.state.password,
+                        userId: this.state.userId,
+                        dateOfBirth: this.state.dateOfBirth,
+                        height: this.state.height,
+                        weight: this.state.weight,
+                        ageOfFirstPeriod: this.state.ageOfFirstPeriod,
+                        maritalStatus: this.state.maritalStatus,
+                        breastFeeding: this.state.breastFeeding
+                    }}
+                />
+                <stack.Screen
+                    name="Question 8"
+                    component={Question8}
+                    options={{
+                        title: "8 of 10",
+                        headerStyle: {backgroundColor: '#ED3030'},
+                        headerTintColor: 'white',
+                    }}
+                    initialParams={{
+                        fullName: this.state.fullName,
+                        email: this.state.email,
+                        password: this.state.password,
+                        userId: this.state.userId,
+                        dateOfBirth: this.state.dateOfBirth,
+                        height: this.state.height,
+                        weight: this.state.weight,
+                        ageOfFirstPeriod: this.state.ageOfFirstPeriod,
+                        maritalStatus: this.state.maritalStatus,
+                        breastFeeding: this.state.breastFeeding,
+                        alcohol: this.state.alcohol,
+                    }}
+                />
+                <stack.Screen
+                    name="Question 9"
+                    component={Question9}
+                    options={{
+                        title: "9 of 10",
+                        headerStyle: {backgroundColor: '#ED3030'},
+                        headerTintColor: 'white',
+                    }}
+                    initialParams={{
+                        fullName: this.state.fullName,
+                        email: this.state.email,
+                        password: this.state.password,
+                        userId: this.state.userId,
+                        dateOfBirth: this.state.dateOfBirth,
+                        height: this.state.height,
+                        weight: this.state.weight,
+                        ageOfFirstPeriod: this.state.ageOfFirstPeriod,
+                        maritalStatus: this.state.maritalStatus,
+                        breastFeeding: this.state.breastFeeding,
+                        alcohol: this.state.alcohol,
+                        smoking: this.state.smoking,
+                    }}
+                />
+                <stack.Screen
+                    name="Question 10"
+                    component={Question10}
+                    options={{
+                        title: "10 of 10",
+                        headerStyle: {backgroundColor: '#ED3030'},
+                        headerTintColor: 'white',
+                    }}
+                    initialParams={{
+                        fullName: this.state.fullName,
+                        email: this.state.email,
+                        password: this.state.password,
+                        userId: this.state.userId,
+                        dateOfBirth: this.state.dateOfBirth,
+                        height: this.state.height,
+                        weight: this.state.weight,
+                        ageOfFirstPeriod: this.state.ageOfFirstPeriod,
+                        maritalStatus: this.state.maritalStatus,
+                        breastFeeding: this.state.breastFeeding,
+                        alcohol: this.state.alcohol,
+                        smoking: this.state.smoking,
+                        menstrualCycle: this.state.menstrualCycle
+                    }}
+                />
+            </stack.Navigator>
             /*</NavigationContainer>*/
         );
     }
@@ -365,11 +365,7 @@ function Question1({navigation, route}) {
     }
 
     return (
-        <View style={styles.Q1View}>
-            {/*<Text>{fullName}</Text>
-            <Text>{email}</Text>
-            <Text>{password}</Text>
-            <Text>{confirmPassword}</Text>*/}
+        /*<View style={styles.Q1View}>
             <Image source={dateIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>What is your Date of Birth?</Text>
             <TouchableOpacity style={styles.dateButton} onPress={showDatePicker}>
@@ -389,29 +385,6 @@ function Question1({navigation, route}) {
                 />
             )}
 
-            {/*<DatePicker
-                style={{width: 300, alignSelf: 'center'}}
-                date={new Date()}
-                mode="date"
-                placeholder="Select DOB"
-                format="DD-MM-YYYY"
-                maxDate={new Date()}
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                customStyles={{
-                    dateIcon: {
-                        position: 'absolute',
-                        left: 0,
-                        top: 4,
-                        marginLeft: 0
-                    },
-                    dateInput: {
-                        marginLeft: 36
-                    }
-                }}
-                onDateChange={(value) => {console.log(value)}}
-            />*/}
-
             <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 2', {
                 fullName: fullName,
                 email: email,
@@ -421,6 +394,39 @@ function Question1({navigation, route}) {
             })}>
                 <Text style={styles.buttonText}>Next Question</Text>
             </TouchableOpacity>
+        </View>*/
+        <View style={{backgroundColor: '#e0dede', flex: 1, justifyContent: 'center', padding: 20}}>
+            <View style={{backgroundColor: 'white', borderRadius: 25, padding: 20}}>
+                <Image source={dateIcon} style={styles.dateIcon}/>
+                <Text style={styles.questionText}>What is your Date of Birth?</Text>
+                <Text style={{padding: 10, fontSize: 20, textAlign: 'center', fontWeight: 'bold'}}>{date.toDateString()}</Text>
+                <TouchableOpacity style={styles.dateButton} onPress={showDatePicker}>
+                    <Text style={styles.dateButtonText}>Show Date Picker</Text>
+                </TouchableOpacity>
+                {show && (
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        timeZoneOffsetInMinutes={0}
+                        value={new Date()}
+                        mode={mode}
+                        is24hours={true}
+                        display="spinner"
+                        onChange={onChange}
+                        maximumDate={new Date()}
+                    />
+                )}
+            </View>
+            <View>
+                <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 2', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: date,
+                })}>
+                    <Text style={styles.buttonText}>Next Question</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -429,13 +435,8 @@ function Question2({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth } = route.params
     const [answer, setAnswer] = useState(null)
     return (
-        <View style={styles.Q2View}>
+        /*<View style={styles.Q2View}>
             <Image source={dateIcon} style={styles.dateIcon}/>
-            {/*<Text>{fullName}</Text>
-            <Text>{email}</Text>
-            <Text>{password}</Text>
-            <Text>{confirmPassword}</Text>
-            <Text>{dateOfBirth.toDateString()}</Text>*/}
             <Text style={styles.questionText}>What's your Height? </Text>
             <TextInput
                 placeholder="Enter in meters"
@@ -466,6 +467,43 @@ function Question2({navigation, route}) {
             })}>
                 <Text style={styles.buttonText}>Next Question</Text>
             </TouchableOpacity>
+        </View>*/
+        <View style={{backgroundColor: '#e0dede', flex: 1, justifyContent: 'center', padding: 20}}>
+            <View style={{backgroundColor: 'white', borderRadius: 25, padding: 20}}>
+                <Image source={dateIcon} style={styles.dateIcon}/>
+                <Text style={styles.questionText}>What's your Height? </Text>
+                <TextInput
+                    placeholder="Enter in meters"
+                    style={{
+                        height: 50,
+                        borderBottomWidth: 1,
+                        borderColor: 'silver',
+                        backgroundColor: '#e8e6e6',
+                        marginTop: 10,
+                        textAlign: 'center',
+                        fontSize: 20,
+                        borderRadius: 25,
+                        width: 350,
+                        alignSelf: 'center'
+                    }}
+                    keyboardType="numeric"
+                    onChangeText={(value) => {
+                        setAnswer(value)
+                    }}
+                />
+            </View>
+            <View>
+                <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 3', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: answer
+                })}>
+                    <Text style={styles.buttonText}>Next Question</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -474,13 +512,7 @@ function Question3({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height } = route.params
     const [answer, setAnswer] = useState(null)
     return (
-        <View style={styles.Q2View}>
-            {/*<Text>{fullName}</Text>
-            <Text>{email}</Text>
-            <Text>{password}</Text>
-            <Text>{confirmPassword}</Text>
-            <Text>{dateOfBirth.toDateString()}</Text>
-            <Text>{height}</Text>*/}
+        /*<View style={styles.Q2View}>
             <Image source={weightIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>What's your Weight?</Text>
             <TextInput
@@ -513,6 +545,44 @@ function Question3({navigation, route}) {
             })}>
                 <Text style={styles.buttonText}>Next Question</Text>
             </TouchableOpacity>
+        </View>*/
+        <View style={{backgroundColor: '#e0dede', flex: 1, justifyContent: 'center', padding: 20}}>
+            <View style={{backgroundColor: 'white', borderRadius: 25, padding: 20}}>
+                <Image source={weightIcon} style={styles.dateIcon}/>
+                <Text style={styles.questionText}>What's your Weight?</Text>
+                <TextInput
+                    placeholder="Enter in kilograms"
+                    style={{
+                        height: 50,
+                        borderBottomWidth: 1,
+                        borderColor: 'silver',
+                        backgroundColor: '#e8e6e6',
+                        marginTop: 10,
+                        textAlign: 'center',
+                        fontSize: 20,
+                        borderRadius: 25,
+                        width: 350,
+                        alignSelf: 'center'
+                    }}
+                    keyboardType="numeric"
+                    onChangeText={(value) => {
+                        setAnswer(value)
+                    }}
+                />
+            </View>
+            <View>
+                <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 4', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: answer
+                })}>
+                    <Text style={styles.buttonText}>Next Question</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -521,14 +591,7 @@ function Question4({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height, weight} = route.params
     const [answer, setAnswer] = useState(null);
     return (
-        <View style={styles.Q2View}>
-            {/*<Text>{fullName}</Text>
-            <Text>{email}</Text>
-            <Text>{password}</Text>
-            <Text>{confirmPassword}</Text>
-            <Text>{dateOfBirth.toDateString()}</Text>
-            <Text>{height}</Text>
-            <Text>{weight}</Text>*/}
+        /*<View style={styles.Q2View}>
             <Image source={firstPeriodIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>What's your age at first period?</Text>
             <TextInput
@@ -562,6 +625,45 @@ function Question4({navigation, route}) {
             })}>
                 <Text style={styles.buttonText}>Next Question</Text>
             </TouchableOpacity>
+        </View>*/
+        <View style={{backgroundColor: '#e0dede', flex: 1, justifyContent: 'center', padding: 20}}>
+            <View style={{backgroundColor: 'white', borderRadius: 25, padding: 20}}>
+                <Image source={firstPeriodIcon} style={styles.dateIcon}/>
+                <Text style={styles.questionText}>What's your age at first period?</Text>
+                <TextInput
+                    placeholder="Enter Here"
+                    style={{
+                        height: 50,
+                        borderBottomWidth: 1,
+                        borderColor: 'silver',
+                        backgroundColor: '#e8e6e6',
+                        marginTop: 10,
+                        textAlign: 'center',
+                        fontSize: 20,
+                        borderRadius: 25,
+                        width: 350,
+                        alignSelf: 'center'
+                    }}
+                    keyboardType="numeric"
+                    onChangeText={(value) => {
+                        setAnswer(value)
+                    }}
+                />
+            </View>
+            <View>
+                <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 5', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: answer
+                })}>
+                    <Text style={styles.buttonText}>Next Question</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -569,17 +671,17 @@ function Question4({navigation, route}) {
 function Question5({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod} = route.params
     return (
-        <View style={styles.Q2View}>
+        /*<View style={styles.Q2View}>
             <Image source={maritalStatusIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>What's your marital status?</Text>
-            {/*<Text>{fullName}</Text>
+            {/!*<Text>{fullName}</Text>
             <Text>{email}</Text>
             <Text>{password}</Text>
             <Text>{confirmPassword}</Text>
             <Text>{dateOfBirth.toDateString()}</Text>
             <Text>{height}</Text>
             <Text>{weight}</Text>
-            <Text>{ageOfFirstPeriod}</Text>*/}
+            <Text>{ageOfFirstPeriod}</Text>*!/}
             <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 6', {
                 fullName: fullName,
                 email: email,
@@ -619,6 +721,78 @@ function Question5({navigation, route}) {
             })}>
                 <Text style={styles.buttonText}>Single</Text>
             </TouchableOpacity>
+        </View>*/
+        <View style={{backgroundColor: '#e0dede', flex: 1, justifyContent: 'center', padding: 20}}>
+            <View style={{backgroundColor: 'white', borderRadius: 25, padding: 20}}>
+                <Image source={maritalStatusIcon} style={styles.dateIcon}/>
+                <Text style={styles.questionText}>What's your marital status?</Text>
+                <TouchableOpacity style={{
+                    alignItems: 'center',
+                    backgroundColor: '#ED3030',
+                    padding: 10,
+                    //marginBottom: 10,
+                    width: 350,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    marginTop: 20
+                }} onPress={() => navigation.navigate('Question 6', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: ageOfFirstPeriod,
+                    maritalStatus: "Married"
+                })}>
+                    <Text style={styles.buttonText}>Married</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    alignItems: 'center',
+                    backgroundColor: '#ED3030',
+                    padding: 10,
+                    //marginBottom: 10,
+                    width: 350,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    marginTop: 20
+                }} onPress={() => navigation.navigate('Question 6', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: ageOfFirstPeriod,
+                    maritalStatus: "Living together"
+                })}>
+                    <Text style={styles.buttonText}>Living together</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    alignItems: 'center',
+                    backgroundColor: '#ED3030',
+                    padding: 10,
+                    //marginBottom: 10,
+                    width: 350,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    marginTop: 20
+                }} onPress={() => navigation.navigate('Question 6', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: ageOfFirstPeriod,
+                    maritalStatus: "Single"
+                })}>
+                    <Text style={styles.buttonText}>Single</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -627,7 +801,7 @@ function Question6({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus} = route.params
     return (
-        <View style={styles.Q2View}>
+        /*<View style={styles.Q2View}>
             <Image source={breastFeedingIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>Have you ever done breastfeeding?</Text>
             <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 7', {
@@ -658,6 +832,58 @@ function Question6({navigation, route}) {
             })}>
                 <Text style={styles.buttonText}>No</Text>
             </TouchableOpacity>
+        </View>*/
+        <View style={{backgroundColor: '#e0dede', flex: 1, justifyContent: 'center', padding: 20}}>
+            <View style={{backgroundColor: 'white', borderRadius: 25, padding: 20}}>
+                <Image source={breastFeedingIcon} style={styles.dateIcon}/>
+                <Text style={styles.questionText}>Have you ever done breastfeeding?</Text>
+                <TouchableOpacity style={{
+                    alignItems: 'center',
+                    backgroundColor: '#ED3030',
+                    padding: 10,
+                    //marginBottom: 10,
+                    width: 350,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    marginTop: 50
+                }} onPress={() => navigation.navigate('Question 7', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: ageOfFirstPeriod,
+                    maritalStatus: maritalStatus,
+                    breastFeeding: "Yes"
+                })}>
+                    <Text style={styles.buttonText}>Yes</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    alignItems: 'center',
+                    backgroundColor: '#ED3030',
+                    padding: 10,
+                    //marginBottom: 10,
+                    width: 350,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    marginTop: 20
+                }} onPress={() => navigation.navigate('Question 7', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: ageOfFirstPeriod,
+                    maritalStatus: maritalStatus,
+                    breastFeeding: "No"
+                })}>
+                    <Text style={styles.buttonText}>No</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -666,7 +892,7 @@ function Question7({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus, breastFeeding} = route.params
     return (
-        <View style={styles.Q2View}>
+        /*<View style={styles.Q2View}>
             <Image source={alcoholIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>Are you an alcoholic?</Text>
             <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 8', {
@@ -699,6 +925,60 @@ function Question7({navigation, route}) {
             })}>
                 <Text style={styles.buttonText}>No</Text>
             </TouchableOpacity>
+        </View>*/
+        <View style={{backgroundColor: '#e0dede', flex: 1, justifyContent: 'center', padding: 20}}>
+            <View style={{backgroundColor: 'white', borderRadius: 25, padding: 20}}>
+                <Image source={alcoholIcon} style={styles.dateIcon}/>
+                <Text style={styles.questionText}>Are you an alcoholic?</Text>
+                <TouchableOpacity style={{
+                    alignItems: 'center',
+                    backgroundColor: '#ED3030',
+                    padding: 10,
+                    //marginBottom: 10,
+                    width: 350,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    marginTop: 50
+                }} onPress={() => navigation.navigate('Question 8', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: ageOfFirstPeriod,
+                    maritalStatus: maritalStatus,
+                    breastFeeding: breastFeeding,
+                    alcohol: "Yes"
+                })}>
+                    <Text style={styles.buttonText}>Yes</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    alignItems: 'center',
+                    backgroundColor: '#ED3030',
+                    padding: 10,
+                    //marginBottom: 10,
+                    width: 350,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    marginTop: 20
+                }} onPress={() => navigation.navigate('Question 8', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: ageOfFirstPeriod,
+                    maritalStatus: maritalStatus,
+                    breastFeeding: breastFeeding,
+                    alcohol: "No"
+                })}>
+                    <Text style={styles.buttonText}>No</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -707,7 +987,7 @@ function Question8({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus, breastFeeding, alcohol} = route.params
     return (
-        <View style={styles.Q2View}>
+        /*<View style={styles.Q2View}>
             <Image source={smokeIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>Do you smoke?</Text>
             <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 9', {
@@ -742,6 +1022,62 @@ function Question8({navigation, route}) {
             })}>
                 <Text style={styles.buttonText}>No</Text>
             </TouchableOpacity>
+        </View>*/
+        <View style={{backgroundColor: '#e0dede', flex: 1, justifyContent: 'center', padding: 20}}>
+            <View style={{backgroundColor: 'white', borderRadius: 25, padding: 20}}>
+                <Image source={smokeIcon} style={styles.dateIcon}/>
+                <Text style={styles.questionText}>Do you smoke?</Text>
+                <TouchableOpacity style={{
+                    alignItems: 'center',
+                    backgroundColor: '#ED3030',
+                    padding: 10,
+                    //marginBottom: 10,
+                    width: 350,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    marginTop: 50
+                }} onPress={() => navigation.navigate('Question 9', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: ageOfFirstPeriod,
+                    maritalStatus: maritalStatus,
+                    breastFeeding: breastFeeding,
+                    alcohol: alcohol,
+                    smoking: "Yes"
+                })}>
+                    <Text style={styles.buttonText}>Yes</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    alignItems: 'center',
+                    backgroundColor: '#ED3030',
+                    padding: 10,
+                    //marginBottom: 10,
+                    width: 350,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    marginTop: 20
+                }} onPress={() => navigation.navigate('Question 9', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: ageOfFirstPeriod,
+                    maritalStatus: maritalStatus,
+                    breastFeeding: breastFeeding,
+                    alcohol: alcohol,
+                    smoking: "No"
+                })}>
+                    <Text style={styles.buttonText}>No</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -750,7 +1086,7 @@ function Question9({navigation, route}) {
     const {fullName, email, password, confirmPassword, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus, breastFeeding, alcohol, smoking} = route.params
     return (
-        <View style={styles.Q2View}>
+        /*<View style={styles.Q2View}>
             <Image source={menstruationIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>Do you have a menstrual cycle?</Text>
             <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Question 10', {
@@ -787,6 +1123,64 @@ function Question9({navigation, route}) {
             })}>
                 <Text style={styles.buttonText}>No</Text>
             </TouchableOpacity>
+        </View>*/
+        <View style={{backgroundColor: '#e0dede', flex: 1, justifyContent: 'center', padding: 20}}>
+            <View style={{backgroundColor: 'white', borderRadius: 25, padding: 20}}>
+                <Image source={menstruationIcon} style={styles.dateIcon}/>
+                <Text style={styles.questionText}>Do you have a menstrual cycle?</Text>
+                <TouchableOpacity style={{
+                    alignItems: 'center',
+                    backgroundColor: '#ED3030',
+                    padding: 10,
+                    //marginBottom: 10,
+                    width: 350,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    marginTop: 50
+                }} onPress={() => navigation.navigate('Question 10', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    confirmPassword: confirmPassword,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: ageOfFirstPeriod,
+                    maritalStatus: maritalStatus,
+                    breastFeeding: breastFeeding,
+                    alcohol: alcohol,
+                    smoking: smoking,
+                    menstrualCycle: "Yes"
+                })}>
+                    <Text style={styles.buttonText}>Yes</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    alignItems: 'center',
+                    backgroundColor: '#ED3030',
+                    padding: 10,
+                    //marginBottom: 10,
+                    width: 350,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    marginTop: 20
+                }} onPress={() => navigation.navigate('Question 10', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    confirmPassword: confirmPassword,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: ageOfFirstPeriod,
+                    maritalStatus: maritalStatus,
+                    breastFeeding: breastFeeding,
+                    alcohol: alcohol,
+                    smoking: smoking,
+                    menstrualCycle: "No"
+                })}>
+                    <Text style={styles.buttonText}>No</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -795,7 +1189,7 @@ function Question10({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus, breastFeeding, alcohol, smoking, menstrualCycle} = route.params
     return (
-        <View style={styles.Q2View}>
+        /*<View style={styles.Q2View}>
             <Image source={medicalHistoryIcon} style={styles.dateIcon}/>
             <Text style={styles.questionText}>Is there any close relation of yours had breast cancer history?</Text>
             <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('SummaryPage', {
@@ -834,6 +1228,66 @@ function Question10({navigation, route}) {
             })}>
                 <Text style={styles.buttonText}>No</Text>
             </TouchableOpacity>
+        </View>*/
+        <View style={{backgroundColor: '#e0dede', flex: 1, justifyContent: 'center', padding: 20}}>
+            <View style={{backgroundColor: 'white', borderRadius: 25, padding: 20}}>
+                <Image source={medicalHistoryIcon} style={styles.dateIcon}/>
+                <Text style={styles.questionText}>Is there any close relation of yours had breast cancer history?</Text>
+                <TouchableOpacity style={{
+                    alignItems: 'center',
+                    backgroundColor: '#ED3030',
+                    padding: 10,
+                    //marginBottom: 10,
+                    width: 350,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    marginTop: 50
+                }} onPress={() => navigation.navigate('SummaryPage', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: ageOfFirstPeriod,
+                    maritalStatus: maritalStatus,
+                    breastFeeding: breastFeeding,
+                    alcohol: alcohol,
+                    smoking: smoking,
+                    menstrualCycle: menstrualCycle,
+                    breastCancerHistory: "Yes"
+                })}>
+                    <Text style={styles.buttonText}>Yes</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    alignItems: 'center',
+                    backgroundColor: '#ED3030',
+                    padding: 10,
+                    //marginBottom: 10,
+                    width: 350,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    marginTop: 20
+                }} onPress={() => navigation.navigate('SummaryPage', {
+                    fullName: fullName,
+                    email: email,
+                    password: password,
+                    userId: userId,
+                    dateOfBirth: dateOfBirth,
+                    height: height,
+                    weight: weight,
+                    ageOfFirstPeriod: ageOfFirstPeriod,
+                    maritalStatus: maritalStatus,
+                    breastFeeding: breastFeeding,
+                    alcohol: alcohol,
+                    smoking: smoking,
+                    menstrualCycle: menstrualCycle,
+                    breastCancerHistory: "No"
+                })}>
+                    <Text style={styles.buttonText}>No</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -914,14 +1368,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#ED3030',
         padding: 10,
         //marginBottom: 10,
-        width: 350,
+        width: 370,
         borderRadius: 25,
         alignSelf: 'center',
-        marginTop: 10
+        marginTop: 50
     },
     dateIcon: {
-        height:200,
-        width:200,
+        height:160,
+        width:160,
         alignSelf: 'center'
     },
     Q2View: {
