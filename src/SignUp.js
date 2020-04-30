@@ -8,6 +8,7 @@ import logo from './Images/icure.jpg'
 import axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
 import DialogProgress from 'react-native-dialog-progress'
+import {Dialog} from "react-native-paper";
 
 class SignUp extends Component {
 
@@ -52,19 +53,30 @@ class SignUp extends Component {
         }
         axios.post('http://10.0.2.2:8000/api/users/register', data)
             .then((response) => {
-                console.log(response)
                 console.log(response.data)
-                console.log(response.data.userId)
-                this.setState({
-                    userId: response.data.userId,
-                })
-                console.log(this.state.userId)
-                this.props.navigation.navigate("InitialDetails", {
-                    fullName: this.state.fullName,
-                    email: this.state.email,
-                    password: this.state.password,
-                    userId: this.state.userId
-                })
+                console.log(JSON.stringify(response.data))
+                if (JSON.stringify(response.data)==='{"error":"Invalid email provided by the user. Please re-check your email")'){
+                    DialogProgress.hide()
+                    alert("Invalid email provided by the user. Please re-check your email")
+                }else{
+                    if(JSON.stringify(response.data)==='{"error":"Email already exists. Please Log in")'){
+                        DialogProgress.hide()
+                        alert('Email already exists. Please Log in')
+                    }else{
+                        console.log(response.data.userId)
+                        this.setState({
+                            userId: response.data.userId,
+                        })
+                        console.log(this.state.userId)
+                        this.props.navigation.navigate("InitialDetails", {
+                            fullName: this.state.fullName,
+                            email: this.state.email,
+                            password: this.state.password,
+                            userId: this.state.userId
+                        })
+                    }
+                }
+
             })
             .catch((err) => {
                 console.log(err)
