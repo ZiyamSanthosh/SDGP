@@ -27,7 +27,7 @@ class ViewAllPredictions extends Component {
         });
     }
 
-    ComponentWillMount() {
+    ComponentWillUnmount() {
         this.fetchData()
     }
 

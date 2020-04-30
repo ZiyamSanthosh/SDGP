@@ -26,6 +26,18 @@ class DailyTracking extends Component {
     }
 
     componentDidMount() {
+        this.getData()
+        this.fetchData = this.props.navigation.addListener('focus', () => {
+            console.log('Focused')
+            this.getData()
+        });
+    }
+
+    componentWillUnmount() {
+        this.fetchData()
+    }
+
+    getData = () => {
         const data = {
             "userId": this.state.userId
         }
