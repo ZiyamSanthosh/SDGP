@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 //enable cors to all routes
 app.use(cors({ origin: "*" }));
 
-const httpErr = require("./models/httpErr");
+const serverErr = require("./models/serverErr");
 
 //middleware for error handling
 app.use((err, req, res, next) => {
@@ -60,11 +60,11 @@ app.get("/", (req, res) => res.send("Weekly tracking page is loaded"));
 // Use Api routes in the App
 app.use("/api", apiRoutes);
 
-// httperr
+// serverErr
 app.use((req, res, next) => {
-  const error = new httpErr("Could not find route", 404);
+  const error = new serverErr("Could not find route", 404);
   return next(res.json({Error: error.message}))
-  //return next(new httpErr("Could not find route", 404));
+  //return next(new serverErr("Could not find route", 404));
 });
 
 // Launch app to listen to specified port
