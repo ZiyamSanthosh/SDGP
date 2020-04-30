@@ -20,6 +20,18 @@ class ViewAllPredictions extends Component {
     }
 
     componentDidMount() {
+        this.getAllPredictions()
+        this.fetchData = this.props.navigation.addListener('focus', () => {
+            console.log('Focused')
+            this.getAllPredictions()
+        });
+    }
+
+    ComponentWillMount() {
+        this.fetchData()
+    }
+
+    getAllPredictions = () => {
         const data = {
             "userId": this.state.userId
         }
