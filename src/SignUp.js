@@ -8,7 +8,6 @@ import logo from './Images/icure.jpg'
 import axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
 import DialogProgress from 'react-native-dialog-progress'
-import {Dialog} from "react-native-paper";
 
 class SignUp extends Component {
 
@@ -55,11 +54,11 @@ class SignUp extends Component {
             .then((response) => {
                 console.log(response.data)
                 console.log(JSON.stringify(response.data))
-                if (JSON.stringify(response.data)==='{"error":"Invalid email provided by the user. Please re-check your email")'){
+                if (JSON.stringify(response.data)==='{"error":"Invalid email provided by the user. Please re-check your email"}'){
                     DialogProgress.hide()
                     alert("Invalid email provided by the user. Please re-check your email")
                 }else{
-                    if(JSON.stringify(response.data)==='{"error":"Email already exists. Please Log in")'){
+                    if(JSON.stringify(response.data)==='{"error":"Email already exists. Please Log in"}'){
                         DialogProgress.hide()
                         alert('Email already exists. Please Log in')
                     }else{
