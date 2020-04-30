@@ -38,13 +38,22 @@ class LogIn extends Component {
         axios.post('http://10.0.2.2:8000/api/users/login', data)
             .then((response) => {
                 console.log(response.data)
-                this.setState({
-                    userId: response.data.userId
-                })
-                console.log(this.state.userId)
-                this.props.navigation.navigate('HomeScreen', {
-                    userId: this.state.userId
-                })
+                console.log(JSON.stringify(response.data))
+                if (JSON.stringify(response.data)==='{"error":"Invalid user credentials. Could not find user"}'){
+                    alert('Invalid user credentials. Could not find user!')
+                } else {
+                    if (JSON.stringify(response.data)==='{"error":"Invalid password, user login failed"}'){
+                        alert('Invalid password, user login failed! ')
+                    } else {
+                        this.setState({
+                            userId: response.data.userId
+                        })
+                        console.log(this.state.userId)
+                        this.props.navigation.navigate('HomeScreen', {
+                            userId: this.state.userId
+                        })
+                    }
+                }
             })
             .catch((err) => {
                 console.log(err)
