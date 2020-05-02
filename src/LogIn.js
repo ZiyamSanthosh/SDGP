@@ -1,10 +1,7 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import 'react-native-gesture-handler';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import logo from './Images/icure.jpg'
 import axios from 'axios'
 
 class LogIn extends Component {
@@ -18,6 +15,7 @@ class LogIn extends Component {
         }
     }
 
+    //function to validate the email format
     validateEmail = (text) => {
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (reg.test(text) === false){
@@ -30,6 +28,7 @@ class LogIn extends Component {
         }
     }
 
+    //function to send data to login and navigate to the next page
     loginProcess = () => {
         const data = {
             "email": this.state.email,
@@ -49,6 +48,7 @@ class LogIn extends Component {
                             userId: response.data.userId
                         })
                         console.log(this.state.userId)
+                        //navigating from Login page to HomeScreen Page
                         this.props.navigation.navigate('HomeScreen', {
                             userId: this.state.userId
                         })
@@ -60,6 +60,7 @@ class LogIn extends Component {
             })
     }
 
+    //function to act after the Login button press
     validations = () => {
         if (this.state.email===null || this.state.password===null){
             alert("Please fill all the fields!")
@@ -104,6 +105,7 @@ class LogIn extends Component {
 
 export default LogIn;
 
+//CSS styles
 const styles = StyleSheet.create({
     mainView: {
         flex: 1,

@@ -1,11 +1,9 @@
 import * as React from 'react';
 import {Component} from 'react';
 import {useState} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput, Platform, Alert,} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput, Platform} from 'react-native';
 import 'react-native-gesture-handler';
-import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import StackNavigator from '@react-navigation/stack/src/navigators/createStackNavigator';
 import infoIcon2 from './Images/info2.png';
 import dateIcon from './Images/date.png';
 import weightIcon from './Images/weight.png';
@@ -17,20 +15,16 @@ import smokeIcon from './Images/cigarette.png';
 import menstruationIcon from './Images/menstruation.png';
 import medicalHistoryIcon from './Images/medicalHistory.png';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-import {RadioGroup, RadioButton} from 'react-native-custom-radio-button';
-import { TagSelect } from 'react-native-tag-select';
-import {color, set} from 'react-native-reanimated';
-import DatePicker from 'react-native-datepicker';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
 import DialogProgress from 'react-native-dialog-progress'
 
+//stack navigator to navigate through components mentioned inside InitialDetails page
 const stack = createStackNavigator();
 
 class InitialDetails extends Component {
 
     constructor(props) {
         super(props);
+        //getting the values of the variables from navigation
         const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod, maritalStatus,
             breastFeeding, alcohol, smoking, menstrualCycle, breastCancerHistory} = this.props.route.params
         this.state = {
@@ -267,6 +261,7 @@ class InitialDetails extends Component {
     }
 }
 
+//functional component for gatherInfo page
 function GatherInfo({navigation, route}) {
     DialogProgress.hide()
     const {fullName, email, password, userId} = route.params
@@ -342,6 +337,7 @@ function GatherInfo({navigation, route}) {
     );
 }
 
+//functional component for question 1
 function Question1({navigation, route}) {
     const {fullName, email, password, userId} = route.params
 
@@ -431,6 +427,7 @@ function Question1({navigation, route}) {
     )
 }
 
+//functional component for question 2
 function Question2({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth } = route.params
     const [answer, setAnswer] = useState(null)
@@ -508,6 +505,7 @@ function Question2({navigation, route}) {
     );
 }
 
+//functional component for question 3
 function Question3({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height } = route.params
     const [answer, setAnswer] = useState(null)
@@ -587,6 +585,7 @@ function Question3({navigation, route}) {
     );
 }
 
+//functional component for question 4
 function Question4({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height, weight} = route.params
     const [answer, setAnswer] = useState(null);
@@ -668,6 +667,7 @@ function Question4({navigation, route}) {
     );
 }
 
+//functional component for question 5
 function Question5({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod} = route.params
     return (
@@ -797,6 +797,7 @@ function Question5({navigation, route}) {
     );
 }
 
+//functional component for question 6
 function Question6({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus} = route.params
@@ -888,6 +889,7 @@ function Question6({navigation, route}) {
     );
 }
 
+//functional component for question 7
 function Question7({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus, breastFeeding} = route.params
@@ -983,6 +985,7 @@ function Question7({navigation, route}) {
     );
 }
 
+//functional component for question 8
 function Question8({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus, breastFeeding, alcohol} = route.params
@@ -1082,6 +1085,7 @@ function Question8({navigation, route}) {
     );
 }
 
+//functional component for question 9
 function Question9({navigation, route}) {
     const {fullName, email, password, confirmPassword, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus, breastFeeding, alcohol, smoking} = route.params
@@ -1185,6 +1189,7 @@ function Question9({navigation, route}) {
     );
 }
 
+//functional component for question 10
 function Question10({navigation, route}) {
     const {fullName, email, password, userId, dateOfBirth, height, weight, ageOfFirstPeriod,
         maritalStatus, breastFeeding, alcohol, smoking, menstrualCycle} = route.params
@@ -1294,6 +1299,7 @@ function Question10({navigation, route}) {
 
 export default InitialDetails;
 
+//CSS styles
 const styles = StyleSheet.create({
     title: {
         fontWeight: 'bold',

@@ -1,12 +1,8 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput, ActivityIndicator} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import 'react-native-gesture-handler';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import logo from './Images/icure.jpg'
 import axios from 'axios';
-import Spinner from 'react-native-loading-spinner-overlay';
 import DialogProgress from 'react-native-dialog-progress'
 
 class SignUp extends Component {
@@ -22,6 +18,7 @@ class SignUp extends Component {
         }
     }
 
+    //function to validate the email format
     validateEmail = (text) => {
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (reg.test(text) === false){
@@ -34,6 +31,7 @@ class SignUp extends Component {
         }
     }
 
+    //function to check whether both the passwords entered by the user are the same
     validatePasswords = (pass1,pass2) => {
         if(pass1!==pass2){
             //console.log("password")
@@ -44,6 +42,7 @@ class SignUp extends Component {
         }
     }
 
+    //function to send the data to the backend and navigate to the next page
     sendData = () => {
         const data = {
             "fullName": this.state.fullName,
@@ -67,6 +66,7 @@ class SignUp extends Component {
                             userId: response.data.userId,
                         })
                         console.log(this.state.userId)
+                        //navigating from SignUp page to InitialDetails page
                         this.props.navigation.navigate("InitialDetails", {
                             fullName: this.state.fullName,
                             email: this.state.email,
@@ -82,6 +82,7 @@ class SignUp extends Component {
             })
     }
 
+    //function to act after SignUp button press
     validations = () => {
         //console.log(this.validateEmail(this.state.email))
         //console.log(this.validatePasswords(this.state.password,this.state.confirmPassword))
@@ -155,6 +156,7 @@ class SignUp extends Component {
 
 export default SignUp;
 
+//CSS styles
 const styles = StyleSheet.create({
     mainView: {
         flex: 1,
