@@ -28,8 +28,8 @@ class SummaryPage extends Component {
         }
     }
 
-    //function to send data to the backend for prediction and receive result as response, then navigate to next page after
-    //start prediction button press
+    //function to send data to the backend for prediction and receive result as response,
+    //then navigate to next page after start prediction button press
     startPrediction = () => {
         const data = {
             "userId": this.state.userId,
