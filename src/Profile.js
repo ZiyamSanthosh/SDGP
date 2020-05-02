@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput,ScrollView} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Image, ScrollView} from 'react-native';
 import homeIcon from './Images/home.png';
 import userIcon2 from './Images/user2.png';
 import editIcon from './Images/edit.png';
@@ -36,6 +36,7 @@ class Profile extends Component {
         }
     }
 
+    //function to get data from the backend
     componentDidMount() {
         const data ={
             "userId": this.state.userId
@@ -73,6 +74,7 @@ class Profile extends Component {
             })
     }
 
+    //function to get correct term according to the marital status
     getMaritalStatus = (maritalStatus)=>{
         if(maritalStatus===1){
             return 'Married'
@@ -83,6 +85,7 @@ class Profile extends Component {
         }
     }
 
+    //function to get correct boolean according to the values 0 and 1
     getYesOrNo  = (factor)=>{
         if(factor===1){
             return "Yes"
@@ -91,6 +94,7 @@ class Profile extends Component {
         }
     }
 
+    //function to send data to the backend and save changes in the database
     updateDetails = () =>{
         const data= {
             "userId": this.state.userId,
@@ -115,6 +119,7 @@ class Profile extends Component {
             })
     }
 
+    //function to send relevant data to the backend and delete the account
     deleteAccount=()=>{
         console.log("Deleting")
         console.log(this.state.password)
@@ -135,6 +140,8 @@ class Profile extends Component {
                 console.log(err)
             })
     }
+
+    //function to edit and save user's full Name in the database
     editName=()=>{
         console.log(this.state.fullName)
         const data={
@@ -165,9 +172,6 @@ class Profile extends Component {
                     </View>
                 </View>
                 <View style={{flex: 13}}>
-                    {/*<View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                        <Image source={iCureLogoOnly} style={{height:100, width: 100}}/>
-                    </View>*/}
                     <View style={{flex: 1.2, backgroundColor: 'white', margin: 20, borderRadius: 25, padding: 15, justifyContent: 'center'}}>
                         <View style={{flexDirection: 'row'}}>
                             <View style={{flex: 1.3, justifyContent: 'center'}}>
@@ -185,7 +189,6 @@ class Profile extends Component {
                                         <DialogInput
                                             isDialogVisible={this.state.isNameAlertVisible}
                                             title={"Edit Full Name"}
-                                            //message={"Enter here"}
                                             hintInput={"Enter here"}
                                             submitInput={(inputText)=>{this.setState({
                                                 fullName: inputText,
@@ -203,20 +206,6 @@ class Profile extends Component {
                                     <Text style={{fontSize: 15}}>{this.state.email}</Text>
                                 </View>
                             </View>
-                            {/*<View style={{flex: 0.7, justifyContent: 'center',}}>
-                                <TouchableOpacity onPress={() => this.setState({isNameAlertVisible: true})}>
-                                    <Image source={editIcon} style={{height: 20, width: 20}} />
-                                </TouchableOpacity>
-                                <DialogInput
-                                    isDialogVisible={this.state.isNameAlertVisible}
-                                    title={"Edit Full Name"}
-                                    //message={"Enter your name"}
-                                    hintInput ={"Enter here"}
-                                    submitInput={ (inputText) => {this.setState({fullName: inputText, isNameAlertVisible: false})} }
-                                    closeDialog={ () =>this.setState({isNameAlertVisible:false})}
-                                >
-                                </DialogInput>
-                            </View>*/}
                         </View>
                     </View>
                     <View style={{flex: 6.2, backgroundColor: 'white', margin: 20, marginTop: 0, borderRadius: 25, padding: 20}}>
@@ -462,6 +451,7 @@ class Profile extends Component {
 
 export default Profile
 
+//CSS styles
 const styles = StyleSheet.create({
     buttonText: {
         fontSize: 20,

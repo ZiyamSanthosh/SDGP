@@ -19,6 +19,7 @@ class ViewAllPredictions extends Component {
         }
     }
 
+    //function to get all the relevant data from the backend whenever the page gets focused
     componentDidMount() {
         this.getAllPredictions()
         this.fetchData = this.props.navigation.addListener('focus', () => {
@@ -31,6 +32,7 @@ class ViewAllPredictions extends Component {
         this.fetchData()
     }
 
+    //function to get all relevant data from the backend
     getAllPredictions = () => {
         const data = {
             "userId": this.state.userId
@@ -50,20 +52,22 @@ class ViewAllPredictions extends Component {
             })
     }
 
+    //function to get correct term according to the rating
     getResultName = (result) => {
         if (result===1){
-            return 'Safe'
+            return 'SAFE'
         } else if (result===2){
-            return 'Moderate'
+            return 'MODERATE'
         } else if (result===3){
-            return 'Be Alert'
+            return 'BE ALERT'
         } else if (result===4){
-            return 'At Risk'
+            return 'AT RISK'
         } else if (result===5){
-            return 'Critical'
+            return 'CRITICAL'
         }
     }
 
+    //function to get correct rating image according to the rating
     getResultIcon = (result) => {
         if (result===1){
             return safe

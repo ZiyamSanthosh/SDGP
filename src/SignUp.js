@@ -90,8 +90,8 @@ class SignUp extends Component {
             if (this.validateEmail(this.state.email) && this.validatePasswords(this.state.password,this.state.confirmPassword)){
                 console.log("All done")
                 const options = {
-                    title: "Loading",
-                    message: "This is a message",
+                    title: "Signing Up!",
+                    message: "Please Wait...",
                     isCancelable: true
                 }
                 DialogProgress.show(options)

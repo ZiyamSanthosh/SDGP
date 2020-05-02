@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import iCureLogoOnly from './Images/icure.png'
 import homeIcon from './Images/home.png'
 
@@ -56,6 +56,7 @@ class AboutUs extends Component {
 
 export default AboutUs
 
+//CSS styles
 const styles = StyleSheet.create({
     buttonText: {
         fontSize: 20,

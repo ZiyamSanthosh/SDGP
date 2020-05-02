@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput, ScrollView} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import axios from 'axios';
 
@@ -25,6 +25,7 @@ class DailyTracking extends Component {
         }
     }
 
+    //function to get data from the backend whenever the page gets focused
     componentDidMount() {
         this.getData()
         this.fetchData = this.props.navigation.addListener('focus', () => {
@@ -33,10 +34,12 @@ class DailyTracking extends Component {
         });
     }
 
+    //function to unmount whenever the page gets unfocused
     componentWillUnmount() {
         this.fetchData()
     }
 
+    ///function to get data from the backend
     getData = () => {
         const data = {
             "userId": this.state.userId
@@ -63,6 +66,7 @@ class DailyTracking extends Component {
             })
     }
 
+    //function to send data to the backend and receive prediction results as response
     updateDataAndPredict = () => {
         const data = {
             "userId": this.state.userId,
@@ -101,6 +105,7 @@ class DailyTracking extends Component {
             })
     }
 
+    //function to send data to the backend and save changes in the database
     updateDataOnly= () => {
         const data = {
             "userId": this.state.userId,
@@ -219,6 +224,7 @@ class DailyTracking extends Component {
 
 export default DailyTracking
 
+//CSS styles
 const styles = StyleSheet.create({
     textBox: {
         height: 40,
