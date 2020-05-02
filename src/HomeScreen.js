@@ -1,17 +1,14 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput, ScrollView} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Image, ScrollView} from 'react-native';
 import iCureCropped from './Images/iCure-Cropped.jpg';
-import infoIcon from './Images/infoIcon.png';
 import userIcon from './Images/user.png';
-import iCureText from './Images/iCure-TextOnly.jpg';
 import safe from './Images/Ratings/safe.png'
 import moderate from './Images/Ratings/moderate.png'
 import beAlert from './Images/Ratings/BeAlert.png'
 import atRisk from './Images/Ratings/AtRisk.png'
 import critical from './Images/Ratings/critical.png'
 import axios from 'axios'
-import {useFocusEffect} from '@react-navigation/native';
 
 class HomeScreen extends Component {
     constructor(props) {
@@ -35,22 +32,9 @@ class HomeScreen extends Component {
             lastPredictedDate: null,
             lastPrediction: null,
         }
-        /*useFocusEffect(
-            React.useCallback(() =>{
-                console.log('Screen was focused');
-                return () => {
-                    console.log('Screen was not focused')
-                };
-            }, [])
-        );*/
-        /*React.useEffect(()=> {
-            const fetchData = this.props.navigation.addListener('focus', () => {
-                console.log('Focused')
-            });
-            return fetchData;
-        }, [])*/
     }
 
+    //function to get data from the backend whenever the page gets focused
     componentDidMount() {
         this.initialDataRouting()
         this.fetchData = this.props.navigation.addListener('focus', () => {
@@ -59,10 +43,12 @@ class HomeScreen extends Component {
         });
     }
 
+    //function to unmount whenever the page gets unfocused
     componentWillUnmount() {
         this.fetchData()
     }
 
+    //function to get details from the backend
     initialDataRouting = () => {
         axios.get("http://10.0.2.2:8000/api/users/"+this.state.userId)
             .then((response) => {
@@ -95,6 +81,7 @@ class HomeScreen extends Component {
             })
     }
 
+    //function to get correct rating image according to the rating
     selectRatingImage = (rating) => {
         if (rating===1){
             return safe
@@ -109,6 +96,7 @@ class HomeScreen extends Component {
         }
     }
 
+    //function to get correct message according to the rating
     renderSubMessage = (rating) => {
         if (rating===1){
             return "Your risk possibility was between 0-20%"
@@ -123,6 +111,7 @@ class HomeScreen extends Component {
         }
     }
 
+    //function to get correct term according to the rating
     renderMessage = (rating) => {
         if (rating===1){
             return "SAFE"
@@ -203,6 +192,7 @@ class HomeScreen extends Component {
 
 export default HomeScreen;
 
+//CSS styles
 const styles = StyleSheet.create({
     buttonText: {
         fontSize: 20,

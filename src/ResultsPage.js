@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput, ScrollView} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Image, ScrollView} from 'react-native';
 import safe from './Images/Ratings/safe.png'
 import moderate from './Images/Ratings/moderate.png'
 import beAlert from './Images/Ratings/BeAlert.png'
@@ -21,10 +21,10 @@ class ResultsPage extends Component {
             result: result,
             factor: null,
             factorMessage: null
-            //ratingString: 'moderate'
         }
     }
 
+    //receive data from backend to display
     componentDidMount() {
         const data = {
             "userId": this.state.userId
@@ -41,6 +41,7 @@ class ResultsPage extends Component {
             })
     }
 
+    //function to choose the rating image according to the rating
     selectRatingImage = (rating) => {
         if (rating===1){
             return safe
@@ -55,6 +56,7 @@ class ResultsPage extends Component {
         }
     }
 
+    //function to choose the correct term according to the rating
     renderRating = (rating) => {
         if (rating===1){
             return "SAFE"
@@ -69,6 +71,7 @@ class ResultsPage extends Component {
         }
     }
 
+    //function to choose the message according to the rating
     renderSubMessage = (rating) => {
         if (rating===1){
             return "Your risk possibility is between 0-20%"
@@ -117,6 +120,7 @@ class ResultsPage extends Component {
 
 export default ResultsPage
 
+//CSS Styles
 const styles = StyleSheet.create({
     buttonText: {
         fontSize: 20,

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Button, Image, TextInput, ScrollView} from 'react-native';
-import style from 'react-native-datepicker/style';
+import {Text, View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import axios from 'axios';
 
 class SummaryPage extends Component {
@@ -29,6 +28,8 @@ class SummaryPage extends Component {
         }
     }
 
+    //function to send data to the backend for prediction and receive result as response, then navigate to next page after
+    //start prediction button press
     startPrediction = () => {
         const data = {
             "userId": this.state.userId,
@@ -49,6 +50,7 @@ class SummaryPage extends Component {
                     result: response.data.result
                 })
                 console.log(this.state.result)
+                //navigating from SummaryPage to HomeScreen
                 this.props.navigation.navigate("ResultsPage", {
                     fullName: this.state.fullName,
                     email: this.state.email,
@@ -150,6 +152,7 @@ class SummaryPage extends Component {
 
 export default SummaryPage;
 
+//CSS styles
 const styles = StyleSheet.create({
     finalPageText1: {
         fontSize: 20,
