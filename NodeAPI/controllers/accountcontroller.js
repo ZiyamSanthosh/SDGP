@@ -10,7 +10,7 @@ const serverErr= require("../models/serverErr");
 const userModel = require("../models/user");
 
 //retrieve all the users from the database
-const getUsers = async (res) => {
+const getUsers = async (req, res) => {
   let appusers;
   try {
     //retireve userid, fullname, email and registered date for users found
@@ -21,7 +21,7 @@ const getUsers = async (res) => {
   }
 
   //convert user objects to string format
-  let obj = appusers.stringify;
+  //let obj = appusers.stringify;
   res.json({
     appusers: appusers.map((user) => user.toObject({ getters: true })),
   });
