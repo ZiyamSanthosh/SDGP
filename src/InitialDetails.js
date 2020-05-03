@@ -6,6 +6,7 @@ import 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
 import infoIcon2 from './Images/info2.png';
 import dateIcon from './Images/date.png';
+import heightIcon from './Images/height.png';
 import weightIcon from './Images/weight.png';
 import firstPeriodIcon from './Images/firstPeriod.png';
 import maritalStatusIcon from './Images/status.png';
@@ -467,7 +468,7 @@ function Question2({navigation, route}) {
         </View>*/
         <View style={{backgroundColor: '#e0dede', flex: 1, justifyContent: 'center', padding: 20}}>
             <View style={{backgroundColor: 'white', borderRadius: 25, padding: 20}}>
-                <Image source={dateIcon} style={styles.dateIcon}/>
+                <Image source={heightIcon} style={styles.dateIcon}/>
                 <Text style={styles.questionText}>What's your Height? </Text>
                 <TextInput
                     placeholder="Enter in meters"
