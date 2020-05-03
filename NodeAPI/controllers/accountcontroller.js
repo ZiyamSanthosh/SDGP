@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt"); //module for password encryption
 const { v4: uuidv4 } = require("uuid"); //module for userid generation
 const validator = require("express-validator"); //module for validating user inputs
 //module for email verification
-const kickbox = require('kickbox').client('live_f0d5ec4fc479ce83f98dd9859a598d7bf03e136375cef81fef755f8fd9733c47').kickbox();
+const kickbox = require('kickbox').client('live_a9ca505b8adba9b36222a1e20825604e67c0e2e0cea33f26461bea33d2a3fd63').kickbox();
 
 //import serverErrand userModel
 const serverErr= require("../models/serverErr");
